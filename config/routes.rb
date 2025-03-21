@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   # Blog routes
   resources :posts, path: 'blog' do
-    resources :comments, only: [:create, :destroy], controller: 'posts', action: 'create_comment'
+    resources :comments, only: [:create, :destroy], controller: 'posts_comments'
   end
   get 'weekly-fix', to: 'posts#index', as: 'weekly_fix'
   
