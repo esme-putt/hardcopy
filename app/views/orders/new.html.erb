@@ -1,0 +1,282 @@
+<% content_for :title, "Checkout" %>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8">
+      <h1 class="mb-4">Checkout</h1>
+      
+      <% unless user_signed_in? %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="flex-grow-1">
+                <h5 class="mb-1">Have an account?</h5>
+                <p class="mb-0">Sign in to access your saved addresses and track your order history.</p>
+              </div>
+              <%= link_to "Sign In", login_path(redirect_to: request.path), class: "btn btn-outline-success" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <%= form_with model: @order, local: true do |f| %>
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Contact Information</h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <%= f.label :email, "Email Address", class: "form-label" %>
+              <%= f.email_field :email, class: "form-control", required: true, value: current_user&.email %>
+              <div class="form-text">Order updates will be sent to this email address.</div>
+            </div>
+            <div class="mb-3">
+              <%= f.label :phone, "Phone Number", class: "form-label" %>
+              <%= f.telephone_field :phone, class: "form-control", required: true %>
+              <div class="form-text">For delivery questions only.</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Shipping Address</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= f.label :first_name, class: "form-label" %>
+                <%= f.text_field :first_name, class: "form-control", required: true %>
+              </div>
+              <div class="col-md-6 mb-3">
+                <%= f.label :last_name, class: "form-label" %>
+                <%= f.text_field :last_name, class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= f.label :address_line1, "Address Line 1", class: "form-label" %>
+              <%= f.text_field :address_line1, class: "form-control", required: true %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :address_line2, "Address Line 2 (Optional)", class: "form-label" %>
+              <%= f.text_field :address_line2, class: "form-control" %>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <%= f.label :city, class: "form-label" %>
+                <%= f.text_field :city, class: "form-control", required: true %>
+              </div>
+              <div class="col-md-4 mb-3">
+                <%= f.label :state, class: "form-label" %>
+                <%= f.text_field :state, class: "form-control", required: true %>
+              </div>
+              <div class="col-md-4 mb-3">
+                <%= f.label :postal_code, "ZIP / Postal Code", class: "form-label" %>
+                <%= f.text_field :postal_code, class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= f.label :country, class: "form-label" %>
+              <%= f.select :country, [["United States", "US"], ["Canada", "CA"]], {include_blank: "Select Country"}, {class: "form-select", required: true} %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Shipping Method</h5>
+          </div>
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <%= f.radio_button :shipping_method, "standard", class: "form-check-input", checked: true %>
+              <%= f.label :shipping_method_standard, class: "form-check-label fw-bold" do %>
+                Standard Shipping (3-5 business days)
+                <% if @cart_total >= 75 %>
+                  <span class="text-success">Free</span>
+                <% else %>
+                  <span>$8.95</span>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="form-check">
+              <%= f.radio_button :shipping_method, "express", class: "form-check-input" %>
+              <%= f.label :shipping_method_express, class: "form-check-label fw-bold" do %>
+                Express Shipping (1-2 business days)
+                <span>$15.95</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Payment Information</h5>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle me-2"></i>
+              This is a demo site. No actual payment will be processed.
+            </div>
+            
+            <div class="mb-3">
+              <label for="cardName" class="form-label">Name on Card</label>
+              <input type="text" class="form-control" id="cardName" required>
+            </div>
+            <div class="mb-3">
+              <label for="cardNumber" class="form-label">Card Number</label>
+              <input type="text" class="form-control" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cardExpiry" class="form-label">Expiration Date</label>
+                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cardCVC" class="form-label">CVC</label>
+                <input type="text" class="form-control" id="cardCVC" placeholder="XXX" required>
+              </div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="saveCard">
+              <label class="form-check-label" for="saveCard">
+                Save this card for future purchases
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <% unless user_signed_in? %>
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="createAccount">
+                <label class="form-check-label" for="createAccount">
+                  <strong>Create an account?</strong> (optional)
+                </label>
+              </div>
+              <div id="account-fields" class="mt-3" style="display: none;">
+                <p class="mb-3">Creating an account makes it easier to track your orders and subscribe to our newsletter.</p>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="password_confirmation">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        
+        <div class="d-grid gap-2">
+          <%= f.submit "Place Order", class: "btn btn-success btn-lg" %>
+          <%= link_to "Return to Cart", cart_path, class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm mb-4 sticky-top" style="top: 20px;">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Order Summary</h5>
+          <small><%= link_to "Edit cart", cart_path, class: "text-decoration-none" %></small>
+        </div>
+        <div class="card-body">
+          <% session[:cart].each do |product_id, quantity| %>
+            <% product = Product.find_by(id: product_id) %>
+            <% next unless product %>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex align-items-center">
+                <% if product.images.attached? %>
+                  <%= image_tag product.images.first, class: "img-thumbnail me-2", style: "width: 50px; height: 50px; object-fit: cover;", alt: product.title %>
+                <% else %>
+                  <div class="bg-light text-center me-2" style="width: 50px; height: 50px;">
+                    <i class="fas fa-image text-muted" style="line-height: 50px;"></i>
+                  </div>
+                <% end %>
+                <div>
+                  <span class="d-block"><%= product.title.truncate(25) %></span>
+                  <small class="text-muted">Qty: <%= quantity %></small>
+                </div>
+              </div>
+              <span>$<%= sprintf('%.2f', product.price * quantity) %></span>
+            </div>
+          <% end %>
+          
+          <hr>
+          
+          <div class="d-flex justify-content-between mb-2">
+            <span>Subtotal:</span>
+            <span>$<%= sprintf('%.2f', @cart_total) %></span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Shipping:</span>
+            <% shipping_cost = @cart_total >= 75 ? 0 : 8.95 %>
+            <span id="shipping-cost"><%= shipping_cost > 0 ? "$#{sprintf('%.2f', shipping_cost)}" : "Free" %></span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Tax:</span>
+            <% tax = @cart_total * 0.07 %>
+            <span>$<%= sprintf('%.2f', tax) %></span>
+          </div>
+          
+          <hr>
+          
+          <div class="d-flex justify-content-between mb-3">
+            <span class="fw-bold">Total:</span>
+            <span class="fw-bold fs-5" id="order-total">$<%= sprintf('%.2f', @cart_total + shipping_cost + tax) %></span>
+          </div>
+          
+          <div class="alert alert-success mb-0">
+            <i class="fas fa-leaf me-2"></i>
+            By purchasing from Hardcopy, you're helping save electronics from landfill!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Update shipping cost and total when shipping method changes
+    document.querySelectorAll('input[name="order[shipping_method]"]').forEach(input => {
+      input.addEventListener('change', function() {
+        const shippingCostElement = document.getElementById('shipping-cost');
+        const orderTotalElement = document.getElementById('order-total');
+        const subtotal = <%= @cart_total %>;
+        const tax = subtotal * 0.07;
+        
+        let shippingCost = 0;
+        if (this.value === 'standard') {
+          shippingCost = subtotal >= 75 ? 0 : 8.95;
+          shippingCostElement.textContent = shippingCost > 0 ? '$' + shippingCost.toFixed(2) : 'Free';
+        } else if (this.value === 'express') {
+          shippingCost = 15.95;
+          shippingCostElement.textContent = '$' + shippingCost.toFixed(2);
+        }
+        
+        const total = subtotal + shippingCost + tax;
+        orderTotalElement.textContent = '$' + total.toFixed(2);
+      });
+    });
+    
+    // Toggle account creation fields
+    const createAccountCheckbox = document.getElementById('createAccount');
+    if (createAccountCheckbox) {
+      createAccountCheckbox.addEventListener('change', function() {
+        const accountFields = document.getElementById('account-fields');
+        accountFields.style.display = this.checked ? 'block' : 'none';
+        
+        // Set required attribute on password fields based on checkbox status
+        const passwordFields = accountFields.querySelectorAll('input[type="password"]');
+        passwordFields.forEach(field => {
+          field.required = this.checked;
+        });
+      });
+    }
+  });
+</script>

@@ -1,0 +1,253 @@
+<% content_for :title, "Admin Dashboard" %>
+
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Admin Dashboard</h1>
+    <div>
+      <%= link_to "View Site", root_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 mb-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Products</h5>
+            <span class="text-success fs-4"><i class="fas fa-box"></i></span>
+          </div>
+          <h2 class="mb-2"><%= @total_products %></h2>
+          <p class="text-muted mb-0"><%= @products_in_stock %> in stock</p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+          <%= link_to "Manage Products", admin_products_path, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Orders</h5>
+            <span class="text-warning fs-4"><i class="fas fa-shopping-cart"></i></span>
+          </div>
+          <h2 class="mb-2"><%= @total_orders %></h2>
+          <p class="text-muted mb-0"><%= @pending_orders %> pending</p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+          <%= link_to "Manage Orders", admin_orders_path, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Subscribers</h5>
+            <span class="text-info fs-4"><i class="fas fa-users"></i></span>
+          </div>
+          <h2 class="mb-2"><%= @total_subscribers %></h2>
+          <p class="text-muted mb-0">Newsletter subscribers</p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+          <%= link_to "Manage Subscribers", admin_subscribers_path, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Blog Posts</h5>
+            <span class="text-danger fs-4"><i class="fas fa-file-alt"></i></span>
+          </div>
+          <h2 class="mb-2"><%= @total_posts %></h2>
+          <p class="text-muted mb-0">The Weekly Fix articles</p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+          <%= link_to "Manage Posts", admin_posts_path, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Recent Orders</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @recent_orders.any? %>
+                  <% @recent_orders.each do |order| %>
+                    <tr>
+                      <td>#<%= order.id %></td>
+                      <td><%= order.email %></td>
+                      <td><%= order.created_at.strftime("%b %d, %Y") %></td>
+                      <td>$<%= sprintf('%.2f', order.total_amount) %></td>
+                      <td>
+                        <span class="badge bg-<%= order.status == 'completed' ? 'success' : (order.status == 'cancelled' ? 'danger' : 'warning') %>">
+                          <%= order.status.titleize %>
+                        </span>
+                      </td>
+                      <td>
+                        <%= link_to "View", admin_order_path(order), class: "btn btn-sm btn-outline-secondary" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="6" class="text-center py-3">No recent orders</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer bg-white text-center">
+          <%= link_to "View All Orders", admin_orders_path, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Low Stock Products</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @low_stock_products.any? %>
+                  <% @low_stock_products.each do |product| %>
+                    <tr>
+                      <td><%= product.title %></td>
+                      <td>$<%= sprintf('%.2f', product.price) %></td>
+                      <td>
+                        <span class="badge bg-<%= product.stock <= 2 ? 'danger' : 'warning' %>">
+                          <%= product.stock %> left
+                        </span>
+                      </td>
+                      <td>
+                        <%= link_to "Edit", edit_admin_product_path(product), class: "btn btn-sm btn-outline-secondary" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="4" class="text-center py-3">No low stock products</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer bg-white text-center">
+          <%= link_to "View All Products", admin_products_path, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-8 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Quick Actions</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <%= link_to new_admin_product_path, class: "text-decoration-none text-dark" do %>
+                <div class="border rounded p-3 text-center h-100">
+                  <i class="fas fa-plus-circle fa-2x text-success mb-2"></i>
+                  <h6 class="mb-0">Add New Product</h6>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-md-4 mb-3">
+              <%= link_to new_admin_post_path, class: "text-decoration-none text-dark" do %>
+                <div class="border rounded p-3 text-center h-100">
+                  <i class="fas fa-edit fa-2x text-primary mb-2"></i>
+                  <h6 class="mb-0">Create Blog Post</h6>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-md-4 mb-3">
+              <%= link_to admin_orders_path(status: 'pending'), class: "text-decoration-none text-dark" do %>
+                <div class="border rounded p-3 text-center h-100">
+                  <i class="fas fa-clipboard-check fa-2x text-warning mb-2"></i>
+                  <h6 class="mb-0">Process Orders</h6>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Website Stats</h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Products in Stock</span>
+              <span><%= @products_in_stock %> / <%= @total_products %></span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-success" role="progressbar" style="width: <%= (@products_in_stock.to_f / @total_products * 100).round %>%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Completed Orders</span>
+              <span><%= Order.where(status: 'completed').count %> / <%= @total_orders %></span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-primary" role="progressbar" style="width: <%= @total_orders > 0 ? (Order.where(status: 'completed').count.to_f / @total_orders * 100).round : 0 %>%"></div>
+            </div>
+          </div>
+          
+          <div>
+            <div class="d-flex justify-content-between mb-1">
+              <span>Active Subscribers</span>
+              <span><%= Subscriber.where(active: true).count %> / <%= @total_subscribers %></span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-info" role="progressbar" style="width: <%= @total_subscribers > 0 ? (Subscriber.where(active: true).count.to_f / @total_subscribers * 100).round : 0 %>%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

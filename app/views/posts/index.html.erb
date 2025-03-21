@@ -1,0 +1,116 @@
+<% content_for :title, "The Weekly Fix" %>
+
+<div class="bg-light py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="display-4">The Weekly Fix</h1>
+      <p class="lead">Repair guides, sustainability tips, and tech knowledge</p>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-8">
+        <% @posts.each do |post| %>
+          <div class="card mb-4 border-0 shadow-sm">
+            <% if post.featured_image.attached? %>
+              <div class="card-img-top-wrapper overflow-hidden" style="max-height: 400px;">
+                <%= image_tag post.featured_image, class: "card-img-top", alt: post.title %>
+              </div>
+            <% end %>
+            <div class="card-body">
+              <div class="small text-muted mb-1">
+                <i class="far fa-calendar-alt me-1"></i>
+                <%= post.published_at.strftime("%B %d, %Y") %>
+              </div>
+              <h2 class="card-title h4"><%= post.title %></h2>
+              <p class="card-text"><%= post.content.to_plain_text.truncate(200) %></p>
+              <%= link_to "Read More", post_path(post), class: "btn btn-success" %>
+            </div>
+          </div>
+        <% end %>
+        
+        <!-- Pagination -->
+        <nav class="my-4">
+            <% if @posts.respond_to?(:total_pages) && @posts.total_pages > 1 %>
+                <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <% if @posts.prev_page %>
+                    <li class="page-item">
+                        <%= link_to "Previous", {page: @posts.prev_page}, class: "page-link" %>
+                    </li>
+                    <% else %>
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    <% end %>
+                    
+                    <% (1..@posts.total_pages).each do |page| %>
+                    <li class="page-item <%= 'active' if page == @posts.current_page %>">
+                        <%= link_to page, {page: page}, class: "page-link" %>
+                    </li>
+                    <% end %>
+                    
+                    <% if @posts.next_page %>
+                    <li class="page-item">
+                        <%= link_to "Next", {page: @posts.next_page}, class: "page-link" %>
+                    </li>
+                    <% else %>
+                    <li class="page-item disabled">
+                        <span class="page-link">Next</span>
+                    </li>
+                    <% end %>
+                </ul>
+                </div>
+            <% end %>
+        </nav>
+      </div>
+      
+      <div class="col-lg-4">
+        <!-- Search Box -->
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Search</h5>
+            <%= form_with url: posts_path, method: :get, local: true do |f| %>
+              <div class="input-group">
+                <%= f.text_field :q, class: "form-control", placeholder: "Search for..." %>
+                <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
+        <!-- Categories (you might want to add these later) -->
+        <div class="card mb-4 border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Categories</h5>
+            <div class="list-group list-group-flush">
+              <a href="#" class="list-group-item list-group-item-action">Repair Guides</a>
+              <a href="#" class="list-group-item list-group-item-action">Sustainability</a>
+              <a href="#" class="list-group-item list-group-item-action">Tech News</a>
+              <a href="#" class="list-group-item list-group-item-action">DIY Projects</a>
+              <a href="#" class="list-group-item list-group-item-action">E-waste</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Subscribe Box -->
+        <div class="card border-0 shadow-sm bg-success text-white">
+          <div class="card-body">
+            <h5 class="card-title">Subscribe to The Weekly Fix</h5>
+            <p>Get the latest repair tips and sustainability news delivered to your inbox every week.</p>
+            <%= form_with model: Subscriber.new, local: true do |f| %>
+              <div class="mb-3">
+                <%= f.label :name, class: "form-label" %>
+                <%= f.text_field :name, class: "form-control", required: true %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :email, class: "form-label" %>
+                <%= f.email_field :email, class: "form-control", required: true %>
+              </div>
+              <%= f.submit "Subscribe", class: "btn btn-light" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

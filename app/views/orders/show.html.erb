@@ -1,0 +1,136 @@
+<% content_for :title, "Order ##{@order.id}" %>
+
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+    <h1 class="mb-2">Thank You for Your Order!</h1>
+    <p class="lead mb-4">Your order #<strong><%= @order.id %></strong> has been placed successfully.</p>
+    <p>A confirmation email has been sent to <strong><%= @order.email %></strong>.</p>
+    
+    <% if !user_signed_in? %>
+      <div class="alert alert-info w-75 mx-auto my-4">
+        <i class="fas fa-info-circle me-2"></i>
+        <strong>Tip:</strong> Create an account to track this order and manage future purchases.
+        <div class="mt-2">
+          <%= link_to "Create Account", signup_path(email: @order.email), class: "btn btn-outline-primary btn-sm mx-1" %>
+          <%= link_to "Log In", login_path, class: "btn btn-outline-secondary btn-sm mx-1" %>
+        </div>
+      </div>
+      <p class="text-muted">
+        <small>Bookmark this page or save your order number to check your order status.</small>
+      </p>
+    <% end %>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Order Details</h5>
+            <span class="badge bg-<%= @order.status == 'completed' ? 'success' : (@order.status == 'cancelled' ? 'danger' : 'warning') %>">
+              <%= @order.status.titleize %>
+            </span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <h6 class="text-muted">Order Information</h6>
+              <p class="mb-1">Order ID: #<%= @order.id %></p>
+              <p class="mb-1">Date: <%= @order.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+              <p class="mb-1">Total: $<%= sprintf('%.2f', @order.total_amount) %></p>
+              <p class="mb-0">Status: <%= @order.status.titleize %></p>
+            </div>
+            <div class="col-md-6">
+              <h6 class="text-muted">Customer Information</h6>
+              <p class="mb-1">Email: <%= @order.email %></p>
+              <p class="mb-1">Phone: <%= @order.phone %></p>
+              <p class="mb-0">Shipping Address: <%= @order.address %></p>
+            </div>
+          </div>
+          
+          <h6 class="text-muted mb-3">Items Ordered</h6>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0">Product</th>
+                  <th scope="col" class="border-0 text-center">Price</th>
+                  <th scope="col" class="border-0 text-center">Quantity</th>
+                  <th scope="col" class="border-0 text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @order.order_items.each do |item| %>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <% if item.product.images.attached? %>
+                          <%= image_tag item.product.images.first, class: "img-thumbnail me-3", style: "width: 60px; height: 60px; object-fit: cover;", alt: item.product.title %>
+                        <% else %>
+                          <div class="bg-light text-center me-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-image text-muted" style="line-height: 60px;"></i>
+                          </div>
+                        <% end %>
+                        <div>
+                          <%= link_to item.product.title, product_path(item.product), class: "text-decoration-none" %>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center">$<%= sprintf('%.2f', item.price) %></td>
+                    <td class="text-center"><%= item.quantity %></td>
+                    <td class="text-end">$<%= sprintf('%.2f', item.price * item.quantity) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-end">Subtotal</td>
+                  <td class="text-end">$<%= sprintf('%.2f', @order.order_items.sum { |item| item.price * item.quantity }) %></td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end">Shipping</td>
+                  <% 
+                    subtotal = @order.order_items.sum { |item| item.price * item.quantity }
+                    shipping = @order.total_amount - subtotal - (subtotal * 0.07)
+                  %>
+                  <td class="text-end"><%= shipping > 0 ? "$#{sprintf('%.2f', shipping)}" : "Free" %></td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end">Tax</td>
+                  <td class="text-end">$<%= sprintf('%.2f', subtotal * 0.07) %></td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-end fw-bold">Total</td>
+                  <td class="text-end fw-bold">$<%= sprintf('%.2f', @order.total_amount) %></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between">
+        <%= link_to root_path, class: "btn btn-outline-secondary" do %>
+          <i class="fas fa-home me-1"></i> Back to Home
+        <% end %>
+        
+        <%= link_to products_path, class: "btn btn-success" do %>
+          <i class="fas fa-shopping-bag me-1"></i> Continue Shopping
+        <% end %>
+      </div>
+      
+      <% if !user_signed_in? %>
+        <div class="alert alert-warning mt-4">
+          <i class="fas fa-link me-2"></i>
+          <strong>Order Access Link:</strong> Bookmark the following link to check your order status:
+          <div class="mt-2">
+            <input type="text" class="form-control form-control-sm" value="<%= order_url(@order, token: @order.token) %>" readonly>
+            <small class="text-muted mt-1 d-block">You'll need this link to check your order status later if you don't create an account.</small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

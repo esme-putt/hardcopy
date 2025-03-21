@@ -1,0 +1,150 @@
+<% content_for :title, "Your Cart" %>
+
+<div class="container py-5">
+  <h1 class="mb-4">Your Cart</h1>
+  
+  <% if @cart_items.empty? %>
+    <div class="text-center py-5 my-5">
+      <i class="fas fa-shopping-cart fa-5x text-muted mb-4"></i>
+      <h2 class="mb-3">Your cart is empty</h2>
+      <p class="mb-4">Looks like you haven't added any items to your cart yet.</p>
+      <%= link_to "Continue Shopping", products_path, class: "btn btn-success btn-lg" %>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-borderless align-middle">
+                <thead class="text-muted">
+                  <tr>
+                    <th scope="col" style="width: 50%">Product</th>
+                    <th scope="col" class="text-center">Price</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-end">Total</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @cart_items.each do |item| %>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <% if item[:product].images.attached? %>
+                            <%= image_tag item[:product].images.first, class: "img-thumbnail me-3", style: "width: 80px; height: 80px; object-fit: cover;", alt: item[:product].title %>
+                          <% else %>
+                            <div class="bg-light text-center me-3" style="width: 80px; height: 80px;">
+                              <i class="fas fa-image text-muted" style="line-height: 80px;"></i>
+                            </div>
+                          <% end %>
+                          <div>
+                            <h6 class="mb-1"><%= link_to item[:product].title, product_path(item[:product]), class: "text-decoration-none text-dark" %></h6>
+                            <% if item[:product].condition.present? %>
+                              <small class="text-muted">Condition: <%= item[:product].condition %></small>
+                            <% end %>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-center">$<%= sprintf('%.2f', item[:product].price) %></td>
+                      <td class="text-center">
+                        <%= form_with url: cart_path, method: :patch, class: "d-inline" do |f| %>
+                          <%= f.hidden_field :product_id, value: item[:product].id %>
+                          <div class="input-group input-group-sm" style="width: 100px; margin: 0 auto;">
+                            <button type="button" class="input-group-text btn btn-outline-secondary quantity-btn" data-action="decrement">-</button>
+                            <%= f.number_field :quantity, value: item[:quantity], min: 1, max: item[:product].stock, class: "form-control text-center", 
+                                             onchange: "this.form.submit()" %>
+                            <button type="button" class="input-group-text btn btn-outline-secondary quantity-btn" data-action="increment">+</button>
+                          </div>
+                        <% end %>
+                      </td>
+                      <td class="text-end fw-bold">$<%= sprintf('%.2f', item[:total]) %></td>
+                      <td class="text-end">
+                        <%= button_to remove_from_cart_path(item[:product]), method: :delete, class: "btn btn-sm text-danger", title: "Remove item" do %>
+                          <i class="fas fa-trash"></i>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3">
+            <%= link_to products_path, class: "btn btn-outline-secondary" do %>
+              <i class="fas fa-arrow-left me-1"></i> Continue Shopping
+            <% end %>
+            <%= button_to cart_path, method: :delete, class: "btn btn-outline-danger", data: { confirm: "Are you sure you want to clear your cart?" } do %>
+              <i class="fas fa-trash-alt me-1"></i> Clear Cart
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Order Summary</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span>Subtotal:</span>
+              <span class="fw-bold">$<%= sprintf('%.2f', @total) %></span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Shipping:</span>
+              <% shipping_cost = @total >= 75 ? 0 : 8.95 %>
+              <span><%= shipping_cost > 0 ? "$#{sprintf('%.2f', shipping_cost)}" : "Free" %></span>
+            </div>
+            <% if shipping_cost > 0 %>
+              <div class="d-flex justify-content-between small text-muted mb-3">
+                <span>Add $<%= sprintf('%.2f', 75 - @total) %> more for free shipping</span>
+              </div>
+            <% end %>
+            <hr>
+            <div class="d-flex justify-content-between mb-4">
+              <span class="fw-bold">Total:</span>
+              <span class="fw-bold fs-5">$<%= sprintf('%.2f', @total + shipping_cost) %></span>
+            </div>
+            <%= link_to new_order_path, class: "btn btn-success w-100" do %>
+              Proceed to Checkout
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="mb-3">Accepted Payment Methods</h5>
+            <div class="d-flex justify-content-between">
+              <i class="fab fa-cc-visa fa-2x text-muted"></i>
+              <i class="fab fa-cc-mastercard fa-2x text-muted"></i>
+              <i class="fab fa-cc-amex fa-2x text-muted"></i>
+              <i class="fab fa-cc-paypal fa-2x text-muted"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle quantity buttons
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const input = this.parentNode.querySelector('input[type=number]');
+        const currentValue = parseInt(input.value, 10);
+        
+        if (this.dataset.action === 'decrement' && currentValue > 1) {
+          input.value = currentValue - 1;
+        } else if (this.dataset.action === 'increment' && currentValue < parseInt(input.max, 10)) {
+          input.value = currentValue + 1;
+        }
+        
+        // Submit the form to update the cart
+        input.form.submit();
+      });
+    });
+  });
+</script>
