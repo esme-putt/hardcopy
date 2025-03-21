@@ -7,5 +7,5 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :name, presence: true
     
-    enum role: { customer: 0, admin: 1 }
+    enum :role, { customer: 0, admin: 1 }
   end
