@@ -6,5 +6,280 @@
  * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
  * depending on specificity.
  *
- * Consider organizing styles into separate files for maintainability.
+ * The custom Hardcopy styles are applied below.
  */
+
+/* Import Atkinson Hyperlegible font */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Color scheme variables */
+:root {
+  --black: #020202;
+  --steel-blue: #f2545b; /* Swapped: previously indian-red */
+  --indian-red: #2d82b7; /* Swapped: previously steel-blue */
+  --olivine: #9eb25d;
+  --white: #ffffff;
+  
+  /* Semantic color variables */
+  --primary: var(--steel-blue); /* Now using the pink color */
+  --secondary: var(--olivine);
+  --danger: var(--indian-red); /* Now using the blue color */
+  --dark: var(--black);
+  --light: var(--white);
+  
+  /* Bootstrap overrides */
+  --bs-primary: var(--primary);
+  --bs-secondary: var(--secondary);
+  --bs-danger: var(--danger);
+  --bs-dark: var(--dark);
+  --bs-light: var(--light);
+  --bs-success: var(--olivine);
+  --bs-warning: #f7a04f; /* A complementary color for warnings */
+  --bs-info: #5fccd9; /* A light blue for info */
+  
+  /* Typography */
+  --bs-font-sans-serif: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+/* Base styles */
+body {
+  font-family: var(--bs-font-sans-serif);
+  color: var(--black);
+}
+
+/* Button overrides */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #d13a41; /* Darker version of the pink */
+  border-color: #d13a41;
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: #88994f; /* Darker version of olivine */
+  border-color: #88994f;
+}
+
+.btn-success {
+  background-color: var(--olivine);
+  border-color: var(--olivine);
+}
+
+.btn-success:hover, .btn-success:focus {
+  background-color: #88994f;
+  border-color: #88994f;
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-danger:hover, .btn-danger:focus {
+  background-color: #246a96; /* Darker version of the blue */
+  border-color: #246a96;
+}
+
+.btn-outline-success {
+  color: var(--olivine);
+  border-color: var(--olivine);
+}
+
+.btn-outline-success:hover, .btn-outline-success:focus {
+  background-color: var(--olivine);
+  border-color: var(--olivine);
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Navigation */
+.navbar-dark {
+  background-color: var(--dark) !important;
+}
+
+.navbar-dark .navbar-brand {
+  color: var(--white);
+}
+
+.navbar-dark .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.navbar-dark .nav-link:hover, .navbar-dark .nav-link.active {
+  color: var(--white) !important;
+}
+
+/* Cards */
+.card {
+  border-radius: 0.5rem;
+}
+
+.card-header {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Background utility classes */
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
+
+.bg-success {
+  background-color: var(--olivine) !important;
+}
+
+.bg-danger {
+  background-color: var(--danger) !important;
+}
+
+.bg-dark {
+  background-color: var(--dark) !important;
+}
+
+.bg-light {
+  background-color: var(--light) !important;
+}
+
+/* Text colors */
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.text-secondary {
+  color: var(--secondary) !important;
+}
+
+.text-success {
+  color: var(--olivine) !important;
+}
+
+.text-danger {
+  color: var(--danger) !important;
+}
+
+/* Hero sections */
+.hero {
+  background-color: var(--primary) !important; /* Now pink */
+  color: var(--white);
+}
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: var(--primary); /* Now pink */
+  border-color: var(--primary);
+}
+
+.page-link {
+  color: var(--primary); /* Now pink */
+}
+
+.page-link:hover {
+  color: #d13a41; /* Darker pink */
+}
+
+/* Form controls */
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.25rem rgba(242, 84, 91, 0.25); /* Pink shadow */
+}
+
+/* Alerts */
+.alert-success {
+  background-color: rgba(158, 178, 93, 0.2);
+  border-color: rgba(158, 178, 93, 0.3);
+  color: #5d6937;
+}
+
+.alert-danger {
+  background-color: rgba(45, 130, 183, 0.2); /* Blue background */
+  border-color: rgba(45, 130, 183, 0.3);
+  color: #1c5578; /* Blue text */
+}
+
+.alert-info {
+  background-color: rgba(242, 84, 91, 0.2); /* Pink background */
+  border-color: rgba(242, 84, 91, 0.3);
+  color: #a52d32; /* Pink text */
+}
+
+/* Product cards */
+.product-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.product-condition {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Badge colors */
+.badge.bg-info {
+  background-color: #5fccd9 !important;
+}
+
+.badge.bg-warning {
+  background-color: #f7a04f !important;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+/* Typography enhancements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+.display-4 {
+  font-weight: 700;
+}
+
+.lead {
+  font-weight: 400;
+}
+
+/* Blog/post content */
+.rich-text {
+  font-family: var(--bs-font-sans-serif);
+  line-height: 1.6;
+}
+
+.rich-text h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.rich-text p {
+  margin-bottom: 1rem;
+}
+
+/* Ensure adequate contrast for accessibility */
+.text-muted {
+  color: #6c757d !important;
+}
