@@ -15,27 +15,27 @@
 /* Color scheme variables */
 :root {
   --black: #020202;
-  --steel-blue: #f2545b; /* Swapped: previously indian-red */
-  --indian-red: #2d82b7; /* Swapped: previously steel-blue */
-  --olivine: #9eb25d;
+  --red: #f2545b; /* For accents only */
+  --olivine: #9eb25d; /* Primary color for hero/footer */
+  --dark-olivine: #88994f; /* Darker version of olivine */
   --white: #ffffff;
   
   /* Semantic color variables */
-  --primary: var(--steel-blue); /* Now using the pink color */
-  --secondary: var(--olivine);
-  --danger: var(--indian-red); /* Now using the blue color */
+  --primary: var(--olivine); /* Changed to olivine */
+  --secondary: var(--olivine); /* Redundant but keeping for compatibility */
+  --accent: var(--red); /* Red for accent elements only */
   --dark: var(--black);
   --light: var(--white);
   
   /* Bootstrap overrides */
   --bs-primary: var(--primary);
   --bs-secondary: var(--secondary);
-  --bs-danger: var(--danger);
+  --bs-danger: var(--accent);
   --bs-dark: var(--dark);
   --bs-light: var(--light);
   --bs-success: var(--olivine);
   --bs-warning: #f7a04f; /* A complementary color for warnings */
-  --bs-info: #5fccd9; /* A light blue for info */
+  --bs-info: #5fccd9; /* A light teal for info */
   
   /* Typography */
   --bs-font-sans-serif: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -55,8 +55,8 @@ body {
 }
 
 .btn-primary:hover, .btn-primary:focus {
-  background-color: #d13a41; /* Darker version of the pink */
-  border-color: #d13a41;
+  background-color: var(--dark-olivine);
+  border-color: var(--dark-olivine);
 }
 
 .btn-secondary {
@@ -65,8 +65,8 @@ body {
 }
 
 .btn-secondary:hover, .btn-secondary:focus {
-  background-color: #88994f; /* Darker version of olivine */
-  border-color: #88994f;
+  background-color: var(--dark-olivine);
+  border-color: var(--dark-olivine);
 }
 
 .btn-success {
@@ -75,18 +75,18 @@ body {
 }
 
 .btn-success:hover, .btn-success:focus {
-  background-color: #88994f;
-  border-color: #88994f;
+  background-color: var(--dark-olivine);
+  border-color: var(--dark-olivine);
 }
 
 .btn-danger {
-  background-color: var(--danger);
-  border-color: var(--danger);
+  background-color: var(--accent);
+  border-color: var(--accent);
 }
 
 .btn-danger:hover, .btn-danger:focus {
-  background-color: #246a96; /* Darker version of the blue */
-  border-color: #246a96;
+  background-color: #d13a41; /* Darker version of red */
+  border-color: #d13a41;
 }
 
 .btn-outline-success {
@@ -126,6 +126,15 @@ body {
   color: var(--white) !important;
 }
 
+/* Navigation accent elements */
+.navbar-dark .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+.navbar-dark .nav-link.active {
+  color: var(--accent) !important;
+}
+
 /* Cards */
 .card {
   border-radius: 0.5rem;
@@ -150,7 +159,7 @@ body {
 }
 
 .bg-danger {
-  background-color: var(--danger) !important;
+  background-color: var(--accent) !important;
 }
 
 .bg-dark {
@@ -159,6 +168,10 @@ body {
 
 .bg-light {
   background-color: var(--light) !important;
+}
+
+.bg-accent {
+  background-color: var(--accent) !important;
 }
 
 /* Text colors */
@@ -175,33 +188,37 @@ body {
 }
 
 .text-danger {
-  color: var(--danger) !important;
+  color: var(--accent) !important;
+}
+
+.text-accent {
+  color: var(--accent) !important;
 }
 
 /* Hero sections */
 .hero {
-  background-color: var(--primary) !important; /* Now pink */
+  background-color: var(--olivine) !important; /* Changed to olivine */
   color: var(--white);
 }
 
 /* Pagination */
 .page-item.active .page-link {
-  background-color: var(--primary); /* Now pink */
+  background-color: var(--primary);
   border-color: var(--primary);
 }
 
 .page-link {
-  color: var(--primary); /* Now pink */
+  color: var(--primary);
 }
 
 .page-link:hover {
-  color: #d13a41; /* Darker pink */
+  color: var(--dark-olivine);
 }
 
 /* Form controls */
 .form-control:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 0.25rem rgba(242, 84, 91, 0.25); /* Pink shadow */
+  box-shadow: 0 0 0 0.25rem rgba(158, 178, 93, 0.25); /* Olivine shadow */
 }
 
 /* Alerts */
@@ -212,15 +229,15 @@ body {
 }
 
 .alert-danger {
-  background-color: rgba(45, 130, 183, 0.2); /* Blue background */
-  border-color: rgba(45, 130, 183, 0.3);
-  color: #1c5578; /* Blue text */
+  background-color: rgba(242, 84, 91, 0.2); /* Red background for danger alerts */
+  border-color: rgba(242, 84, 91, 0.3);
+  color: #a52d32;
 }
 
 .alert-info {
-  background-color: rgba(242, 84, 91, 0.2); /* Pink background */
-  border-color: rgba(242, 84, 91, 0.3);
-  color: #a52d32; /* Pink text */
+  background-color: rgba(95, 204, 217, 0.2); /* Teal background */
+  border-color: rgba(95, 204, 217, 0.3);
+  color: #3a777e;
 }
 
 /* Product cards */
@@ -245,9 +262,15 @@ body {
   background-color: #f7a04f !important;
 }
 
+/* Shopping cart badge */
+.navbar-nav .fa-shopping-cart + .badge {
+  background-color: var(--accent) !important;
+  color: white;
+}
+
 /* Footer */
 footer {
-  background-color: var(--dark);
+  background-color: var(--dark); /* Keeping footer black as requested */
   color: var(--white);
 }
 
@@ -282,4 +305,89 @@ h1, h2, h3, h4, h5, h6 {
 /* Ensure adequate contrast for accessibility */
 .text-muted {
   color: #6c757d !important;
+}
+
+/* Accent elements - using red more for interactive elements */
+.accent-element {
+  color: var(--accent);
+}
+
+/* Red accent buttons */
+.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.btn-accent:hover, .btn-accent:focus {
+  background-color: #d13a41; /* Darker red */
+  border-color: #d13a41;
+}
+
+.btn-outline-accent {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline-accent:hover {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+/* Interactive elements with red accents */
+a:hover {
+  color: var(--accent);
+}
+
+.link-accent {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.link-accent:hover {
+  color: #d13a41; /* Darker red */
+  text-decoration: underline;
+}
+
+/* Form elements with red accents */
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent) !important;
+}
+
+/* Badge accent color */
+.badge-accent {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Icon accents */
+.icon-accent {
+  color: var(--accent);
+}
+
+/* Specific icon styling */
+.fa-recycle {
+  color: var(--dark) !important; /* Stop landfill waste icon in black */
+}
+
+/* Button alternatives using accent color */
+.btn-primary.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-primary.btn-accent:hover {
+  background-color: #d13a41; /* Darker red */
+  border-color: #d13a41;
+}
+
+.btn-outline-primary.btn-accent {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline-primary.btn-accent:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
 }
