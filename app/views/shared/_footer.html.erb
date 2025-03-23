@@ -1,61 +1,65 @@
-<footer class="mt-5 py-5">
+<footer class="py-5">
   <div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-4 mb-md-0">
-        <h5 class="mb-3">Hardcopy</h5>
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6">
+        <h5 class="mb-3 font-monospace">HARDCOPY</h5>
         <p>Our mission is to rescue technology from landfill, empower people with knowledge, and give electronics a second life.</p>
-        <div class="mt-3">
-          <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+        <div class="mt-3 d-flex gap-3">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-      <div class="col-md-2 mb-4 mb-md-0">
-        <h5 class="mb-3">Shop</h5>
+      <div class="col-lg-2 col-md-6">
+        <h5 class="mb-3 font-monospace">SHOP</h5>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="<%= products_path %>" class="text-white text-decoration-none">All Products</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Laptops</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Phones</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Accessories</a></li>
+          <li class="mb-2"><a href="<%= products_path %>">All Products</a></li>
+          <li class="mb-2"><a href="#">Laptops</a></li>
+          <li class="mb-2"><a href="#">Phones</a></li>
+          <li class="mb-2"><a href="#">Accessories</a></li>
         </ul>
       </div>
-      <div class="col-md-2 mb-4 mb-md-0">
-        <h5 class="mb-3">Learn</h5>
+      <div class="col-lg-2 col-md-6">
+        <h5 class="mb-3 font-monospace">LEARN</h5>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="<%= weekly_fix_path %>" class="text-white text-decoration-none">The Weekly Fix</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Repair Guides</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Sustainability</a></li>
-          <li class="mb-2"><a href="<%= about_path %>" class="text-white text-decoration-none">About Us</a></li>
+          <li class="mb-2"><a href="<%= weekly_fix_path %>">The Weekly Fix</a></li>
+          <li class="mb-2"><a href="#">Repair Guides</a></li>
+          <li class="mb-2"><a href="#">Sustainability</a></li>
+          <li class="mb-2"><a href="<%= about_path %>">About Us</a></li>
         </ul>
       </div>
-      <div class="col-md-4">
-        <h5 class="mb-3">Contact Us</h5>
-        <p class="mb-1"><i class="fas fa-envelope me-2"></i> hello@hardcopy.com</p>
-        <p class="mb-1"><i class="fas fa-phone me-2"></i> (555) 123-4567</p>
-        <p class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> 123 Repair Street, Fixville</p>
+      <div class="col-lg-4 col-md-6">
+        <h5 class="mb-3 font-monospace">CONTACT US</h5>
+        <p class="mb-2">
+          <i class="fas fa-envelope me-2"></i> hello@hardcopy.com
+        </p>
+        <p class="mb-2">
+          <i class="fas fa-phone me-2"></i> (555) 123-4567
+        </p>
+        <p class="mb-3">
+          <i class="fas fa-map-marker-alt me-2"></i> 123 Repair Street, Fixville
+        </p>
         
-        <h5 class="mb-2">Subscribe to our Newsletter</h5>
-        <%= form_with model: Subscriber.new, local: true, class: "mt-2" do |f| %>
+        <h5 class="mb-2 font-monospace">NEWSLETTER</h5>
+        <%= form_with model: Subscriber.new, local: true, class: "d-flex" do |f| %>
           <div class="input-group">
             <%= f.email_field :email, class: "form-control", placeholder: "Your email address", required: true %>
             <%= f.hidden_field :name, value: "Subscriber" %>
-            <button type="submit" class="btn btn-primary">Subscribe</button>
+            <button type="submit" class="btn btn-accent">Subscribe</button>
           </div>
         <% end %>
       </div>
     </div>
-    <hr class="my-4 border-secondary">
+    <hr class="my-4">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-3 mb-md-0">
         <p class="mb-0">© <%= Time.current.year %> Hardcopy. All rights reserved.</p>
       </div>
       <div class="col-md-6 text-md-end">
-        <p class="mb-0">
-          <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
-          <a href="#" class="text-white text-decoration-none me-3">Terms of Service</a>
-          <a href="#" class="text-white text-decoration-none">Shipping Policy</a>
-        </p>
+        <a href="#" class="me-3">Privacy Policy</a>
+        <a href="#" class="me-3">Terms of Service</a>
+        <a href="#">Shipping Policy</a>
       </div>
     </div>
   </div>

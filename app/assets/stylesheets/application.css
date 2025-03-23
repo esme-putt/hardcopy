@@ -5,8 +5,6 @@
  * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
  * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
  * depending on specificity.
- *
- * The custom Hardcopy styles are applied below.
  */
 
 /* Import Atkinson Hyperlegible font */
@@ -15,15 +13,15 @@
 /* Color scheme variables */
 :root {
   --black: #020202;
-  --red: #f2545b; /* For accents only */
-  --olivine: #9eb25d; /* Primary color for hero/footer */
-  --dark-olivine: #88994f; /* Darker version of olivine */
+  --red: #f2545b;
+  --purple: #5e17eb;
+  --purple-dark: #4a12c4;
   --white: #ffffff;
   
   /* Semantic color variables */
-  --primary: var(--olivine); /* Changed to olivine */
-  --secondary: var(--olivine); /* Redundant but keeping for compatibility */
-  --accent: var(--red); /* Red for accent elements only */
+  --primary: var(--purple);
+  --secondary: var(--purple);
+  --accent: var(--red);
   --dark: var(--black);
   --light: var(--white);
   
@@ -33,9 +31,8 @@
   --bs-danger: var(--accent);
   --bs-dark: var(--dark);
   --bs-light: var(--light);
-  --bs-success: var(--olivine);
-  --bs-warning: #f7a04f; /* A complementary color for warnings */
-  --bs-info: #5fccd9; /* A light teal for info */
+  --bs-success: var(--primary);
+  --bs-warning: #f7a04f;
   
   /* Typography */
   --bs-font-sans-serif: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -44,7 +41,7 @@
 
 /* Base styles */
 body {
-  font-family: var(--bs-font-sans-serif);
+  font-family: monospace, var(--bs-font-sans-serif);
   color: var(--black);
 }
 
@@ -52,92 +49,145 @@ body {
 .btn-primary {
   background-color: var(--primary);
   border-color: var(--primary);
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
 }
 
 .btn-primary:hover, .btn-primary:focus {
-  background-color: var(--dark-olivine);
-  border-color: var(--dark-olivine);
+  background-color: var(--purple-dark);
+  border-color: var(--purple-dark);
 }
 
 .btn-secondary {
   background-color: var(--secondary);
   border-color: var(--secondary);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .btn-secondary:hover, .btn-secondary:focus {
-  background-color: var(--dark-olivine);
-  border-color: var(--dark-olivine);
+  background-color: var(--purple-dark);
+  border-color: var(--purple-dark);
 }
 
 .btn-success {
-  background-color: var(--olivine);
-  border-color: var(--olivine);
+  background-color: var(--primary);
+  border-color: var(--primary);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .btn-success:hover, .btn-success:focus {
-  background-color: var(--dark-olivine);
-  border-color: var(--dark-olivine);
+  background-color: var(--purple-dark);
+  border-color: var(--purple-dark);
 }
 
 .btn-danger {
   background-color: var(--accent);
   border-color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .btn-danger:hover, .btn-danger:focus {
-  background-color: #d13a41; /* Darker version of red */
+  background-color: #d13a41;
   border-color: #d13a41;
 }
 
-.btn-outline-success {
-  color: var(--olivine);
-  border-color: var(--olivine);
+.btn-light {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--black);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.btn-outline-success:hover, .btn-outline-success:focus {
-  background-color: var(--olivine);
-  border-color: var(--olivine);
+.btn-light:hover {
+  color: var(--white);
+  background-color: var(--accent);
 }
 
-.btn-outline-primary {
+.btn-outline-success, .btn-outline-primary {
   color: var(--primary);
   border-color: var(--primary);
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
+.btn-outline-success:hover, .btn-outline-success:focus,
 .btn-outline-primary:hover, .btn-outline-primary:focus {
   background-color: var(--primary);
   border-color: var(--primary);
 }
 
+.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.btn-accent:hover, .btn-accent:focus {
+  background-color: #d13a41;
+  border-color: #d13a41;
+}
+
 /* Navigation */
 .navbar-dark {
   background-color: var(--dark) !important;
+  padding: 1rem 0;
 }
 
 .navbar-dark .navbar-brand {
   color: var(--white);
+  font-weight: 800;
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+  font-family: monospace;
 }
 
 .navbar-dark .nav-link {
   color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 700;
+  position: relative;
+  margin: 0 0.25rem;
+  font-family: monospace;
 }
 
-.navbar-dark .nav-link:hover, .navbar-dark .nav-link.active {
-  color: var(--white) !important;
+.navbar-dark .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
 }
 
-/* Navigation accent elements */
-.navbar-dark .nav-link:hover {
-  color: var(--accent) !important;
+.navbar-dark .nav-link:hover::after, 
+.navbar-dark .nav-link.active::after {
+  width: 100%;
 }
 
+.navbar-dark .nav-link:hover, 
 .navbar-dark .nav-link.active {
-  color: var(--accent) !important;
+  color: var(--white) !important;
 }
 
 /* Cards */
 .card {
   border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .card-header {
@@ -145,112 +195,321 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-/* Background utility classes */
-.bg-primary {
-  background-color: var(--primary) !important;
-}
-
-.bg-secondary {
-  background-color: var(--secondary) !important;
-}
-
-.bg-success {
-  background-color: var(--olivine) !important;
-}
-
-.bg-danger {
-  background-color: var(--accent) !important;
-}
-
-.bg-dark {
-  background-color: var(--dark) !important;
-}
-
-.bg-light {
-  background-color: var(--light) !important;
-}
-
-.bg-accent {
-  background-color: var(--accent) !important;
-}
-
-/* Text colors */
-.text-primary {
-  color: var(--primary) !important;
-}
-
-.text-secondary {
-  color: var(--secondary) !important;
-}
-
-.text-success {
-  color: var(--olivine) !important;
-}
-
-.text-danger {
-  color: var(--accent) !important;
-}
-
-.text-accent {
-  color: var(--accent) !important;
-}
-
-/* Hero sections */
+/* Hero section */
 .hero {
-  background-color: var(--olivine) !important; /* Changed to olivine */
+  background-color: var(--dark) !important;
   color: var(--white);
+  padding: 7rem 0;
+  position: relative;
 }
 
-/* Pagination */
-.page-item.active .page-link {
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
   background-color: var(--primary);
-  border-color: var(--primary);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%, 0% 100%);
 }
 
-.page-link {
-  color: var(--primary);
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-family: monospace;
+  position: relative;
 }
 
-.page-link:hover {
-  color: var(--dark-olivine);
+.hero-title::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 0.5rem;
+  background-color: var(--accent);
 }
 
-/* Form controls */
-.form-control:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 0.25rem rgba(158, 178, 93, 0.25); /* Olivine shadow */
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-family: monospace;
 }
 
-/* Alerts */
-.alert-success {
-  background-color: rgba(158, 178, 93, 0.2);
-  border-color: rgba(158, 178, 93, 0.3);
-  color: #5d6937;
+.hero-subtitle span {
+  display: inline-block;
+  background-color: var(--primary);
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  font-weight: 700;
 }
 
-.alert-danger {
-  background-color: rgba(242, 84, 91, 0.2); /* Red background for danger alerts */
-  border-color: rgba(242, 84, 91, 0.3);
-  color: #a52d32;
+.hero-text {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  max-width: 36rem;
+  font-family: monospace;
 }
 
-.alert-info {
-  background-color: rgba(95, 204, 217, 0.2); /* Teal background */
-  border-color: rgba(95, 204, 217, 0.3);
-  color: #3a777e;
+/* Mission section */
+.mission-section {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 5rem 0;
+  position: relative;
+}
+
+.mission-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  background-color: var(--dark);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+}
+
+.mission-card {
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  color: var(--dark);
+  transition: transform 0.3s ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-0.5rem);
+}
+
+.mission-card-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.mission-card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  font-family: monospace;
+}
+
+.mission-card-text {
+  color: #666;
+  font-weight: 600;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  font-family: monospace;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background-color: var(--accent);
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 /* Product cards */
+.product-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
 .product-card:hover {
-  transform: translateY(-5px);
-  transition: transform 0.3s ease;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  height: 12rem;
+  background-color: #f0f0f0;
+  position: relative;
 }
 
 .product-condition {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.product-price-original {
+  font-size: 1rem;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
+
+/* Blog cards */
+.blog-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.blog-image {
+  height: 12rem;
+  background-color: #f0f0f0;
+}
+
+.blog-date {
+  font-size: 0.875rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.blog-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.blog-excerpt {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.blog-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.blog-link:hover {
+  color: var(--purple-dark);
+}
+
+/* Newsletter section */
+.newsletter-section {
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 5rem 0;
+}
+
+.newsletter-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  font-family: monospace;
+}
+
+.newsletter-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.newsletter-form input {
+  border: none;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.newsletter-form button {
+  background-color: var(--primary);
+  border: none;
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: var(--purple-dark);
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark);
+  color: var(--white);
+  padding: 5rem 0 2rem;
+}
+
+footer h5 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+footer p {
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--white);
+}
+
+footer .social-icon {
+  transition: color 0.3s ease;
+}
+
+footer .social-icon:hover {
+  color: var(--accent);
+}
+
+footer hr {
+  border-color: #333;
+  margin: 2rem 0;
+}
+
+footer .footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .footer-links {
+  display: flex;
+  gap: 1.5rem;
 }
 
 /* Badge colors */
@@ -262,132 +521,92 @@ body {
   background-color: #f7a04f !important;
 }
 
+.badge.bg-purple {
+  background-color: var(--primary) !important;
+}
+
 /* Shopping cart badge */
 .navbar-nav .fa-shopping-cart + .badge {
   background-color: var(--accent) !important;
   color: white;
-}
-
-/* Footer */
-footer {
-  background-color: var(--dark); /* Keeping footer black as requested */
-  color: var(--white);
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Typography enhancements */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  font-weight: 800;
+  font-family: monospace;
 }
 
 .display-4 {
-  font-weight: 700;
+  font-weight: 800;
+  font-family: monospace;
 }
 
 .lead {
   font-weight: 400;
+  font-family: monospace;
 }
 
-/* Blog/post content */
-.rich-text {
-  font-family: var(--bs-font-sans-serif);
-  line-height: 1.6;
-}
-
-.rich-text h2 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.rich-text p {
-  margin-bottom: 1rem;
-}
-
-/* Ensure adequate contrast for accessibility */
-.text-muted {
-  color: #6c757d !important;
-}
-
-/* Accent elements - using red more for interactive elements */
-.accent-element {
+/* Accent elements */
+.accent-text {
   color: var(--accent);
 }
 
-/* Red accent buttons */
-.btn-accent {
+.accent-bg {
   background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--white);
 }
 
-.btn-accent:hover, .btn-accent:focus {
-  background-color: #d13a41; /* Darker red */
-  border-color: #d13a41;
+/* Grid patterns */
+.grid-pattern {
+  position: relative;
 }
 
-.btn-outline-accent {
-  color: var(--accent);
-  border-color: var(--accent);
+.grid-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(90deg, var(--primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+  pointer-events: none;
 }
 
-.btn-outline-accent:hover {
-  background-color: var(--accent);
-  color: var(--white);
-}
-
-/* Interactive elements with red accents */
-a:hover {
-  color: var(--accent);
-}
-
-.link-accent {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.link-accent:hover {
-  color: #d13a41; /* Darker red */
-  text-decoration: underline;
-}
-
-/* Form elements with red accents */
-input:focus, select:focus, textarea:focus {
-  border-color: var(--accent) !important;
-}
-
-/* Badge accent color */
-.badge-accent {
-  background-color: var(--accent);
-  color: white;
-}
-
-/* Icon accents */
-.icon-accent {
-  color: var(--accent);
-}
-
-/* Specific icon styling */
-.fa-recycle {
-  color: var(--dark) !important; /* Stop landfill waste icon in black */
-}
-
-/* Button alternatives using accent color */
-.btn-primary.btn-accent {
-  background-color: var(--accent);
-  border-color: var(--accent);
-}
-
-.btn-primary.btn-accent:hover {
-  background-color: #d13a41; /* Darker red */
-  border-color: #d13a41;
-}
-
-.btn-outline-primary.btn-accent {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.btn-outline-primary.btn-accent:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: white;
+/* Media queries */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .hero-text {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .newsletter-title {
+    font-size: 2rem;
+  }
+  
+  .newsletter-text {
+    font-size: 1rem;
+  }
 }

@@ -1,0 +1,18 @@
+<section class="newsletter-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <h2 class="newsletter-title">SUBSCRIBE TO THE WEEKLY FIX</h2>
+        <p class="newsletter-text">Get repair tips, sustainability news, and product updates delivered to your inbox.</p>
+      </div>
+      <div class="col-lg-5">
+        <%= form_with model: Subscriber.new, local: true, class: "newsletter-form d-flex flex-column flex-sm-row gap-3" do |f| %>
+          <%= f.email_field :email, placeholder: "Your email address", required: true, class: "form-control form-control-lg" %>
+          <%= f.hidden_field :name, value: "Subscriber" %>
+          <%= f.submit "SUBSCRIBE", class: "btn btn-primary btn-lg" %>
+        <% end %>
+        <p class="mt-2 text-white"><small>We respect your privacy and will never share your email</small></p>
+      </div>
+    </div>
+  </div>
+</section>
