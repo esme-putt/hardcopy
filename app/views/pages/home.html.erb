@@ -2,22 +2,9 @@
 <section class="terminal-hero">
   <div class="terminal-command">
     <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-    <span class="terminal-command-text">cat welcome.txt</span>
+    <span class="terminal-command-text">welcome.txt</span>
   </div>
-  
-  <div class="my-4">
-    <h1 class="terminal-hero-title typewriter-text">HARDCOPY TERMINAL</h1>
-    <div class="terminal-hero-subtitle">[ RESCUE. REPAIR. REUSE. ]</div>
-    <div class="terminal-hero-text mb-4">
-      Join our mission to reduce e-waste and empower people with knowledge.
-    </div>
-    
-    <div class="d-flex flex-wrap gap-3">
-      <%= link_to "$ cd /store", products_path, class: "btn btn-primary" %>
-      <%= link_to "$ cat weekly_fix.txt", weekly_fix_path, class: "btn btn-accent" %>
-    </div>
-  </div>
-  
+
   <!-- ASCII Art Logo -->
   <div class="ascii-art my-4">
  _    _              _____  _____   _____ ____  _______     __
@@ -27,13 +14,25 @@
 | |  | |  / ____ \  | | \ \| |__| | |___| |__| | |      | |   
 |_|  |_| /_/    \_\ |_|  \_\_____/ \_____\____/|_|      |_|   
   </div>
+  
+  <div class="my-4">
+    <div class="terminal-hero-subtitle">[ RESCUE. REPAIR. ENJOY! ]</div>
+    <div class="terminal-hero-text mb-4">
+      We love technology and hate waste.
+    </div>
+    
+    <div class="d-flex flex-wrap gap-3">
+      <%= link_to "$ /store", products_path, class: "btn btn-primary" %>
+      <%= link_to "$ weekly_fix.txt", weekly_fix_path, class: "btn btn-accent" %>
+    </div>
+  </div>
 </section>
 
 <!-- Mission Section -->
 <section class="mb-5">
   <div class="terminal-command">
     <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-    <span class="terminal-command-text">cat mission.txt</span>
+    <span class="terminal-command-text">mission.txt</span>
   </div>
   
   <div class="terminal-section">
@@ -42,31 +41,98 @@
       <div class="row">
         <div class="col-md-4 mb-4">
           <div class="terminal-card p-3 h-100">
-            <div class="mb-3">
-              <i class="fas fa-recycle fa-3x text-success"></i>
+            <div class="ascii-art-small my-4">
+             :@@@@@@@@.-@*.             
+            :@@@@@@@@=#@@@%             
+            #@@@@@@@@ @@@@@+            
+           =@@@@@@@@ @@@@@@@.           
+           @@@@@@@@%:@@@@@@@#           
+          #@@@@@@@@ *@@@@@@@@: .        
+         .@@@@@@@@*  @@@@@@@@@@         
+          %@@@@@@@    @@@@@@@@+         
+           :@@@@@-    #@@@@@@@          
+             =@@#      @@@@@@=          
+     %@@@@@@-  *      *@@@@@%           
+       @@@@@@                   +       
+      @@@@@@@+                -@@.      
+     .@@@@@@@@              .@@@@@      
+     @@@@@@@@@*            @@@@@@@.     
+    :@@@@@@@@ %           +@@@@@@@@.    
+   .@@@@@@@@=              @@@@@@@@@    
+   :@@@@@@@@               =@@@@@@@@:   
+   :@@@@@@@=                @@@@@@@@:   
+    :@@@@@@                 -@@@@@@@:   
+    .                 #:     *@@@@@@    
+     @@@@@@@@@@@@%    @*+==== @@@@@.    
+     .@@@@@@@@@@@%   %@@@@@@@*-@@@@     
+      %@@@@@@@@@@%  -@@@@@@@@@ @@@      
+       @@@@@@@@@@%  @@@@@@@@@@#:@:      
+       :@@@@@@@@@% .@@@@@@@@@@@ @       
+        @@@@@@@@@%  @@@@@@@@@@@+:       
+         %@@@@@@@%   @@@@@@@@@@         
+           :-----:   -@@@@@@@@-          
             </div>
-            <h3 class="h4 mb-3">STOP_LANDFILL_WASTE()</h3>
-            <p>We rescue technology from ending up in landfills by fixing and refurbishing it.</p>
+            <h3 class="h4 mb-3">STOP_E_WASTE</h3>
+            <p>We believe in celebrating what's already out there - and investing in reburbishing it, not creating more.</p>
           </div>
         </div>
         
         <div class="col-md-4 mb-4">
           <div class="terminal-card p-3 h-100">
-            <div class="mb-3">
-              <i class="fas fa-book-open fa-3x text-primary"></i>
+            <div class="ascii-art-small my-4">
+           .:****#:.*****+.             
+          =#--   .*+=    --=-           
+        #-        **:       #-
+        =#        **.       %+          
+        =#        **:       %+
+        =#        **.       %+          
+        =#        **.       %+          
+        =#        **.       %+          
+        =#        **.       %+         
+        =#        **.       %+          
+        =#        **.       %+          
+        =#        **:       %+         
+        =#        **.       %+          
+        =#        **.       %+          
+        =#:-+####=#*==####--%+          
+        =####################+
+        =######+==##+==######+          
+        =#                  *+                        
             </div>
-            <h3 class="h4 mb-3">SHARE_KNOWLEDGE()</h3>
-            <p>We empower you with the skills and knowledge to repair and maintain your own devices.</p>
+            <h3 class="h4 mb-3">SHARE_KNOWLEDGE</h3>
+            <p>We think if you're buying something, you deserve to know how to fix it.</p>
           </div>
         </div>
         
         <div class="col-md-4 mb-4">
           <div class="terminal-card p-3 h-100">
-            <div class="mb-3">
-              <i class="fas fa-store fa-3x text-accent"></i>
-            </div>
-            <h3 class="h4 mb-3">SELL_COOL_STUFF()</h3>
-            <p>We offer quality refurbished tech items that are both functional and unique.</p>
+          <div class="ascii-art-small my-4">
+          -@%%%%%%%%%%%%%%@-           
+          %#::::::::::::::#%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %*              *%           
+          %@**************@%           
+          %@@@@@%=--=%@@@@@%           
+          %@@@@%.    .%@@@@%           
+          %@@@@   ++   @@@@%           
+          %@@@% .#@@#. %@@@%           
+          %@@@* -@@@@- *@@@%           
+          %@@@% .#@@#. %@@@%           
+          %@@@@  :%%:  @@@@%           
+          %@@@@#.    .#@@@@%           
+          %@@@@@#=..=#@@@@@%           
+          #@@@@@@@@@@@@@@@@#                       
+           </div>
+            <h3 class="h4 mb-3">SELL_COOL_STUFF</h3>
+            <p>We love technology! And want to see cool stuff in the world.</p>
           </div>
         </div>
       </div>

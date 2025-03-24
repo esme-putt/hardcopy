@@ -35,9 +35,9 @@
   :root {
     /* Terminal color scheme */
     --terminal-bg: #000000;
-    --terminal-text: #00ff00;  /* Classic green terminal text */
-    --terminal-accent: #ff5f5f;
-    --terminal-secondary: #5f5fff;
+    --terminal-text: #FF69B4;  /* Main terminal text */
+    --terminal-accent: #FF69B4;
+    --terminal-secondary: #00ff00;
     --terminal-prompt: #ffff00;
     --terminal-success: #00ff00;
     --terminal-warning: #ffff00;
@@ -435,6 +435,15 @@
     line-height: 1.2;
     margin: 1rem 0;
     color: var(--terminal-secondary);
+  }
+
+  .ascii-art-small {
+    font-family: monospace;
+    white-space: pre;
+    font-size: 0.8rem;
+    line-height:1;
+    margin: 2rem 0;
+    color: var(--terminal-main);
   }
   
   /* Terminal decoration */

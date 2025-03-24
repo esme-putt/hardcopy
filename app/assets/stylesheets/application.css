@@ -9,6 +9,10 @@
 
 /* Import JetBrains Mono font */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+@import url('')
 
 /* Color scheme variables */
 :root {
@@ -16,14 +20,14 @@
   --red: #f2545b;
   --purple: #5e17eb;
   --purple-dark: #4a12c4;
-  --white: #ffffff;
+  --yellow: #ffff00;
   
   /* Semantic color variables */
   --primary: var(--purple);
   --secondary: var(--purple);
   --accent: var(--red);
   --dark: var(--black);
-  --light: var(--white);
+  --light: var(--yellow);
   
   /* Bootstrap overrides */
   --bs-primary: var(--primary);
@@ -36,8 +40,8 @@
   --bs-info: #5fccd9;
   
   /* Typography */
-  --bs-font-monospace: 'JetBrains Mono', 'Courier New', monospace;
-  --bs-font-sans-serif: 'JetBrains Mono', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bs-font-monospace: 'Atkinson Hyperlegible Mono','JetBrains Mono', 'Courier New', monospace;
+  --bs-font-sans-serif: 'Atkinson Hyperlegible', 'JetBrains Mono', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --bs-body-font-family: var(--bs-font-monospace);
 }
 
