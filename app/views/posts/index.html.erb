@@ -1,114 +1,155 @@
-<% content_for :title, "The Weekly Fix" %>
+<!-- Blog Index Command -->
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">ls -la /weekly_fix</span>
+</div>
 
-<div class="bg-light py-5">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h1 class="display-4">The Weekly Fix</h1>
-      <p class="lead">Repair guides, sustainability tips, and tech knowledge</p>
-    </div>
-    
-    <div class="row">
-      <div class="col-lg-8">
-        <% @posts.each do |post| %>
-          <div class="card mb-4 border-0 shadow-sm">
+<div class="my-4">
+  <h1 class="mb-3">// THE WEEKLY FIX</h1>
+  <p class="terminal-decoration">Repair guides, sustainability tips, and tech knowledge</p>
+</div>
+
+<div class="row">
+  <!-- Blog Posts Column -->
+  <div class="col-lg-8">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="terminal-section mb-4">
+          <div class="terminal-section-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="me-2">// POST #<%= post.id %></div>
+              <div class="terminal-decoration small">
+                <i class="far fa-calendar-alt me-1"></i>
+                <%= post.published_at.strftime("%Y-%m-%d %H:%M") %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="terminal-section-body">
             <% if post.featured_image.attached? %>
-              <div class="card-img-top-wrapper overflow-hidden" style="max-height: 400px;">
-                <%= image_tag post.featured_image, class: "card-img-top", alt: post.title %>
+              <div class="text-center mb-4">
+                <%= image_tag post.featured_image, class: "img-fluid rounded", style: "max-height: 300px;", alt: post.title %>
               </div>
             <% end %>
-            <div class="card-body">
-              <div class="small text-muted mb-1">
-                <i class="far fa-calendar-alt me-1"></i>
-                <%= post.published_at.strftime("%B %d, %Y") %>
-              </div>
-              <h2 class="card-title h4"><%= post.title %></h2>
-              <p class="card-text"><%= post.content.to_plain_text.truncate(200) %></p>
-              <%= link_to "Read More", post_path(post), class: "btn btn-success" %>
+            
+            <h2 class="mb-3"><%= post.title %></h2>
+            
+            <div class="mb-4">
+              <%= truncate(post.content.to_plain_text, length: 300) %>
             </div>
+            
+            <div class="d-flex">
+              <%= link_to "$ cat /weekly_fix/#{post.id}.md", post_path(post), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <!-- Pagination -->
+      <% if @posts.respond_to?(:total_pages) && @posts.total_pages > 1 %>
+        <div class="d-flex justify-content-center mt-4">
+          <nav>
+            <ul class="pagination">
+              <% if @posts.prev_page %>
+                <li class="page-item">
+                  <%= link_to "prev", {page: @posts.prev_page}, class: "page-link" %>
+                </li>
+              <% else %>
+                <li class="page-item disabled">
+                  <span class="page-link">prev</span>
+                </li>
+              <% end %>
+              
+              <% (1..@posts.total_pages).each do |page| %>
+                <li class="page-item <%= 'active' if page == @posts.current_page %>">
+                  <%= link_to page, {page: page}, class: "page-link" %>
+                </li>
+              <% end %>
+              
+              <% if @posts.next_page %>
+                <li class="page-item">
+                  <%= link_to "next", {page: @posts.next_page}, class: "page-link" %>
+                </li>
+              <% else %>
+                <li class="page-item disabled">
+                  <span class="page-link">next</span>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="terminal-section">
+        <div class="terminal-section-body text-center py-5">
+          <i class="fas fa-file-alt fa-5x text-muted mb-4"></i>
+          <h2 class="mb-3">No posts found</h2>
+          <p class="mb-4 terminal-decoration">Check back soon for new content!</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <!-- Sidebar Column -->
+  <div class="col-lg-4">
+    <!-- Search Box -->
+    <div class="terminal-section mb-4">
+      <div class="terminal-section-header">// SEARCH</div>
+      <div class="terminal-section-body">
+        <%= form_with url: posts_path, method: :get, local: true do |f| %>
+          <div class="input-group">
+            <%= f.text_field :q, value: params[:q], class: "form-control", placeholder: "grep -i 'keyword'" %>
+            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
           </div>
         <% end %>
-        
-        <!-- Pagination -->
-        <nav class="my-4">
-            <% if @posts.respond_to?(:total_pages) && @posts.total_pages > 1 %>
-                <div class="d-flex justify-content-center">
-                <ul class="pagination">
-                    <% if @posts.prev_page %>
-                    <li class="page-item">
-                        <%= link_to "Previous", {page: @posts.prev_page}, class: "page-link" %>
-                    </li>
-                    <% else %>
-                    <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                    </li>
-                    <% end %>
-                    
-                    <% (1..@posts.total_pages).each do |page| %>
-                    <li class="page-item <%= 'active' if page == @posts.current_page %>">
-                        <%= link_to page, {page: page}, class: "page-link" %>
-                    </li>
-                    <% end %>
-                    
-                    <% if @posts.next_page %>
-                    <li class="page-item">
-                        <%= link_to "Next", {page: @posts.next_page}, class: "page-link" %>
-                    </li>
-                    <% else %>
-                    <li class="page-item disabled">
-                        <span class="page-link">Next</span>
-                    </li>
-                    <% end %>
-                </ul>
-                </div>
-            <% end %>
-        </nav>
       </div>
-      
-      <div class="col-lg-4">
-        <!-- Search Box -->
-        <div class="card mb-4 border-0 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Search</h5>
-            <%= form_with url: posts_path, method: :get, local: true do |f| %>
-              <div class="input-group">
-                <%= f.text_field :q, class: "form-control", placeholder: "Search for..." %>
-                <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>
-              </div>
-            <% end %>
-          </div>
+    </div>
+    
+    <!-- Categories -->
+    <div class="terminal-section mb-4">
+      <div class="terminal-section-header">// CATEGORIES</div>
+      <div class="terminal-section-body p-0">
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
+            <i class="fas fa-wrench me-2"></i> repair_guides
+          </a>
+          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
+            <i class="fas fa-leaf me-2"></i> sustainability
+          </a>
+          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
+            <i class="fas fa-newspaper me-2"></i> tech_news
+          </a>
+          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
+            <i class="fas fa-hammer me-2"></i> diy_projects
+          </a>
+          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
+            <i class="fas fa-trash me-2"></i> e-waste
+          </a>
         </div>
+      </div>
+    </div>
+    
+    <!-- Subscribe Box -->
+    <div class="terminal-section">
+      <div class="terminal-section-header">// SUBSCRIBE</div>
+      <div class="terminal-section-body">
+        <h5 class="mb-3">Join The Weekly Fix</h5>
+        <p class="mb-4">Get repair tips, sustainability news, and product updates delivered to your inbox every week.</p>
         
-        <!-- Categories (you might want to add these later) -->
-        <div class="card mb-4 border-0 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Categories</h5>
-            <div class="list-group list-group-flush">
-              <a href="#" class="list-group-item list-group-item-action">Repair Guides</a>
-              <a href="#" class="list-group-item list-group-item-action">Sustainability</a>
-              <a href="#" class="list-group-item list-group-item-action">Tech News</a>
-              <a href="#" class="list-group-item list-group-item-action">DIY Projects</a>
-              <a href="#" class="list-group-item list-group-item-action">E-waste</a>
-            </div>
+        <%= form_with model: Subscriber.new, local: true do |f| %>
+          <div class="mb-3">
+            <%= f.label :name, class: "form-label" %>
+            <%= f.text_field :name, class: "form-control", required: true, value: current_user&.name %>
           </div>
-        </div>
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, class: "form-control", required: true, value: current_user&.email %>
+          </div>
+          <%= f.submit "subscribe", class: "btn btn-success w-100" %>
+        <% end %>
         
-        <!-- Subscribe Box -->
-        <div class="card border-0 shadow-sm bg-success text-white">
-          <div class="card-body">
-            <h5 class="card-title">Subscribe to The Weekly Fix</h5>
-            <p>Get the latest repair tips and sustainability news delivered to your inbox every week.</p>
-            <%= form_with model: Subscriber.new, local: true do |f| %>
-              <div class="mb-3">
-                <%= f.label :name, class: "form-label" %>
-                <%= f.text_field :name, class: "form-control", required: true %>
-              </div>
-              <div class="mb-3">
-                <%= f.label :email, class: "form-label" %>
-                <%= f.email_field :email, class: "form-control", required: true %>
-              </div>
-              <%= f.submit "Subscribe", class: "btn btn-light" %>
-            <% end %>
-          </div>
+        <div class="terminal-decoration mt-3 small">
+          <i class="fas fa-lock me-1"></i> We respect your privacy and will never share your email
         </div>
       </div>
     </div>

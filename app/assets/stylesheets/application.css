@@ -7,8 +7,8 @@
  * depending on specificity.
  */
 
-/* Import Atkinson Hyperlegible font */
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+/* Import JetBrains Mono font */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
 /* Color scheme variables */
 :root {
@@ -33,15 +33,17 @@
   --bs-light: var(--light);
   --bs-success: var(--primary);
   --bs-warning: #f7a04f;
+  --bs-info: #5fccd9;
   
   /* Typography */
-  --bs-font-sans-serif: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-font-monospace: 'JetBrains Mono', 'Courier New', monospace;
+  --bs-font-sans-serif: 'JetBrains Mono', monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bs-body-font-family: var(--bs-font-monospace);
 }
 
 /* Base styles */
 body {
-  font-family: monospace, var(--bs-font-sans-serif);
+  font-family: var(--bs-font-monospace);
   color: var(--black);
 }
 
@@ -146,7 +148,7 @@ body {
   font-weight: 800;
   font-size: 1.75rem;
   letter-spacing: -0.5px;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .navbar-dark .nav-link {
@@ -154,7 +156,7 @@ body {
   font-weight: 700;
   position: relative;
   margin: 0 0.25rem;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .navbar-dark .nav-link::after {
@@ -219,7 +221,7 @@ body {
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1.5rem;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
   position: relative;
 }
 
@@ -236,7 +238,7 @@ body {
 .hero-subtitle {
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .hero-subtitle span {
@@ -251,7 +253,7 @@ body {
   font-size: 1.25rem;
   margin-bottom: 2.5rem;
   max-width: 36rem;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 /* Mission section */
@@ -295,7 +297,7 @@ body {
   font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .mission-card-text {
@@ -311,7 +313,7 @@ body {
   text-align: center;
   position: relative;
   display: inline-block;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .section-title::after {
@@ -430,7 +432,7 @@ body {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .newsletter-text {
@@ -544,17 +546,17 @@ footer .footer-links {
 /* Typography enhancements */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .display-4 {
   font-weight: 800;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 .lead {
   font-weight: 400;
-  font-family: monospace;
+  font-family: var(--bs-font-monospace);
 }
 
 /* Accent elements */

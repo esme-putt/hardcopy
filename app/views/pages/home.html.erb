@@ -1,112 +1,266 @@
-<%= render 'hero' %>
-
-<%= render 'mission_section' %>
-
-<section class="py-5">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title">Featured Products</h2>
-      <p class="section-subtitle">Rescued from landfill, restored with care</p>
+<!-- Terminal Hero Section -->
+<section class="terminal-hero">
+  <div class="terminal-command">
+    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+    <span class="terminal-command-text">cat welcome.txt</span>
+  </div>
+  
+  <div class="my-4">
+    <h1 class="terminal-hero-title typewriter-text">HARDCOPY TERMINAL</h1>
+    <div class="terminal-hero-subtitle">[ RESCUE. REPAIR. REUSE. ]</div>
+    <div class="terminal-hero-text mb-4">
+      Join our mission to reduce e-waste and empower people with knowledge.
     </div>
     
-    <div class="row">
+    <div class="d-flex flex-wrap gap-3">
+      <%= link_to "$ cd /store", products_path, class: "btn btn-primary" %>
+      <%= link_to "$ cat weekly_fix.txt", weekly_fix_path, class: "btn btn-accent" %>
+    </div>
+  </div>
+  
+  <!-- ASCII Art Logo -->
+  <div class="ascii-art my-4">
+ _    _              _____  _____   _____ ____  _______     __
+| |  | |     /\     |  __ \|  __ \ / ____/ __ \|  __ \ \   / /
+| |__| |    /  \    | |__) | |  | | |   | |  | | |__) \ \_/ / 
+|  __  |   / /\ \   |  _  /| |  | | |   | |  | |  ___/ \   /  
+| |  | |  / ____ \  | | \ \| |__| | |___| |__| | |      | |   
+|_|  |_| /_/    \_\ |_|  \_\_____/ \_____\____/|_|      |_|   
+  </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mb-5">
+  <div class="terminal-command">
+    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+    <span class="terminal-command-text">cat mission.txt</span>
+  </div>
+  
+  <div class="terminal-section">
+    <div class="terminal-section-header">// OUR MISSION</div>
+    <div class="terminal-section-body">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="terminal-card p-3 h-100">
+            <div class="mb-3">
+              <i class="fas fa-recycle fa-3x text-success"></i>
+            </div>
+            <h3 class="h4 mb-3">STOP_LANDFILL_WASTE()</h3>
+            <p>We rescue technology from ending up in landfills by fixing and refurbishing it.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="terminal-card p-3 h-100">
+            <div class="mb-3">
+              <i class="fas fa-book-open fa-3x text-primary"></i>
+            </div>
+            <h3 class="h4 mb-3">SHARE_KNOWLEDGE()</h3>
+            <p>We empower you with the skills and knowledge to repair and maintain your own devices.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="terminal-card p-3 h-100">
+            <div class="mb-3">
+              <i class="fas fa-store fa-3x text-accent"></i>
+            </div>
+            <h3 class="h4 mb-3">SELL_COOL_STUFF()</h3>
+            <p>We offer quality refurbished tech items that are both functional and unique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="mb-5">
+  <div class="terminal-command">
+    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+    <span class="terminal-command-text">ls -la featured_products/</span>
+  </div>
+
+  <div class="terminal-section">
+    <div class="terminal-section-header">// FEATURED PRODUCTS</div>
+    <div class="terminal-section-body">
+      <div class="terminal-decoration mb-4">Rescued from landfill, restored with care</div>
+      
       <% if @featured_products.present? %>
-        <% @featured_products.each do |product| %>
-          <div class="col-md-3 mb-4">
-            <div class="card product-card h-100">
-              <% if product.images.attached? %>
-                <div class="product-image">
-                  <%= image_tag product.images.first, class: "card-img-top", alt: product.title %>
-                  <% if product.condition.present? %>
-                    <div class="product-condition badge bg-purple">
-                      <%= product.condition %>
-                    </div>
+        <div class="row">
+          <% @featured_products.each do |product| %>
+            <div class="col-md-6 col-lg-3 mb-4">
+              <div class="terminal-product h-100">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="badge bg-primary"><%= product.condition.present? ? product.condition : "Used" %></span>
+                  <% if product.stock > 0 %>
+                    <span class="badge bg-success">In Stock</span>
+                  <% else %>
+                    <span class="badge bg-danger">Out of Stock</span>
                   <% end %>
                 </div>
-              <% else %>
-                <div class="product-image bg-light d-flex align-items-center justify-content-center">
-                  <i class="fas fa-image fa-3x text-muted"></i>
-                  <% if product.condition.present? %>
-                    <div class="product-condition badge bg-purple">
-                      <%= product.condition %>
-                    </div>
-                  <% end %>
+                
+                <div class="terminal-product-title">
+                  <%= product.title %>
                 </div>
-              <% end %>
-              
-              <div class="card-body">
-                <h3 class="product-title"><%= product.title %></h3>
-                <div class="product-price">
+                
+                <div class="terminal-product-price mb-2">
                   $<%= sprintf('%.2f', product.price) %>
                   <% if product.original_price.present? && product.original_price > product.price %>
-                    <span class="product-price-original">$<%= sprintf('%.2f', product.original_price) %></span>
+                    <span class="text-muted ms-2"><s>$<%= sprintf('%.2f', product.original_price) %></s></span>
                   <% end %>
                 </div>
-                <div class="d-flex justify-content-between">
-                  <%= link_to "View Details", product_path(product), class: "btn btn-outline-primary" %>
-                  <%= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
-                    <i class="fas fa-cart-plus"></i>
-                  <% end %>
+                
+                <div class="terminal-product-description">
+                  <%= truncate(product.description.to_plain_text, length: 100) if product.description.present? %>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-3">
+                  <%= link_to "view", product_path(product), class: "btn btn-sm btn-primary" %>
+                  <%= button_to "add_to_cart", add_to_cart_path(product), class: "btn btn-sm btn-success" %>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="col-12 text-center">
-          <p>No featured products available at the moment. Check back soon!</p>
+          <% end %>
         </div>
+      <% else %>
+        <div class="terminal-decoration">No featured products found</div>
       <% end %>
-    </div>
-    
-    <div class="text-center mt-4">
-      <%= link_to "VIEW ALL PRODUCTS", products_path, class: "btn btn-accent" %>
+      
+      <div class="text-center mt-4">
+        <%= link_to "$ ls -la /products", products_path, class: "btn btn-primary" %>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="py-5 bg-light">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title">The Weekly Fix</h2>
-      <p class="section-subtitle">Latest from our repair and sustainability blog</p>
-    </div>
-    
-    <div class="row">
+<!-- Blog Section -->
+<section class="mb-5">
+  <div class="terminal-command">
+    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+    <span class="terminal-command-text">ls -la weekly_fix/</span>
+  </div>
+
+  <div class="terminal-section">
+    <div class="terminal-section-header">// THE WEEKLY FIX</div>
+    <div class="terminal-section-body">
+      <div class="terminal-decoration mb-4">Latest from our repair and sustainability blog</div>
+      
       <% if @recent_posts.present? %>
-        <% @recent_posts.each do |post| %>
-          <div class="col-md-4 mb-4">
-            <div class="card blog-card h-100">
-              <% if post.featured_image.attached? %>
-                <div class="blog-image">
-                  <%= image_tag post.featured_image, class: "card-img-top", alt: post.title %>
-                </div>
-              <% else %>
-                <div class="blog-image d-flex align-items-center justify-content-center">
-                  <i class="fas fa-image fa-3x text-muted"></i>
-                </div>
-              <% end %>
-              <div class="card-body">
-                <p class="blog-date">
+        <div class="row">
+          <% @recent_posts.each do |post| %>
+            <div class="col-md-4 mb-4">
+              <div class="terminal-post h-100">
+                <div class="terminal-post-date">
                   <i class="far fa-calendar-alt me-1"></i>
-                  <%= post.published_at.strftime("%B %d, %Y") %>
-                </p>
-                <h3 class="blog-title"><%= post.title %></h3>
-                <p class="blog-excerpt"><%= post.content.to_plain_text.truncate(100) %></p>
-                <%= link_to "Read More →", post_path(post), class: "blog-link" %>
+                  <%= post.published_at.strftime("%Y-%m-%d") %>
+                </div>
+                
+                <div class="terminal-post-title">
+                  <%= post.title %>
+                </div>
+                
+                <div class="terminal-post-excerpt">
+                  <%= truncate(post.content.to_plain_text, length: 120) if post.content.present? %>
+                </div>
+                
+                <div class="mt-3">
+                  <%= link_to "read_more", post_path(post), class: "btn btn-sm btn-primary" %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="col-12 text-center">
-          <p>No blog posts available at the moment. Check back soon!</p>
+          <% end %>
         </div>
+      <% else %>
+        <div class="terminal-decoration">No recent posts found</div>
       <% end %>
-    </div>
-    
-    <div class="text-center mt-4">
-      <%= link_to "VIEW ALL POSTS", weekly_fix_path, class: "btn btn-accent" %>
+      
+      <div class="text-center mt-4">
+        <%= link_to "$ ls -la /weekly_fix", weekly_fix_path, class: "btn btn-primary" %>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- Newsletter Section -->
+<section class="mb-5">
+  <div class="terminal-command">
+    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+    <span class="terminal-command-text">cat subscribe.txt</span>
+  </div>
+
+  <div class="terminal-section">
+    <div class="terminal-section-header">// SUBSCRIBE TO THE WEEKLY FIX</div>
+    <div class="terminal-section-body">
+      <div class="row align-items-center">
+        <div class="col-lg-7 mb-4 mb-lg-0">
+          <h3 class="mb-3">Join our newsletter</h3>
+          <p>Get repair tips, sustainability news, and product updates delivered to your inbox.</p>
+        </div>
+        <div class="col-lg-5">
+          <%= form_with model: Subscriber.new, local: true, class: "d-flex flex-column flex-sm-row gap-3" do |f| %>
+            <%= f.email_field :email, placeholder: "your_email@example.com", required: true, class: "form-control" %>
+            <%= f.hidden_field :name, value: "Subscriber" %>
+            <%= f.submit "subscribe", class: "btn btn-primary" %>
+          <% end %>
+          <p class="mt-2 text-muted small">We respect your privacy and will never share your email</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Terminal Animation -->
+<div class="mb-5">
+  <div class="terminal-decoration text-center" id="typing-text"></div>
+</div>
+
+<script>
+  // Typing animation
+  document.addEventListener('DOMContentLoaded', function() {
+    const messages = [
+      "Rescuing electronics one device at a time...",
+      "Reducing e-waste through repair and reuse...",
+      "Loading sustainability protocols...",
+      "Empowering users with repair knowledge...",
+      "Initializing second life for technology..."
+    ];
+    
+    const typingTextElement = document.getElementById('typing-text');
+    let messageIndex = 0;
+    
+    function typeWriter(text, i, callback) {
+      if (i < text.length) {
+        typingTextElement.innerHTML += text.charAt(i);
+        setTimeout(function() {
+          typeWriter(text, i + 1, callback);
+        }, 50);
+      } else if (typeof callback === 'function') {
+        setTimeout(callback, 1000);
+      }
+    }
+    
+    function deleteText(callback) {
+      const text = typingTextElement.innerHTML;
+      if (text.length > 0) {
+        typingTextElement.innerHTML = text.substring(0, text.length - 1);
+        setTimeout(function() {
+          deleteText(callback);
+        }, 25);
+      } else if (typeof callback === 'function') {
+        setTimeout(callback, 500);
+      }
+    }
+    
+    function nextMessage() {
+      const message = messages[messageIndex];
+      messageIndex = (messageIndex + 1) % messages.length;
+      
+      typeWriter(message, 0, function() {
+        deleteText(nextMessage);
+      });
+    }
+    
+    nextMessage();
+  });
+</script>

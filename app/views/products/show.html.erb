@@ -1,288 +1,180 @@
-<% content_for :title, @product.title %>
+<!-- Product Detail Path -->
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">cat /store/product/<%= @product.id %>.txt</span>
+</div>
 
-<div class="container py-5">
-  <nav aria-label="breadcrumb" class="mb-4">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
-      <li class="breadcrumb-item"><%= link_to "Store", products_path %></li>
-      <li class="breadcrumb-item active" aria-current="page"><%= @product.title %></li>
-    </ol>
-  </nav>
-  
-  <div class="row">
-    <div class="col-md-6 mb-4 mb-md-0">
-      <% if @product.images.attached? %>
-        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <% @product.images.each_with_index do |image, index| %>
-              <div class="carousel-item <%= 'active' if index.zero? %>">
-                <%= image_tag image, class: "d-block w-100 rounded", alt: "#{@product.title} - Image #{index + 1}" %>
-              </div>
+<!-- Breadcrumb Navigation -->
+<nav class="mb-4">
+  <div class="terminal-decoration">
+    <%= link_to "~", root_path %> / 
+    <%= link_to "store", products_path %> / 
+    <span class="text-white"><%= @product.title.downcase.gsub(' ', '_') %></span>
+  </div>
+</nav>
+
+<div class="row">
+  <!-- Product Images -->
+  <div class="col-md-6 mb-4">
+    <div class="terminal-section h-100">
+      <div class="terminal-section-header">// IMAGES</div>
+      <div class="terminal-section-body p-0">
+        <% if @product.images.attached? %>
+          <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% @product.images.each_with_index do |image, index| %>
+                <div class="carousel-item <%= 'active' if index.zero? %>">
+                  <%= image_tag image, class: "d-block w-100", style: "max-height: 400px; object-fit: contain;", alt: @product.title %>
+                </div>
+              <% end %>
+            </div>
+            <% if @product.images.count > 1 %>
+              <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             <% end %>
           </div>
+          
           <% if @product.images.count > 1 %>
-            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <div class="row p-2 g-1">
+              <% @product.images.each_with_index do |image, index| %>
+                <div class="col-3">
+                  <a href="javascript:void(0)" data-bs-target="#productCarousel" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>">
+                    <%= image_tag image, class: "img-thumbnail", style: "height: 60px; object-fit: cover;", alt: "Thumbnail #{index + 1}" %>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="text-center p-5">
+            <i class="fas fa-image fa-5x text-muted"></i>
+            <p class="mt-3">No images available</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Product Details -->
+  <div class="col-md-6">
+    <div class="terminal-section mb-4">
+      <div class="terminal-section-header">// PRODUCT DETAILS</div>
+      <div class="terminal-section-body">
+        <h1 class="mb-3"><%= @product.title %></h1>
+        
+        <div class="mb-4">
+          <span class="terminal-product-price fs-3">
+            $<%= sprintf('%.2f', @product.price) %>
+          </span>
+          <% if @product.original_price.present? && @product.original_price > @product.price %>
+            <span class="text-muted ms-2"><s>$<%= sprintf('%.2f', @product.original_price) %></s></span>
+            <span class="badge bg-danger ms-2">
+              <%= ((1 - @product.price / @product.original_price) * 100).round %>% OFF
+            </span>
           <% end %>
         </div>
         
-        <% if @product.images.count > 1 %>
-          <div class="row mt-3">
-            <% @product.images.each_with_index do |image, index| %>
-              <div class="col-3 mb-3">
-                <a href="javascript:void(0)" data-bs-target="#productCarousel" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>">
-                  <%= image_tag image, class: "img-thumbnail", alt: "Thumbnail #{index + 1}" %>
-                </a>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="bg-light text-center p-5 rounded">
-          <i class="fas fa-image fa-5x text-muted"></i>
-          <p class="mt-3">No images available</p>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="col-md-6">
-      <h1 class="mb-3"><%= @product.title %></h1>
-      
-      <div class="mb-4">
-        <span class="fs-3 text-success fw-bold">$<%= sprintf('%.2f', @product.price) %></span>
-        <% if @product.original_price.present? && @product.original_price > @product.price %>
-          <span class="text-muted ms-2"><s>$<%= sprintf('%.2f', @product.original_price) %></s></span>
-          <span class="badge bg-danger ms-2">
-            <%= ((1 - @product.price / @product.original_price) * 100).round %>% OFF
-          </span>
-        <% end %>
-      </div>
-      
-      <% if @product.condition.present? %>
-        <div class="mb-4">
-          <span class="fw-bold">Condition:</span>
-          <span class="badge bg-info ms-2"><%= @product.condition %></span>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#conditionInfoModal" class="text-decoration-none">
-            <i class="fas fa-question-circle ms-2 text-muted"></i>
-          </a>
-        </div>
-      <% end %>
-      
-      <div class="mb-4">
-        <span class="fw-bold">Availability:</span>
-        <% if @product.stock > 0 %>
-          <span class="text-success ms-2">In Stock (<%= @product.stock %> available)</span>
-        <% else %>
-          <span class="text-danger ms-2">Out of Stock</span>
-        <% end %>
-      </div>
-      
-      <div class="mb-4">
-        <div class="rich-text">
-          <%= @product.description %>
-        </div>
-      </div>
-      
-      <div class="mb-4">
-        <%= form_with url: add_to_cart_path(@product), method: :post do |f| %>
-          <div class="row g-3 align-items-center mb-3">
-            <div class="col-auto">
-              <%= f.label :quantity, "Quantity:", class: "col-form-label" %>
-            </div>
-            <div class="col-auto">
-              <%= f.number_field :quantity, value: 1, min: 1, max: @product.stock, class: "form-control", style: "width: 70px;" %>
-            </div>
-          </div>
-          
-          <div class="d-grid gap-2">
-            <% if @product.stock > 0 %>
-              <%= f.submit "Add to Cart", class: "btn btn-success btn-lg" %>
-            <% else %>
-              <button class="btn btn-secondary btn-lg" disabled>Out of Stock</button>
-            <% end %>
-            <a href="#" class="btn btn-outline-secondary">
-              <i class="far fa-heart me-1"></i> Add to Wishlist
+        <% if @product.condition.present? %>
+          <div class="mb-4">
+            <span class="fw-bold">Condition:</span>
+            <span class="badge bg-primary ms-2"><%= @product.condition %></span>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#conditionInfoModal">
+              <i class="fas fa-question-circle ms-2 text-muted"></i>
             </a>
           </div>
         <% end %>
-      </div>
-      
-      <div class="card border-0 bg-light mt-4">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-auto">
-              <i class="fas fa-truck fa-2x text-success"></i>
-            </div>
-            <div class="col">
-              <h5 class="mb-1">Free Shipping</h5>
-              <p class="mb-0 small">On orders over $75</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-auto">
-              <i class="fas fa-undo fa-2x text-success"></i>
-            </div>
-            <div class="col">
-              <h5 class="mb-1">30-Day Returns</h5>
-              <p class="mb-0 small">Hassle-free returns policy</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-auto">
-              <i class="fas fa-shield-alt fa-2x text-success"></i>
-            </div>
-            <div class="col">
-              <h5 class="mb-1">90-Day Warranty</h5>
-              <p class="mb-0 small">All products come with a 90-day warranty</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-auto">
-              <i class="fas fa-leaf fa-2x text-success"></i>
-            </div>
-            <div class="col">
-              <h5 class="mb-1">Eco-Friendly</h5>
-              <p class="mb-0 small">Rescued from landfill and given a new life</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row mt-5">
-    <div class="col-12">
-      <ul class="nav nav-tabs" id="productTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">
-            Specifications
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="repair-tab" data-bs-toggle="tab" data-bs-target="#repair" type="button" role="tab">
-            Repair History
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab">
-            Shipping & Returns
-          </button>
-        </li>
-      </ul>
-      <div class="tab-content p-4 border border-top-0 rounded-bottom" id="productTabsContent">
-        <div class="tab-pane fade show active" id="specs" role="tabpanel" aria-labelledby="specs-tab">
-          <% if @product.specifications.present? %>
-            <div class="row">
-              <% @product.specifications.split("\n").each do |spec_line| %>
-                <% if spec_line.include?(':') %>
-                  <% key, value = spec_line.split(':', 2) %>
-                  <div class="col-md-6 mb-2">
-                    <span class="fw-bold"><%= key.strip %>:</span> <%= value.strip %>
-                  </div>
-                <% else %>
-                  <div class="col-12 mb-2">
-                    <%= spec_line %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
+        
+        <div class="mb-4">
+          <span class="fw-bold">Status:</span>
+          <% if @product.stock > 0 %>
+            <span class="text-success ms-2">
+              <i class="fas fa-check-circle"></i> In Stock (<%= @product.stock %> available)
+            </span>
           <% else %>
-            <p class="text-muted">No detailed specifications available for this product.</p>
+            <span class="text-danger ms-2">
+              <i class="fas fa-times-circle"></i> Out of Stock
+            </span>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="repair" role="tabpanel" aria-labelledby="repair-tab">
-          <p>This product has been carefully inspected, cleaned, and repaired by our technicians to ensure it's in excellent working condition.</p>
-          <h5 class="mt-3">What We Did:</h5>
-          <ul>
-            <li>Full diagnostic testing of all components</li>
-            <li>Professional cleaning of all internal and external parts</li>
-            <li>Replacement of any worn or damaged components</li>
-            <li>Software updates and configuration</li>
-            <li>Final quality assurance testing</li>
-          </ul>
-          <p>Every product we sell comes with our 90-day warranty, covering any issues that might arise from our repair work.</p>
+        
+        <div class="mb-4">
+          <div class="terminal-decoration mb-2">// Description</div>
+          <div class="rich-text">
+            <%= @product.description %>
+          </div>
         </div>
-        <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
-          <h5>Shipping Information</h5>
-          <p>We ship all products within 1-2 business days after your order is placed. Standard shipping typically takes 3-5 business days.</p>
-          <p>Free shipping is available on all orders over $75 within the continental United States.</p>
-          
-          <h5 class="mt-4">Return Policy</h5>
-          <p>If you're not completely satisfied with your purchase, you can return it within 30 days for a full refund or exchange.</p>
-          <p>To be eligible for a return, the item must be in the same condition that you received it, unworn or unused, with tags, and in its original packaging.</p>
-          
-          <h5 class="mt-4">Warranty</h5>
-          <p>All products come with a 90-day warranty covering any defects or issues related to our repair work. If you experience any problems, please contact our customer service team.</p>
+        
+        <div class="mb-4">
+          <%= form_with url: add_to_cart_path(@product), method: :post do |f| %>
+            <div class="row g-3 align-items-center mb-3">
+              <div class="col-auto">
+                <%= f.label :quantity, "Quantity:", class: "col-form-label" %>
+              </div>
+              <div class="col-auto">
+                <%= f.number_field :quantity, value: 1, min: 1, max: @product.stock, class: "form-control", style: "width: 70px;" %>
+              </div>
+            </div>
+            
+            <div class="d-flex gap-2">
+              <% if @product.stock > 0 %>
+                <%= f.submit "add_to_cart", class: "btn btn-success" %>
+              <% else %>
+                <button class="btn btn-secondary" disabled>Out of Stock</button>
+              <% end %>
+              <a href="#" class="btn btn-outline-secondary">
+                <i class="far fa-heart me-1"></i> add_to_wishlist
+              </a>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>
-  
-  <section class="related-products mt-5">
-    <h3 class="mb-4">You Might Also Like</h3>
-    <div class="row">
-      <% Product.available.where.not(id: @product.id).limit(4).each do |related_product| %>
-        <div class="col-md-3 mb-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <% if related_product.images.attached? %>
-              <%= image_tag related_product.images.first, class: "card-img-top", alt: related_product.title %>
-            <% else %>
-              <div class="bg-light text-center p-5">
-                <i class="fas fa-image fa-3x text-muted"></i>
-              </div>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= related_product.title %></h5>
-              <p class="card-text">
-                <span class="text-success fw-bold">$<%= sprintf('%.2f', related_product.price) %></span>
-              </p>
-              <%= link_to "View Details", product_path(related_product), class: "btn btn-sm btn-outline-success" %>
+    
+    <div class="terminal-section">
+      <div class="terminal-section-header">// PRODUCT INFO</div>
+      <div class="terminal-section-body p-0">
+        <div class="px-3 py-2 border-bottom">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-truck fa-lg text-success me-3"></i>
+            <div>
+              <div class="fw-bold">Free Shipping</div>
+              <div class="small">On orders over $75</div>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
-  </section>
-</div>
-
-<!-- Condition Info Modal -->
-<div class="modal fade" id="conditionInfoModal" tabindex="-1" aria-labelledby="conditionInfoModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="conditionInfoModalLabel">Product Condition Guide</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <h6 class="fw-bold">Like New</h6>
-          <p>Product looks and functions as if it just came out of the box. No visible scratches, dents, or signs of use.</p>
+        
+        <div class="px-3 py-2 border-bottom">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-undo fa-lg text-success me-3"></i>
+            <div>
+              <div class="fw-bold">30-Day Returns</div>
+              <div class="small">Hassle-free returns policy</div>
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <h6 class="fw-bold">Excellent</h6>
-          <p>Product functions perfectly with minimal signs of previous use. May have very minor cosmetic imperfections that are barely noticeable.</p>
+        
+        <div class="px-3 py-2 border-bottom">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-shield-alt fa-lg text-success me-3"></i>
+            <div>
+              <div class="fw-bold">90-Day Warranty</div>
+              <div class="small">All products come with a 90-day warranty</div>
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <h6 class="fw-bold">Good</h6>
-          <p>Product functions perfectly but has some visible signs of previous use, such as minor scratches or wear on the case/exterior.</p>
+        
+        <div class="px-3 py-2">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-leaf fa-lg text-success me-3"></i>
+            <div>
+              <div class="fw-bold">Eco-Friendly</div>
+              <div class="small">Rescued from landfill and given a new life</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <h6 class="fw-bold">Fair</h6>
-          <p>Product functions as intended but shows significant signs of previous use, including visible scratches, dents, or other cosmetic issues.</p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>

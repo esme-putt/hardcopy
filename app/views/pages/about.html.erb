@@ -1,18 +1,27 @@
-<div class="container py-5">
-  <div class="row mb-5">
-    <div class="col-md-8 offset-md-2 text-center">
-      <h1 class="display-4 mb-4">About Hardcopy</h1>
-      <p class="lead">
-        Hardcopy is on a mission to reduce electronic waste, empower people with knowledge, 
-        and give technology a second life.
-      </p>
-    </div>
-  </div>
-  
-  <div class="row mb-5">
-    <div class="col-md-6">
-      <div class="bg-light p-4 h-100">
-        <h2 class="mb-4">Our Story</h2>
+<!-- About Page Command -->
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">cat /about/README.md</span>
+</div>
+
+<div class="my-4">
+  <h1 class="mb-3">// ABOUT HARDCOPY</h1>
+  <p class="terminal-decoration">
+    Hardcopy is on a mission to reduce electronic waste, empower people with knowledge, 
+    and give technology a second life.
+  </p>
+</div>
+
+<div class="row mb-5">
+  <div class="col-md-6">
+    <div class="terminal-section h-100">
+      <div class="terminal-section-header">// OUR STORY</div>
+      <div class="terminal-section-body">
+        <div class="terminal-command mb-3">
+          <span class="terminal-command-prompt">#</span>
+          <span class="terminal-command-text">cat story.txt</span>
+        </div>
+        
         <p>
           Hardcopy began with a simple observation: too much perfectly functional technology 
           ends up in landfills, while valuable technical knowledge remains locked away from users.
@@ -29,93 +38,162 @@
         </p>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="bg-success text-white p-4 h-100">
-        <h2 class="mb-4">Our Values</h2>
-        <div class="mb-4">
-          <h5><i class="fas fa-leaf mr-2"></i> Sustainability First</h5>
-          <p>We believe the most sustainable device is the one you already own. Repair and reuse are 
-          our first priorities.</p>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="terminal-section h-100">
+      <div class="terminal-section-header">// OUR VALUES</div>
+      <div class="terminal-section-body">
+        <div class="terminal-command mb-3">
+          <span class="terminal-command-prompt">#</span>
+          <span class="terminal-command-text">cat values.json</span>
         </div>
+        
         <div class="mb-4">
-          <h5><i class="fas fa-tools mr-2"></i> Knowledge Is Power</h5>
-          <p>We're committed to demystifying technology and empowering people with the skills to 
-          maintain and repair their own devices.</p>
+          <h5><i class="fas fa-recycle me-2 text-success"></i> Sustainability First</h5>
+          <div class="ms-4 mb-3">
+            <code>We believe the most sustainable device is the one you already own. Repair and reuse are our first priorities.</code>
+          </div>
         </div>
+        
         <div class="mb-4">
-          <h5><i class="fas fa-handshake mr-2"></i> Fair Business</h5>
-          <p>We practice transparent pricing, honest descriptions of condition, and fair labor practices 
-          in all our operations.</p>
+          <h5><i class="fas fa-book-open me-2 text-primary"></i> Knowledge Is Power</h5>
+          <div class="ms-4 mb-3">
+            <code>We're committed to demystifying technology and empowering people with the skills to maintain and repair their own devices.</code>
+          </div>
         </div>
+        
+        <div class="mb-4">
+          <h5><i class="fas fa-handshake me-2 text-accent"></i> Fair Business</h5>
+          <div class="ms-4 mb-3">
+            <code>We practice transparent pricing, honest descriptions of condition, and fair labor practices in all our operations.</code>
+          </div>
+        </div>
+        
         <div>
-          <h5><i class="fas fa-globe-americas mr-2"></i> Community Focus</h5>
-          <p>We support local repair initiatives and advocate for right-to-repair legislation.</p>
+          <h5><i class="fas fa-globe-americas me-2 text-warning"></i> Community Focus</h5>
+          <div class="ms-4">
+            <code>We support local repair initiatives and advocate for right-to-repair legislation.</code>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class="row mb-5">
-    <div class="col-12">
-      <div class="card border-0 bg-light">
-        <div class="card-body p-5">
-          <h2 class="text-center mb-4">What We Do</h2>
-          <div class="row text-center">
-            <div class="col-md-4 mb-4">
-              <i class="fas fa-laptop fa-3x text-success mb-3"></i>
-              <h4>Rescue & Repair</h4>
-              <p>We rescue electronic devices from landfill, repair them, and give them a second life.</p>
+</div>
+
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">ls -la /about/what_we_do</span>
+</div>
+
+<div class="terminal-section mb-5">
+  <div class="terminal-section-header">// WHAT WE DO</div>
+  <div class="terminal-section-body">
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="terminal-card p-4 h-100">
+          <i class="fas fa-laptop fa-3x text-success mb-3"></i>
+          <h4 class="mb-3">rescue_and_repair.sh</h4>
+          <div class="terminal-card-content">
+            <code>We rescue electronic devices from landfill, repair them, and give them a second life.</code>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4">
+        <div class="terminal-card p-4 h-100">
+          <i class="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
+          <h4 class="mb-3">educate_and_empower.sh</h4>
+          <div class="terminal-card-content">
+            <code>We create detailed repair guides and share knowledge through our Weekly Fix blog.</code>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-4">
+        <div class="terminal-card p-4 h-100">
+          <i class="fas fa-store fa-3x text-accent mb-3"></i>
+          <h4 class="mb-3">sell_and_support.sh</h4>
+          <div class="terminal-card-content">
+            <code>We sell refurbished technology with warranties and ongoing support.</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">cat /about/impact.txt</span>
+</div>
+
+<div class="row mb-5">
+  <div class="col-md-8 offset-md-2">
+    <div class="terminal-section">
+      <div class="terminal-section-header">// OUR IMPACT</div>
+      <div class="terminal-section-body">
+        <div class="text-center mb-4">
+          <p class="terminal-decoration">Every device we repair and sell helps reduce electronic waste and extends the life of valuable resources.</p>
+        </div>
+        
+        <div class="row text-center">
+          <div class="col-md-4 mb-4">
+            <div class="terminal-card p-4 h-100">
+              <h3 class="text-success">150+</h3>
+              <div class="terminal-card-title">devices_rescued</div>
             </div>
-            <div class="col-md-4 mb-4">
-              <i class="fas fa-chalkboard-teacher fa-3x text-success mb-3"></i>
-              <h4>Educate & Empower</h4>
-              <p>We create detailed repair guides and share knowledge through our Weekly Fix blog.</p>
-            </div>
-            <div class="col-md-4 mb-4">
-              <i class="fas fa-store fa-3x text-success mb-3"></i>
-              <h4>Sell & Support</h4>
-              <p>We sell refurbished technology with warranties and ongoing support.</p>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="terminal-card p-4 h-100">
+              <h3 class="text-success">500+</h3>
+              <div class="terminal-card-title">repair_guides</div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <div class="text-center mb-4">
-        <h2>Our Impact</h2>
-        <p class="lead">Every device we repair and sell helps reduce electronic waste and extends the life of valuable resources.</p>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-4 mb-4">
-          <div class="border p-4 rounded h-100">
-            <h3 class="text-success">150+</h3>
-            <p>Devices rescued from landfill</p>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="border p-4 rounded h-100">
-            <h3 class="text-success">500+</h3>
-            <p>Repair guides published</p>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="border p-4 rounded h-100">
-            <h3 class="text-success">2000+</h3>
-            <p>Weekly Fix subscribers</p>
+          
+          <div class="col-md-4 mb-4">
+            <div class="terminal-card p-4 h-100">
+              <h3 class="text-success">2000+</h3>
+              <div class="terminal-card-title">weekly_fix_subscribers</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class="row mt-5">
-    <div class="col-md-8 offset-md-2 text-center">
-      <h2>Get In Touch</h2>
-      <p class="mb-4">Have questions, want to contribute, or interested in our services? We'd love to hear from you!</p>
-      <a href="mailto:hello@hardcopy.com" class="btn btn-success btn-lg">Contact Us</a>
+</div>
+
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">cat /about/contact.txt</span>
+</div>
+
+<div class="row mb-5">
+  <div class="col-md-8 offset-md-2 text-center">
+    <div class="terminal-section">
+      <div class="terminal-section-header">// GET IN TOUCH</div>
+      <div class="terminal-section-body">
+        <h2 class="mb-3">Contact Us</h2>
+        <p class="mb-4 terminal-decoration">Have questions, want to contribute, or interested in our services? We'd love to hear from you!</p>
+        <div class="mb-4">
+          <div class="terminal-command mb-2">
+            <span class="terminal-command-prompt">#</span>
+            <span class="terminal-command-text">mailto:hello@hardcopy.com</span>
+          </div>
+          <a href="mailto:hello@hardcopy.com" class="btn btn-primary">Send Email</a>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
+<!-- ASCII Art Hardcopy Logo -->
+<div class="ascii-art text-center mb-5">
+ _    _              _____  _____   _____ ____  _______     __
+| |  | |     /\     |  __ \|  __ \ / ____/ __ \|  __ \ \   / /
+| |__| |    /  \    | |__) | |  | | |   | |  | | |__) \ \_/ / 
+|  __  |   / /\ \   |  _  /| |  | | |   | |  | |  ___/ \   /  
+| |  | |  / ____ \  | | \ \| |__| | |___| |__| | |      | |   
+|_|  |_| /_/    \_\ |_|  \_\_____/ \_____\____/|_|      |_|   
 </div>

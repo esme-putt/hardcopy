@@ -1,148 +1,160 @@
-<% content_for :title, @post.title %>
+<!-- Blog Post Command -->
+<div class="terminal-command">
+  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+  <span class="terminal-command-text">cat /weekly_fix/<%= @post.id %>.md</span>
+</div>
 
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
-          <li class="breadcrumb-item"><%= link_to "The Weekly Fix", weekly_fix_path %></li>
-          <li class="breadcrumb-item active" aria-current="page"><%= @post.title %></li>
-        </ol>
-      </nav>
+<!-- Breadcrumb Navigation -->
+<nav class="mb-4">
+  <div class="terminal-decoration">
+    <%= link_to "~", root_path %> / 
+    <%= link_to "weekly_fix", weekly_fix_path %> / 
+    <span class="text-white"><%= @post.title.downcase.gsub(' ', '_') %></span>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="terminal-section mb-4">
+      <div class="terminal-section-header">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="me-2">// POST #<%= @post.id %></div>
+          <div class="terminal-decoration small">
+            <i class="far fa-calendar-alt me-1"></i>
+            <%= @post.published_at.strftime("%Y-%m-%d %H:%M") %>
+          </div>
+        </div>
+      </div>
       
-      <article>
-        <header class="mb-4">
-          <h1 class="fw-bold mb-3"><%= @post.title %></h1>
-          <div class="text-muted fst-italic mb-4">
-            Posted on <%= @post.published_at.strftime("%B %d, %Y") %>
-          </div>
+      <div class="terminal-section-body">
+        <article>
+          <header class="mb-4">
+            <h1 class="mb-3"><%= @post.title %></h1>
+            
+            <% if @post.featured_image.attached? %>
+              <div class="text-center mb-4">
+                <%= image_tag @post.featured_image, class: "img-fluid rounded", alt: @post.title %>
+              </div>
+            <% end %>
+          </header>
           
-          <% if @post.featured_image.attached? %>
-            <div class="text-center mb-4">
-              <%= image_tag @post.featured_image, class: "img-fluid rounded", alt: @post.title %>
+          <section class="post-content mb-5">
+            <div class="rich-text">
+              <%= @post.content %>
             </div>
-          <% end %>
-        </header>
-        
-        <section class="post-content mb-5">
-          <div class="rich-text">
-            <%= @post.content %>
-          </div>
-        </section>
-        
-        <footer class="mb-5">
-          <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded">
-            <div>
-              <strong>Share this post:</strong>
-              <div class="mt-2">
-                <a href="#" class="me-2 text-dark"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="me-2 text-dark"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="me-2 text-dark"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="text-dark"><i class="far fa-envelope"></i></a>
+          </section>
+          
+          <footer class="mb-4">
+            <div class="terminal-card p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>Share this post:</strong>
+                  <div class="mt-2">
+                    <a href="#" class="me-2 terminal-nav-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="me-2 terminal-nav-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="me-2 terminal-nav-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="terminal-nav-link"><i class="far fa-envelope"></i></a>
+                  </div>
+                </div>
+                <div>
+                  <%= link_to "$ cd /weekly_fix", weekly_fix_path, class: "btn btn-primary" %>
+                </div>
               </div>
             </div>
-            <div>
-              <%= link_to weekly_fix_path, class: "btn btn-outline-secondary" do %>
-                <i class="fas fa-arrow-left me-1"></i> Back to Blog
-              <% end %>
-            </div>
-          </div>
-        </footer>
-      </article>
-      
-      <!-- Comments Section -->
-      <section class="comments-section my-5">
-        <h3 class="mb-4">Comments (<%= @comments.count %>)</h3>
-        
+          </footer>
+        </article>
+      </div>
+    </div>
+    
+    <!-- Comments Section -->
+    <div class="terminal-section mb-4">
+      <div class="terminal-section-header">// COMMENTS (<%= @comments.count %>)</div>
+      <div class="terminal-section-body">
         <% if user_signed_in? %>
-          <div class="card border-0 shadow-sm mb-4">
-            <div class="card-body">
-              <h5 class="mb-3">Leave a Comment</h5>
-              <%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
-                <div class="mb-3">
-                  <%= f.text_area :content, class: "form-control", rows: 4, placeholder: "Share your thoughts...", required: true %>
-                </div>
-                <div class="d-grid">
-                  <%= f.submit "Post Comment", class: "btn btn-success" %>
-                </div>
-              <% end %>
-            </div>
+          <div class="mb-4">
+            <h5 class="mb-3">Leave a Comment</h5>
+            <%= form_with model: @comment, url: post_comments_path(@post), local: true do |f| %>
+              <div class="mb-3">
+                <%= f.text_area :content, class: "form-control", rows: 4, placeholder: "// Add your comment here...", required: true %>
+              </div>
+              <div class="d-grid">
+                <%= f.submit "post_comment", class: "btn btn-success" %>
+              </div>
+            <% end %>
           </div>
         <% else %>
-          <div class="alert alert-info mb-4">
+          <div class="terminal-card p-3 mb-4">
             <i class="fas fa-info-circle me-2"></i>
-            <a href="<%= login_path(redirect_to: request.path) %>" class="alert-link">Sign in</a> or <a href="<%= signup_path %>" class="alert-link">create an account</a> to join the discussion and leave a comment.
+            <a href="<%= login_path(redirect_to: request.path) %>" class="terminal-nav-link">Sign in</a> or <a href="<%= signup_path %>" class="terminal-nav-link">create an account</a> to join the discussion and leave a comment.
           </div>
         <% end %>
         
         <% if @comments.any? %>
           <% @comments.each do |comment| %>
-            <div class="card border-0 shadow-sm mb-3">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <div class="d-flex align-items-center">
-                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
-                      <%= comment.user.name.first.upcase %>
-                    </div>
-                    <div>
-                      <span class="fw-bold"><%= comment.user.name %></span>
-                      <small class="text-muted d-block"><%= time_ago_in_words(comment.created_at) %> ago</small>
-                    </div>
+            <div class="terminal-card p-3 mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center">
+                  <div class="terminal-command-prompt me-2">
+                    <%= comment.user.name.first.upcase %>
                   </div>
-                  
-                  <% if current_user && (current_user.admin? || current_user == comment.user) %>
-                    <%= link_to "#", class: "text-danger", data: { confirm: "Are you sure you want to delete this comment?" } do %>
-                      <i class="fas fa-trash-alt"></i>
-                    <% end %>
-                  <% end %>
+                  <div>
+                    <span class="fw-bold"><%= comment.user.name %></span>
+                    <small class="text-muted d-block"><%= time_ago_in_words(comment.created_at) %> ago</small>
+                  </div>
                 </div>
-                <p class="mb-0"><%= comment.content %></p>
+                
+                <% if current_user && (current_user.admin? || current_user == comment.user) %>
+                  <%= link_to "#", class: "text-danger", data: { confirm: "Are you sure you want to delete this comment?" } do %>
+                    <i class="fas fa-trash-alt"></i>
+                  <% end %>
+                <% end %>
               </div>
+              <div class="terminal-decoration mb-2"># Comment:</div>
+              <p class="mb-0"><%= comment.content %></p>
             </div>
           <% end %>
         <% else %>
-          <div class="text-center py-4 bg-light rounded">
+          <div class="text-center py-4">
             <i class="far fa-comments fa-3x text-muted mb-3"></i>
-            <p class="mb-0">No comments yet. Be the first to share your thoughts!</p>
+            <p class="mb-0 terminal-decoration">No comments yet. Be the first to share your thoughts!</p>
           </div>
         <% end %>
-      </section>
-      
-      <section class="card border-0 shadow-sm bg-success text-white">
-        <div class="card-body p-4">
-          <div class="row align-items-center">
-            <div class="col-md-8">
-              <h3>Subscribe to The Weekly Fix</h3>
-              <p class="mb-md-0">Get the latest repair guides and sustainability tips delivered to your inbox.</p>
-            </div>
-            <div class="col-md-4 text-md-end">
-              <%= link_to "Subscribe Now", new_subscriber_path, class: "btn btn-light" %>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <section class="related-posts my-5">
-        <h3 class="mb-4">Related Posts</h3>
-        <div class="row">
-          <% Post.published.recent.limit(3).each do |related_post| %>
-            <% next if related_post.id == @post.id %>
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
-                <% if related_post.featured_image.attached? %>
-                  <%= image_tag related_post.featured_image, class: "card-img-top", alt: related_post.title %>
-                <% end %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= related_post.title %></h5>
-                  <p class="card-text"><small class="text-muted"><%= related_post.published_at.strftime("%B %d, %Y") %></small></p>
-                  <%= link_to "Read More", post_path(related_post), class: "btn btn-sm btn-outline-success" %>
-                </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-4">
+    <!-- Subscribe Box -->
+    <div class="terminal-section mb-4">
+      <div class="terminal-section-header">// SUBSCRIBE</div>
+      <div class="terminal-section-body">
+        <h5 class="mb-3">Join The Weekly Fix</h5>
+        <p class="mb-4">Get the latest repair guides and sustainability tips delivered to your inbox.</p>
+        
+        <%= link_to "subscribe", new_subscriber_path, class: "btn btn-success w-100" %>
+      </div>
+    </div>
+    
+    <!-- Related Posts -->
+    <div class="terminal-section">
+      <div class="terminal-section-header">// RELATED POSTS</div>
+      <div class="terminal-section-body p-0">
+        <% Post.published.recent.limit(3).each do |related_post| %>
+          <% next if related_post.id == @post.id %>
+          <a href="<%= post_path(related_post) %>" class="terminal-card-link">
+            <div class="terminal-card p-3 border-bottom">
+              <div class="terminal-decoration mb-1 small">
+                <i class="far fa-calendar-alt me-1"></i>
+                <%= related_post.published_at.strftime("%Y-%m-%d") %>
               </div>
+              <h5 class="mb-2"><%= related_post.title %></h5>
+              <p class="mb-0 small text-muted">
+                <%= truncate(related_post.content.to_plain_text, length: 80) %>
+              </p>
             </div>
-          <% end %>
-        </div>
-      </section>
+          </a>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
