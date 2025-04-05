@@ -7,3 +7,6 @@ import "@rails/actiontext"
 
 // Import terminal script
 import "terminal"
+
+// Import logo animation
+import "logo"
