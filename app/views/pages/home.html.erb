@@ -1,18 +1,18 @@
 <!-- Terminal Hero Section -->
 <section class="terminal-hero">
   <div class="terminal-command">
-    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-    <span class="terminal-command-text">welcome.txt</span>
+    <span class="terminal-command-prompt">hello@hardcopy:~$</span>
+    <span class="terminal-command-text">welcome</span>
   </div>
 
   <!-- ASCII Art Logo -->
   <div class="ascii-art my-4">
- _    _              _____  _____   _____ ____  _______     __
-| |  | |     /\     |  __ \|  __ \ / ____/ __ \|  __ \ \   / /
-| |__| |    /  \    | |__) | |  | | |   | |  | | |__) \ \_/ / 
-|  __  |   / /\ \   |  _  /| |  | | |   | |  | |  ___/ \   /  
-| |  | |  / ____ \  | | \ \| |__| | |___| |__| | |      | |   
-|_|  |_| /_/    \_\ |_|  \_\_____/ \_____\____/|_|      |_|   
+  ██╗  ██╗ █████╗ ██████╗ ██████╗  ██████╗ ██████╗ ██████╗ ██╗   ██╗
+  ██║  ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔═══██╗██╔══██╗╚██╗ ██╔╝
+  ███████║███████║██████╔╝██║  ██║██║     ██║   ██║██████╔╝ ╚████╔╝ 
+  ██╔══██║██╔══██║██╔══██╗██║  ██║██║     ██║   ██║██╔═══╝   ╚██╔╝  
+  ██║  ██║██║  ██║██║  ██║██████╔╝╚██████╗╚██████╔╝██║        ██║   
+  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═════╝ ╚═╝        ╚═╝
   </div>
   
   <div class="my-4">
@@ -22,8 +22,81 @@
     </div>
     
     <div class="d-flex flex-wrap gap-3">
-      <%= link_to "$ /store", products_path, class: "btn btn-primary" %>
-      <%= link_to "$ weekly_fix.txt", weekly_fix_path, class: "btn btn-accent" %>
+      <%= link_to "store", products_path, class: "btn btn-primary" %>
+      <%= link_to "weekly_fix", weekly_fix_path, class: "btn btn-accent" %>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="mb-5">
+  <div class="terminal-command">
+    <span class="terminal-command-prompt">goods@hardcopy:~$</span>
+    <span class="terminal-command-text">view featured_products/</span>
+  </div>
+
+  <div class="terminal-section">
+    <div class="terminal-section-header">// FEATURED PRODUCTS</div>
+    <div class="terminal-section-body">
+      <div class="terminal-decoration mb-4">Rescued from landfill, restored with care</div>
+      
+      <% if @featured_products.present? %>
+        <div class="row">
+          <% @featured_products.each do |product| %>
+            <div class="col-md-6 col-lg-3 mb-4">
+            <div class="terminal-product h-100">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-primary"><%= product.condition.present? ? product.condition : "Used" %></span>
+              <% if product.stock > 0 %>
+                <span class="badge bg-success">In Stock</span>
+              <% else %>
+                <span class="badge bg-danger">Out of Stock</span>
+              <% end %>
+            </div>
+            
+            <!-- Product Image -->
+            <div class="terminal-product-image mb-3">
+              <% if product.images.attached? %>
+                <%= link_to product_path(product) do %>
+                  <%= image_tag product.images.first, class: "img-fluid", style: "max-height: 120px; width: 100%; object-fit: contain; border: 1px solid var(--terminal-border);" %>
+                <% end %>
+              <% else %>
+                <div class="terminal-no-image" style="height: 120px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--terminal-border);">
+                  <i class="fas fa-image fa-3x text-muted"></i>
+                </div>
+              <% end %>
+            </div>
+            
+            <div class="terminal-product-title">
+              <%= product.title %>
+            </div>
+            
+            <div class="terminal-product-price mb-2">
+              $<%= sprintf('%.2f', product.price) %>
+              <% if product.original_price.present? && product.original_price > product.price %>
+                <span class="text-muted ms-2"><s>$<%= sprintf('%.2f', product.original_price) %></s></span>
+              <% end %>
+            </div>
+            
+            <div class="terminal-product-description">
+              <%= truncate(product.description.to_plain_text, length: 100) if product.description.present? %>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-3">
+              <%= link_to "view", product_path(product), class: "btn btn-sm btn-primary" %>
+              <%= button_to "add_to_cart", add_to_cart_path(product), class: "btn btn-sm btn-success" %>
+            </div>
+            </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="terminal-decoration">No featured products found</div>
+      <% end %>
+      
+      <div class="text-center mt-4">
+        <%= link_to "all_products", products_path, class: "btn btn-primary" %>
+      </div>
     </div>
   </div>
 </section>
@@ -31,8 +104,8 @@
 <!-- Mission Section -->
 <section class="mb-5">
   <div class="terminal-command">
-    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-    <span class="terminal-command-text">mission.txt</span>
+    <span class="terminal-command-prompt">goals@hardcopy:~$</span>
+    <span class="terminal-command-text">mission</span>
   </div>
   
   <div class="terminal-section">
@@ -72,8 +145,8 @@
          %@@@@@@@%   @@@@@@@@@@         
            :-----:   -@@@@@@@@-          
             </div>
-            <h3 class="h4 mb-3">STOP_E_WASTE</h3>
-            <p>We believe in celebrating what's already out there - and investing in reburbishing it, not creating more.</p>
+            <h3 class="h4 mb-3">RESCUE</h3>
+            <p>We believe technology deserves a second life, not a place in landfill.</p>
           </div>
         </div>
         
@@ -99,102 +172,42 @@
         =######+==##+==######+          
         =#                  *+                        
             </div>
-            <h3 class="h4 mb-3">SHARE_KNOWLEDGE</h3>
-            <p>We think if you're buying something, you deserve to know how to fix it.</p>
+            <h3 class="h4 mb-3">REPAIR</h3>
+            <p>We share the ups and downs of repairing things - and hope they will help you.</p>
           </div>
         </div>
-        
+
         <div class="col-md-4 mb-4">
-          <div class="terminal-card p-3 h-100">
-          <div class="ascii-art-small my-4">
-          -@%%%%%%%%%%%%%%@-           
-          %#::::::::::::::#%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %*              *%           
-          %@**************@%           
-          %@@@@@%=--=%@@@@@%           
-          %@@@@%.    .%@@@@%           
-          %@@@@   ++   @@@@%           
-          %@@@% .#@@#. %@@@%           
-          %@@@* -@@@@- *@@@%           
-          %@@@% .#@@#. %@@@%           
-          %@@@@  :%%:  @@@@%           
-          %@@@@#.    .#@@@@%           
-          %@@@@@#=..=#@@@@@%           
-          #@@@@@@@@@@@@@@@@#                       
-           </div>
-            <h3 class="h4 mb-3">SELL_COOL_STUFF</h3>
-            <p>We love technology! And want to see cool stuff in the world.</p>
-          </div>
+        <div class="terminal-card p-3 h-100">
+        <div class="ascii-art-small my-4">
+        -@%%%%%%%%%%%%%%@-           
+        %#::::::::::::::#%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %*              *%           
+        %@**************@%           
+        %@@@@@%=--=%@@@@@%           
+        %@@@@%.    .%@@@@%           
+        %@@@@   ++   @@@@%           
+        %@@@% .#@@#. %@@@%           
+        %@@@* -@@@@- *@@@%           
+        %@@@% .#@@#. %@@@%           
+        %@@@@  :%%:  @@@@%           
+        %@@@@#.    .#@@@@%           
+        %@@@@@#=..=#@@@@@%           
+        #@@@@@@@@@@@@@@@@#                       
+         </div>
+          <h3 class="h4 mb-3">ENJOY</h3>
+          <p>We connect people with quality (and cool) technology that's too good to waste.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Featured Products Section -->
-<section class="mb-5">
-  <div class="terminal-command">
-    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-    <span class="terminal-command-text">ls -la featured_products/</span>
-  </div>
-
-  <div class="terminal-section">
-    <div class="terminal-section-header">// FEATURED PRODUCTS</div>
-    <div class="terminal-section-body">
-      <div class="terminal-decoration mb-4">Rescued from landfill, restored with care</div>
-      
-      <% if @featured_products.present? %>
-        <div class="row">
-          <% @featured_products.each do |product| %>
-            <div class="col-md-6 col-lg-3 mb-4">
-              <div class="terminal-product h-100">
-                <div class="d-flex justify-content-between mb-2">
-                  <span class="badge bg-primary"><%= product.condition.present? ? product.condition : "Used" %></span>
-                  <% if product.stock > 0 %>
-                    <span class="badge bg-success">In Stock</span>
-                  <% else %>
-                    <span class="badge bg-danger">Out of Stock</span>
-                  <% end %>
-                </div>
-                
-                <div class="terminal-product-title">
-                  <%= product.title %>
-                </div>
-                
-                <div class="terminal-product-price mb-2">
-                  $<%= sprintf('%.2f', product.price) %>
-                  <% if product.original_price.present? && product.original_price > product.price %>
-                    <span class="text-muted ms-2"><s>$<%= sprintf('%.2f', product.original_price) %></s></span>
-                  <% end %>
-                </div>
-                
-                <div class="terminal-product-description">
-                  <%= truncate(product.description.to_plain_text, length: 100) if product.description.present? %>
-                </div>
-                
-                <div class="d-flex justify-content-between mt-3">
-                  <%= link_to "view", product_path(product), class: "btn btn-sm btn-primary" %>
-                  <%= button_to "add_to_cart", add_to_cart_path(product), class: "btn btn-sm btn-success" %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="terminal-decoration">No featured products found</div>
-      <% end %>
-      
-      <div class="text-center mt-4">
-        <%= link_to "$ ls -la /products", products_path, class: "btn btn-primary" %>
       </div>
     </div>
   </div>
@@ -203,14 +216,14 @@
 <!-- Blog Section -->
 <section class="mb-5">
   <div class="terminal-command">
-    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-    <span class="terminal-command-text">ls -la weekly_fix/</span>
+    <span class="terminal-command-prompt">newsletter@hardcopy:~$</span>
+    <span class="terminal-command-text">weekly_fix/</span>
   </div>
 
   <div class="terminal-section">
     <div class="terminal-section-header">// THE WEEKLY FIX</div>
     <div class="terminal-section-body">
-      <div class="terminal-decoration mb-4">Latest from our repair and sustainability blog</div>
+      <div class="terminal-decoration mb-4">Follow our repairs through our weekly newsletter</div>
       
       <% if @recent_posts.present? %>
         <div class="row">
@@ -242,7 +255,7 @@
       <% end %>
       
       <div class="text-center mt-4">
-        <%= link_to "$ ls -la /weekly_fix", weekly_fix_path, class: "btn btn-primary" %>
+        <%= link_to "weekly_fix", weekly_fix_path, class: "btn btn-primary" %>
       </div>
     </div>
   </div>
@@ -251,7 +264,7 @@
 <!-- Newsletter Section -->
 <section class="mb-5">
   <div class="terminal-command">
-    <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
+    <span class="terminal-command-prompt">join@hardcopy:~$</span>
     <span class="terminal-command-text">cat subscribe.txt</span>
   </div>
 

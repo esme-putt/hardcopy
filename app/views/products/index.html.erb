@@ -121,7 +121,7 @@
         <% if @products.any? %>
           <div class="row">
             <% @products.each do |product| %>
-              <div class="col-md-6 col-lg-4 mb-4">
+<div class="col-lg-6 col-xl-4 mb-4">
                 <div class="terminal-product h-100">
                   <div class="d-flex justify-content-between mb-2">
                     <span class="badge bg-primary"><%= product.condition.present? ? product.condition : "Used" %></span>
@@ -132,8 +132,21 @@
                     <% end %>
                   </div>
                   
-                  <div class="terminal-product-title">
-                    <%= product.title %>
+                  <!-- Product Image -->
+                  <div class="terminal-product-image mb-3">
+                    <% if product.images.attached? %>
+                      <%= link_to product_path(product) do %>
+                        <%= image_tag product.images.first, class: "img-fluid", style: "height: 180px; width: 100%; object-fit: contain; border: 1px solid var(--terminal-border);" %>
+                      <% end %>
+                    <% else %>
+                      <div class="terminal-no-image" style="height: 180px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--terminal-border);">
+                        <i class="fas fa-image fa-3x text-muted"></i>
+                      </div>
+                    <% end %>
+                  </div>
+                  
+                  <div class="terminal-product-title text-break">
+                    <%= truncate(product.title, length: 40) %>
                   </div>
                   
                   <div class="terminal-product-price mb-2">
@@ -143,8 +156,8 @@
                     <% end %>
                   </div>
                   
-                  <div class="terminal-product-description">
-                    <%= truncate(product.description.to_plain_text, length: 100) if product.description.present? %>
+                  <div class="terminal-product-description text-break">
+                    <%= truncate(product.description.to_plain_text, length: 80) if product.description.present? %>
                   </div>
                   
                   <div class="d-flex justify-content-between mt-3">

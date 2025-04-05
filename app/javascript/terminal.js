@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add blinking cursor effect
     addBlinkingCursor();
+
+    // Add loading effect for product images
+    addProductImageEffects();
   });
   
   // Initialize terminal effects
@@ -95,6 +98,70 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 500);
     }
   }
+
+    // Add product image loading effects
+    function addProductImageEffects() {
+        // Add loading animation for images
+        const productImages = document.querySelectorAll('.terminal-product-image img');
+        
+        productImages.forEach(img => {
+          // Add loading class
+          img.classList.add('loading');
+          
+          // Add loading overlay
+          const overlay = document.createElement('div');
+          overlay.classList.add('terminal-image-loading');
+          overlay.innerHTML = '<div class="terminal-loading-text">Loading image...</div>';
+          img.parentNode.appendChild(overlay);
+          
+          // Remove loading class and overlay when image loads
+          img.onload = function() {
+            img.classList.remove('loading');
+            if (overlay.parentNode) {
+              overlay.parentNode.removeChild(overlay);
+            }
+            
+            // Add a subtle fade-in effect
+            img.style.opacity = 0;
+            setTimeout(() => {
+              img.style.transition = 'opacity 0.5s ease';
+              img.style.opacity = 1;
+            }, 50);
+          };
+          
+          // Handle image load errors
+          img.onerror = function() {
+            img.style.display = 'none';
+            const errorDiv = document.createElement('div');
+            errorDiv.classList.add('terminal-image-error');
+            errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i><br>Image not found';
+            img.parentNode.appendChild(errorDiv);
+            
+            if (overlay.parentNode) {
+              overlay.parentNode.removeChild(overlay);
+            }
+          };
+        });
+        
+        // Add hover effects for product cards
+        const productCards = document.querySelectorAll('.terminal-product');
+        
+        productCards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            const image = card.querySelector('.terminal-product-image img');
+            if (image) {
+              image.style.transform = 'scale(1.05)';
+            }
+          });
+          
+          card.addEventListener('mouseleave', () => {
+            const image = card.querySelector('.terminal-product-image img');
+            if (image) {
+              image.style.transform = 'scale(1)';
+            }
+          });
+        });
+      }
   
   // Matrix rain effect (optional - can be added to specific pages)
   function matrixRain() {
