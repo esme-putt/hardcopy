@@ -1,0 +1,53 @@
+<%= form_with model: [:admin, @post], local: true do |f| %>
+    <% if @post.errors.any? %>
+      <div class="alert alert-danger">
+        <h5><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h5>
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="mb-3">
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "form-control", required: true %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :content, class: "form-label" %>
+      <%= f.rich_text_area :content, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :featured_image, "Featured Image", class: "form-label" %>
+      <%= f.file_field :featured_image, class: "form-control" %>
+      
+      <% if @post.featured_image.attached? %>
+        <div class="mt-3">
+          <p class="mb-2">Current Featured Image:</p>
+          <%= image_tag @post.featured_image.variant(resize_to_limit: [200, 200]), class: "img-thumbnail" %>
+        </div>
+      <% end %>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="form-check">
+          <%= f.check_box :published, class: "form-check-input" %>
+          <%= f.label :published, class: "form-check-label" %>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <%= f.label :published_at, "Publication Date", class: "form-label" %>
+        <%= f.datetime_local_field :published_at, class: "form-control", value: @post.published_at || Time.current %>
+      </div>
+    </div>
+  
+    <div class="d-flex gap-2">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= link_to "Cancel", admin_posts_path, class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>

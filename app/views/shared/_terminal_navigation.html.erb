@@ -7,7 +7,7 @@
   <div class="terminal-nav-links">
     <%= link_to "home", root_path, class: "terminal-nav-link #{current_page?(root_path) ? 'active' : ''}" %>
     <%= link_to "shop", products_path, class: "terminal-nav-link #{controller_name == 'products' && action_name == 'index' ? 'active' : ''}" %>
-    <%= link_to "weekly-fix", weekly_fix_path, class: "terminal-nav-link #{controller_name == 'posts' ? 'active' : ''}" %>
+    <%= link_to "weekly_fix", weekly_fix_path, class: "terminal-nav-link #{controller_name == 'posts' ? 'active' : ''}" %>
     <%= link_to "about", about_path, class: "terminal-nav-link #{current_page?(about_path) ? 'active' : ''}" %>
     
     <% if current_user %>
@@ -19,7 +19,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <% if current_user.admin? %>
-              <li><%= link_to "admin_panel", admin_path, class: "dropdown-item" %></li>
+              <li><%= link_to "admin_panel", admin_root_path, class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>
             <% end %>
             <li><%= link_to "my_orders", orders_path, class: "dropdown-item" %></li>
@@ -28,6 +28,15 @@
         </span>
       </div>
     <% else %>
+    <% end %>
+    
+    <%= link_to cart_path, class: "terminal-nav-link position-relative" do %>
+      <i class="fas fa-shopping-cart"></i>
+      <% if session[:cart].present? && session[:cart].any? %>
+        <span class="badge bg-danger position-absolute" style="top: -8px; right: -8px;">
+          <%= session[:cart].values.sum %>
+        </span>
+      <% end %>
     <% end %>
   </div>
 </div>

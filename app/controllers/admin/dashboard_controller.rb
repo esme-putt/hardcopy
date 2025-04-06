@@ -1,16 +1,12 @@
-class Admin::DashboardController < ApplicationController
-    before_action :authenticate_user!
-    before_action :ensure_admin
-    
+class Admin::DashboardController < Admin::BaseController
     def index
-      @total_products = Product.count
+      @product_count = Product.count
       @products_in_stock = Product.where('stock > 0').count
-      @total_orders = Order.count
-      @pending_orders = Order.where(status: 'pending').count
-      @total_subscribers = Subscriber.count
-      @total_posts = Post.count
-      
-      @recent_orders = Order.order(created_at: :desc).limit(5)
-      @low_stock_products = Product.where('stock <= 5 AND stock > 0').order(:stock).limit(5)
+      @post_count = Post.count
+      @published_posts = Post.where(published: true).count
+      @order_count = Order.count rescue 0
+      @pending_orders = Order.where(status: 'pending').count rescue 0
+      @user_count = User.count
+      @admin_count = User.where(role: 'admin').count
     end
   end

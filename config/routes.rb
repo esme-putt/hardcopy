@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   
   # Admin dashboard
   namespace :admin do
-    get '/', to: 'dashboard#index'
+    get '/', to: 'dashboard#index', as: :root
     resources :posts
     resources :products
     resources :orders, only: [:index, :show, :update]
