@@ -28,17 +28,6 @@
         </span>
       </div>
     <% else %>
-      <%= link_to "login", login_path, class: "terminal-nav-link" %>
-      <%= link_to "sign_up", signup_path, class: "terminal-nav-link" %>
-    <% end %>
-    
-    <%= link_to cart_path, class: "terminal-nav-link position-relative" do %>
-      <i class="fas fa-shopping-cart"></i>
-      <% if session[:cart].present? && session[:cart].any? %>
-        <span class="badge bg-danger position-absolute" style="top: -8px; right: -8px;">
-          <%= session[:cart].values.sum %>
-        </span>
-      <% end %>
     <% end %>
   </div>
 </div>

@@ -1,12 +1,8 @@
 <!-- Blog Index Command -->
-<div class="terminal-command">
-  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-  <span class="terminal-command-text">ls -la /weekly_fix</span>
-</div>
 
 <div class="my-4">
-  <h1 class="mb-3">// THE WEEKLY FIX</h1>
-  <p class="terminal-decoration">Repair guides, sustainability tips, and tech knowledge</p>
+  <h1 class="mb-3">THE WEEKLY FIX</h1>
+  <p class="terminal-decoration">Sharing our journey through the world of electronics repairs.</p>
 </div>
 
 <div class="row">
@@ -39,7 +35,7 @@
             </div>
             
             <div class="d-flex">
-              <%= link_to "$ cat /weekly_fix/#{post.id}.md", post_path(post), class: "btn btn-primary" %>
+              <%= link_to "Read more", post_path(post), class: "btn btn-primary" %>
             </div>
           </div>
         </div>
@@ -98,34 +94,10 @@
       <div class="terminal-section-body">
         <%= form_with url: posts_path, method: :get, local: true do |f| %>
           <div class="input-group">
-            <%= f.text_field :q, value: params[:q], class: "form-control", placeholder: "grep -i 'keyword'" %>
+            <%= f.text_field :q, value: params[:q], class: "form-control", placeholder: "Enter text here" %>
             <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
           </div>
         <% end %>
-      </div>
-    </div>
-    
-    <!-- Categories -->
-    <div class="terminal-section mb-4">
-      <div class="terminal-section-header">// CATEGORIES</div>
-      <div class="terminal-section-body p-0">
-        <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
-            <i class="fas fa-wrench me-2"></i> repair_guides
-          </a>
-          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
-            <i class="fas fa-leaf me-2"></i> sustainability
-          </a>
-          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
-            <i class="fas fa-newspaper me-2"></i> tech_news
-          </a>
-          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
-            <i class="fas fa-hammer me-2"></i> diy_projects
-          </a>
-          <a href="#" class="list-group-item terminal-nav-link py-2 px-3">
-            <i class="fas fa-trash me-2"></i> e-waste
-          </a>
-        </div>
       </div>
     </div>
     
@@ -134,7 +106,7 @@
       <div class="terminal-section-header">// SUBSCRIBE</div>
       <div class="terminal-section-body">
         <h5 class="mb-3">Join The Weekly Fix</h5>
-        <p class="mb-4">Get repair tips, sustainability news, and product updates delivered to your inbox every week.</p>
+        <p class="mb-4">Updates delivered to your inbox every week.</p>
         
         <%= form_with model: Subscriber.new, local: true do |f| %>
           <div class="mb-3">

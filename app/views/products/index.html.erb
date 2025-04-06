@@ -1,100 +1,10 @@
 <!-- Products Page Header -->
-<div class="terminal-command">
-  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-  <span class="terminal-command-text">cd /store && ls -la</span>
-</div>
 
 <div class="my-4">
-  <h1 class="mb-3">// HARDCOPY STORE</h1>
-  <p class="terminal-decoration">Rescued and refurbished technology with a new lease on life</p>
+  <h1 class="mb-3">HARDCOPY STORE</h1>
 </div>
 
 <div class="row">
-  <!-- Sidebar with Filters -->
-  <div class="col-lg-3 mb-4">
-    <div class="terminal-section mb-4">
-      <div class="terminal-section-header">// SEARCH</div>
-      <div class="terminal-section-body">
-        <%= form_with url: products_path, method: :get, local: true do |f| %>
-          <div class="input-group">
-            <%= f.text_field :q, value: params[:q], class: "form-control", placeholder: "grep -i 'keyword'" %>
-            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    
-    <div class="terminal-section mb-4">
-      <div class="terminal-section-header">// CATEGORIES</div>
-      <div class="terminal-section-body p-0">
-        <div class="list-group list-group-flush">
-          <a href="<%= products_path %>" class="list-group-item terminal-nav-link py-2 px-3 <%= !params[:category].present? ? 'active' : '' %>">
-            <i class="fas fa-folder me-2"></i> all
-          </a>
-          <a href="<%= products_path(category: 'laptops') %>" class="list-group-item terminal-nav-link py-2 px-3 <%= params[:category] == 'laptops' ? 'active' : '' %>">
-            <i class="fas fa-laptop me-2"></i> laptops
-          </a>
-          <a href="<%= products_path(category: 'phones') %>" class="list-group-item terminal-nav-link py-2 px-3 <%= params[:category] == 'phones' ? 'active' : '' %>">
-            <i class="fas fa-mobile-alt me-2"></i> phones
-          </a>
-          <a href="<%= products_path(category: 'cameras') %>" class="list-group-item terminal-nav-link py-2 px-3 <%= params[:category] == 'cameras' ? 'active' : '' %>">
-            <i class="fas fa-camera me-2"></i> cameras
-          </a>
-          <a href="<%= products_path(category: 'audio') %>" class="list-group-item terminal-nav-link py-2 px-3 <%= params[:category] == 'audio' ? 'active' : '' %>">
-            <i class="fas fa-headphones me-2"></i> audio
-          </a>
-          <a href="<%= products_path(category: 'accessories') %>" class="list-group-item terminal-nav-link py-2 px-3 <%= params[:category] == 'accessories' ? 'active' : '' %>">
-            <i class="fas fa-plug me-2"></i> accessories
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="terminal-section mb-4">
-      <div class="terminal-section-header">// CONDITION</div>
-      <div class="terminal-section-body">
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="checkbox" id="conditionLikeNew" <%= params[:condition] == 'Like New' ? 'checked' : '' %>>
-          <label class="form-check-label" for="conditionLikeNew">
-            Like New
-          </label>
-        </div>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="checkbox" id="conditionExcellent" <%= params[:condition] == 'Excellent' ? 'checked' : '' %>>
-          <label class="form-check-label" for="conditionExcellent">
-            Excellent
-          </label>
-        </div>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="checkbox" id="conditionGood" <%= params[:condition] == 'Good' ? 'checked' : '' %>>
-          <label class="form-check-label" for="conditionGood">
-            Good
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="conditionFair" <%= params[:condition] == 'Fair' ? 'checked' : '' %>>
-          <label class="form-check-label" for="conditionFair">
-            Fair
-          </label>
-        </div>
-      </div>
-    </div>
-    
-    <div class="terminal-section">
-      <div class="terminal-section-header">// PRICE RANGE</div>
-      <div class="terminal-section-body">
-        <div class="mb-3">
-          <label for="priceMin" class="form-label">Min Price ($)</label>
-          <input type="number" class="form-control" id="priceMin" min="0" value="<%= params[:min_price] %>">
-        </div>
-        <div class="mb-3">
-          <label for="priceMax" class="form-label">Max Price ($)</label>
-          <input type="number" class="form-control" id="priceMax" min="0" value="<%= params[:max_price] %>">
-        </div>
-        <button type="button" class="btn btn-primary w-100">Apply Filter</button>
-      </div>
-    </div>
-  </div>
   
   <!-- Product Listings -->
   <div class="col-lg-9">
@@ -103,15 +13,6 @@
         <span class="terminal-decoration">
           <i class="fas fa-hdd me-1"></i> Showing <%= @products.count %> products
         </span>
-      </div>
-      <div class="d-flex align-items-center">
-        <label class="me-2">sort-by:</label>
-        <select class="form-select form-select-sm" style="width: auto;">
-          <option>newest</option>
-          <option>price-asc</option>
-          <option>price-desc</option>
-          <option>name-asc</option>
-        </select>
       </div>
     </div>
     
@@ -162,7 +63,6 @@
                   
                   <div class="d-flex justify-content-between mt-3">
                     <%= link_to "view", product_path(product), class: "btn btn-sm btn-primary" %>
-                    <%= button_to "add_to_cart", add_to_cart_path(product), class: "btn btn-sm btn-success" %>
                   </div>
                 </div>
               </div>

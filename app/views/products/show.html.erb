@@ -1,17 +1,3 @@
-<!-- Product Detail Path -->
-<div class="terminal-command">
-  <span class="terminal-command-prompt">visitor@hardcopy:~$</span>
-  <span class="terminal-command-text">cat /store/product/<%= @product.id %>.txt</span>
-</div>
-
-<!-- Breadcrumb Navigation -->
-<nav class="mb-4">
-  <div class="terminal-decoration">
-    <%= link_to "~", root_path %> / 
-    <%= link_to "store", products_path %> / 
-    <span class="text-white"><%= @product.title.downcase.gsub(' ', '_') %></span>
-  </div>
-</nav>
 
 <div class="row">
   <!-- Product Images -->
@@ -109,72 +95,5 @@
             <%= @product.description %>
           </div>
         </div>
-        
-        <div class="mb-4">
-          <%= form_with url: add_to_cart_path(@product), method: :post do |f| %>
-            <div class="row g-3 align-items-center mb-3">
-              <div class="col-auto">
-                <%= f.label :quantity, "Quantity:", class: "col-form-label" %>
-              </div>
-              <div class="col-auto">
-                <%= f.number_field :quantity, value: 1, min: 1, max: @product.stock, class: "form-control", style: "width: 70px;" %>
-              </div>
-            </div>
-            
-            <div class="d-flex gap-2">
-              <% if @product.stock > 0 %>
-                <%= f.submit "add_to_cart", class: "btn btn-success" %>
-              <% else %>
-                <button class="btn btn-secondary" disabled>Out of Stock</button>
-              <% end %>
-              <a href="#" class="btn btn-outline-secondary">
-                <i class="far fa-heart me-1"></i> add_to_wishlist
-              </a>
-            </div>
-          <% end %>
-        </div>
       </div>
     </div>
-    
-    <div class="terminal-section">
-      <div class="terminal-section-header">// PRODUCT INFO</div>
-      <div class="terminal-section-body p-0">
-        <div class="px-3 py-2 border-bottom">
-          <div class="d-flex align-items-center">
-            <i class="fas fa-truck fa-lg text-success me-3"></i>
-            <div>
-              <div class="fw-bold">Free Shipping</div>
-              <div class="small">On orders over $75</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="px-3 py-2 border-bottom">
-          <div class="d-flex align-items-center">
-            <i class="fas fa-undo fa-lg text-success me-3"></i>
-            <div>
-              <div class="fw-bold">30-Day Returns</div>
-              <div class="small">Hassle-free returns policy</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="px-3 py-2 border-bottom">
-          <div class="d-flex align-items-center">
-            <i class="fas fa-shield-alt fa-lg text-success me-3"></i>
-            <div>
-              <div class="fw-bold">90-Day Warranty</div>
-              <div class="small">All products come with a 90-day warranty</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="px-3 py-2">
-          <div class="d-flex align-items-center">
-            <i class="fas fa-leaf fa-lg text-success me-3"></i>
-            <div>
-              <div class="fw-bold">Eco-Friendly</div>
-              <div class="small">Rescued from landfill and given a new life</div>
-            </div>
-          </div>
-        </div>
