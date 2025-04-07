@@ -22,24 +22,24 @@ class ProductsController < ApplicationController
     end
     
     def create
-      @product = Product.new(product_params)
-      
-      if @product.save
-        redirect_to @product, notice: 'Product was successfully created.'
-      else
-        render :new
-      end
-    end
-    
-    def edit
+        @product = Product.new(product_params)
+        
+        if @product.save
+            redirect_to admin_product_path(@product), notice: 'Product was successfully created.'
+        else
+            render :new, status: :unprocessable_entity
+        end
     end
     
     def update
-      if @product.update(product_params)
-        redirect_to @product, notice: 'Product was successfully updated.'
-      else
-        render :edit
-      end
+        if @product.update(product_params)
+            redirect_to admin_product_path(@product), notice: 'Product was successfully updated.'
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def edit
     end
     
     def destroy
