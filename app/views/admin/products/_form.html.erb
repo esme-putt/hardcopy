@@ -61,16 +61,32 @@
       <%= f.label :images, class: "form-label" %>
       <%= f.file_field :images, multiple: true, class: "form-control" %>
       
-      <% if @product.images.attached? %>
+      <% if @product.images.attached? && @product.persisted? %>
         <div class="mt-3">
-          <p class="mb-2">Current Images:</p>
-          <div class="row g-2">
-            <% @product.images.each do |image| %>
-              <div class="col-auto">
-                <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "img-thumbnail", style: "width: 100px; height: 100px; object-fit: cover;" %>
-              </div>
-            <% end %>
+          <p class="mb-2">Current Images: <small class="text-muted">(Drag to reorder)</small></p>
+          
+          <div class="image-reorder-container mb-3">
+            <div class="row g-2" id="sortable-images">
+              <% @product.images.each_with_index do |image, index| %>
+                <div class="col-auto image-item" data-image-id="<%= image.id %>">
+                  <div class="card border">
+                    <div class="card-body p-1">
+                      <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "img-thumbnail mb-2", style: "width: 100px; height: 100px; object-fit: cover; cursor: move;" %>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-secondary">Position: <%= index + 1 %></span>
+                        <%= link_to "#", class: "btn btn-sm btn-outline-danger remove-image", data: { image_id: image.id } do %>
+                          <i class="fas fa-trash"></i>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
+          
+          <!-- Hidden field to store image order -->
+          <%= f.hidden_field :image_order, id: "image-order-field" %>
         </div>
       <% end %>
     </div>
@@ -79,4 +95,111 @@
       <%= f.submit class: "btn btn-primary" %>
       <%= link_to "Cancel", admin_products_path, class: "btn btn-outline-secondary" %>
     </div>
+  <% end %>
+  
+  <% if @product.persisted? %>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize sortable
+        const sortableImages = document.getElementById('sortable-images');
+        if (sortableImages) {
+          let draggingElement = null;
+          let placeholder = null;
+          
+          // Function to update image order field
+          function updateImageOrder() {
+            const imageItems = document.querySelectorAll('.image-item');
+            const imageIds = Array.from(imageItems).map(item => item.dataset.imageId);
+            document.getElementById('image-order-field').value = imageIds.join(',');
+            
+            // Update position badges
+            imageItems.forEach((item, index) => {
+              const badge = item.querySelector('.badge');
+              if (badge) {
+                badge.textContent = `Position: ${index + 1}`;
+              }
+            });
+          }
+          
+          // Make images draggable
+          document.querySelectorAll('.image-item').forEach(item => {
+            item.setAttribute('draggable', 'true');
+            
+            item.addEventListener('dragstart', function(e) {
+              draggingElement = this;
+              setTimeout(() => {
+                this.classList.add('dragging');
+              }, 0);
+            });
+            
+            item.addEventListener('dragend', function() {
+              this.classList.remove('dragging');
+              draggingElement = null;
+              updateImageOrder();
+            });
+          });
+          
+          // Handle drag over
+          sortableImages.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            if (!draggingElement) return;
+            
+            const afterElement = getDragAfterElement(sortableImages, e.clientY);
+            if (afterElement == null) {
+              sortableImages.appendChild(draggingElement);
+            } else {
+              sortableImages.insertBefore(draggingElement, afterElement);
+            }
+          });
+          
+          // Function to determine which element to insert before
+          function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.image-item:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+              const box = child.getBoundingClientRect();
+              const offset = y - box.top - box.height / 2;
+              
+              if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+              } else {
+                return closest;
+              }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+          }
+          
+          // Initialize the image order field
+          updateImageOrder();
+          
+          // Handle image removal
+          document.querySelectorAll('.remove-image').forEach(button => {
+            button.addEventListener('click', function(e) {
+              e.preventDefault();
+              const imageId = this.dataset.imageId;
+              if (confirm('Are you sure you want to remove this image?')) {
+                // Add removed image ID to a list that will be processed by controller
+                const removedImagesField = document.getElementById('removed-images') || 
+                                          document.createElement('input');
+                if (!removedImagesField.id) {
+                  removedImagesField.type = 'hidden';
+                  removedImagesField.id = 'removed-images';
+                  removedImagesField.name = 'product[removed_image_ids][]';
+                  document.querySelector('form').appendChild(removedImagesField);
+                }
+                
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'product[removed_image_ids][]';
+                input.value = imageId;
+                document.querySelector('form').appendChild(input);
+                
+                // Remove the image from UI
+                this.closest('.image-item').remove();
+                updateImageOrder();
+              }
+            });
+          });
+        }
+      });
+    </script>
   <% end %>
