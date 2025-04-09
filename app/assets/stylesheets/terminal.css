@@ -750,22 +750,29 @@ img.loading {
     display: flex;
   }
   
-  /* Resize ASCII art for mobile */
+  /* Resize ASCII art for mobile - updated to remove all scrollbars */
   .ascii-art {
-    font-size: 0.4rem !important;
+    font-size: 0.52rem !important; /* 30% bigger than 0.4rem */
     line-height: 0.7 !important;
     transform: scale(0.9);
     transform-origin: left top;
-    overflow-x: auto;
-    max-width: 100%;
     white-space: pre;
+    max-width: 100%;
+    overflow: hidden; /* Hide all scrollbars */
+    display: block; /* Ensure block display */
   }
   
-  /* Special handling for homepage logo */
+  /* Special handling for homepage logo - no scrollbars */
   .ascii-art.homepage-logo {
-    font-size: 0.35rem !important;
+    font-size: 0.455rem !important; /* 30% bigger than 0.35rem */
     line-height: 0.6 !important;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em; /* Slightly tighter letter spacing */
+    transform-origin: center; /* Center the transform */
+    margin: 0 auto; /* Center the logo */
+    text-align: center; /* Center the text */
+    width: 100%; /* Take up full width */
+    max-height: 150px; /* Limit height to prevent scrolling */
+    overflow: hidden; /* Hide all scrollbars */
   }
   
   /* Other mobile optimizations */
@@ -811,17 +818,21 @@ img.loading {
   }
 }
 
-/* Extra small devices */
+/* Extra small devices - updated with no scrollbars */
 @media (max-width: 480px) {
   .ascii-art {
-    font-size: 0.3rem !important;
-    transform: scale(0.8);
+    font-size: 0.39rem !important; /* 30% bigger than 0.3rem */
+    transform: scale(0.85);
+    overflow: hidden; /* Hide all scrollbars */
   }
   
   .ascii-art.homepage-logo {
-    font-size: 0.25rem !important;
+    font-size: 0.325rem !important; /* 30% bigger than 0.25rem */
     letter-spacing: -0.05em;
     line-height: 0.6 !important;
+    transform: scale(0.83); /* Slightly reduced scale to fit */
+    transform-origin: center; /* Center the transform */
+    max-height: 120px; /* Smaller max height for extra small devices */
   }
 }
 
