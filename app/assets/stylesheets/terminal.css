@@ -2,811 +2,876 @@
 
 /* Terminal card styling */
 .terminal-card {
-    background-color: var(--terminal-bg);
-    border: 1px solid var(--terminal-border);
-    transition: all 0.3s ease;
+  background-color: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  transition: all 0.3s ease;
+}
+
+.terminal-card:hover {
+  border-color: var(--terminal-text);
+  background-color: var(--terminal-hover);
+}
+
+.terminal-card-title {
+  font-weight: bold;
+  color: var(--terminal-text);
+}
+
+.terminal-card-content {
+  color: var(--terminal-muted);
+}
+
+.terminal-card-link {
+  text-decoration: none;
+  color: var(--terminal-text);
+  display: block;
+}
+
+.terminal-card-link:hover {
+  color: var(--terminal-text);
+  text-decoration: none;
+}
+
+:root {
+  /* Terminal color scheme */
+  --terminal-bg: #000000;
+  --terminal-text: #FF69B4;  /* Main terminal text */
+  --terminal-accent: #FF69B4;
+  --terminal-secondary: #00ff00;
+  --terminal-prompt: #ffff00;
+  --terminal-success: #00ff00;
+  --terminal-warning: #ffff00;
+  --terminal-error: #ff0000;
+  --terminal-muted: #888888;
+  --terminal-border: #333333;
+  --terminal-header: #111111;
+  --terminal-hover: #222222;
+  
+  /* Font settings */
+  --font-mono: 'Courier New', monospace;
+  
+  /* Bootstrap overrides */
+  --bs-primary: var(--terminal-secondary);
+  --bs-secondary: var(--terminal-text);
+  --bs-success: var(--terminal-success);
+  --bs-danger: var(--terminal-error);
+  --bs-warning: var(--terminal-warning);
+  --bs-light: #222222;
+  --bs-dark: #111111;
+}
+
+/* Global styles */
+body {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  cursor: text;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--terminal-border);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-hover);
+}
+
+/* Basic terminal element styles */
+.terminal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow-x: hidden;
+}
+
+.terminal-header {
+  background-color: var(--terminal-header);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--terminal-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.terminal-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-control.close {
+  background-color: #ff5f5f;
+}
+
+.terminal-control.minimize {
+  background-color: #ffff00;
+}
+
+.terminal-control.expand {
+  background-color: #00ff00;
+}
+
+.terminal-prompt {
+  color: var(--terminal-prompt);
+  margin-right: 0.5rem;
+}
+
+.terminal-path {
+  color: var(--terminal-secondary);
+  margin-right: 0.5rem;
+}
+
+.terminal-section {
+  margin: 2rem 0;
+  border: 1px solid var(--terminal-border);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.terminal-section-header {
+  background-color: var(--terminal-header);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--terminal-border);
+  font-weight: bold;
+}
+
+.terminal-section-body {
+  padding: 1rem;
+}
+
+/* Terminal command box */
+.terminal-command {
+  display: flex;
+  padding: 0.25rem 0;
+}
+
+.terminal-command-prompt {
+  color: var(--terminal-prompt);
+  margin-right: 0.5rem;
+  user-select: none;
+}
+
+.terminal-command-text {
+  flex-grow: 1;
+}
+
+.terminal-command-text.success {
+  color: var(--terminal-success);
+}
+
+.terminal-command-text.error {
+  color: var(--terminal-error);
+}
+
+.terminal-command-cursor {
+  width: 0.5rem;
+  height: 1rem;
+  background-color: var(--terminal-text);
+  display: inline-block;
+  animation: blink 1s infinite;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+}
+
+.typewriter-text {
+  animation: typing 3s steps(40, end);
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Navigation styles */
+.terminal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--terminal-border);
+  margin-bottom: 1rem;
+}
+
+.terminal-nav-brand {
+  font-weight: bold;
+  color: var(--terminal-text);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.terminal-nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.terminal-nav-link {
+  color: var(--terminal-text);
+  text-decoration: none;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.terminal-nav-link:hover, .terminal-nav-link.active {
+  color: var(--terminal-accent);
+}
+
+.terminal-nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--terminal-accent);
+  transition: width 0.3s ease;
+}
+
+.terminal-nav-link:hover:after, .terminal-nav-link.active:after {
+  width: 100%;
+}
+
+/* Override Bootstrap components */
+.card {
+  background-color: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  border-radius: 0;
+  margin-bottom: 1rem;
+}
+
+.card-header {
+  background-color: var(--terminal-header);
+  border-bottom: 1px solid var(--terminal-border);
+  border-radius: 0 !important;
+  color: var(--terminal-text);
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  color: var(--terminal-text);
+  font-weight: bold;
+}
+
+.card-text {
+  color: var(--terminal-text);
+}
+
+.btn {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  border: 1px solid var(--terminal-text);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--terminal-text);
+  color: var(--terminal-bg);
+}
+
+.btn-primary {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-secondary);
+  border-color: var(--terminal-secondary);
+}
+
+.btn-primary:hover {
+  background-color: var(--terminal-secondary);
+  color: var(--terminal-bg);
+  border-color: var(--terminal-secondary);
+}
+
+.btn-success {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-success);
+  border-color: var(--terminal-success);
+}
+
+.btn-success:hover {
+  background-color: var(--terminal-success);
+  color: var(--terminal-bg);
+  border-color: var(--terminal-success);
+}
+
+.btn-danger {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-error);
+  border-color: var(--terminal-error);
+}
+
+.btn-danger:hover {
+  background-color: var(--terminal-error);
+  color: var(--terminal-bg);
+  border-color: var(--terminal-error);
+}
+
+.btn-accent {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-accent);
+  border-color: var(--terminal-accent);
+}
+
+.btn-accent:hover {
+  background-color: var(--terminal-accent);
+  color: var(--terminal-bg);
+  border-color: var(--terminal-accent);
+}
+
+.form-control {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  border: 1px solid var(--terminal-border);
+  border-radius: 0;
+  padding: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.form-control:focus {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  border-color: var(--terminal-text);
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: var(--terminal-muted);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+table th, table td {
+  padding: 0.5rem;
+  border: 1px solid var(--terminal-border);
+  text-align: left;
+}
+
+table th {
+  background-color: var(--terminal-header);
+  font-weight: bold;
+}
+
+/* Terminal hero section */
+.terminal-hero {
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--terminal-border);
+}
+
+.terminal-hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.terminal-hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--terminal-accent);
+}
+
+.terminal-hero-text {
+  margin-bottom: 2rem;
+}
+
+/* Terminal ASCII art */
+.ascii-art {
+  font-family: monospace;
+  white-space: pre;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  margin: 1rem 0;
+  color: var(--terminal-secondary);
+}
+
+.ascii-art-small {
+  font-family: monospace;
+  white-space: pre;
+  font-size: 0.8rem;
+  line-height:0.9;
+  margin: 2rem 0;
+  color: var(--terminal-main);
+}
+
+/* Special class for homepage logo */
+.ascii-art.homepage-logo {
+  /* Default styles same as .ascii-art */
+}
+
+/* Terminal decoration */
+.terminal-decoration {
+  color: var(--terminal-muted);
+  user-select: none;
+  font-size: 0.8rem;
+}
+
+.terminal-separator {
+  height: 1px;
+  background-color: var(--terminal-border);
+  margin: 2rem 0;
+}
+
+/* Product cards */
+.terminal-product {
+  border: 1px solid var(--terminal-border);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.terminal-product:hover {
+  border-color: var(--terminal-text);
+  background-color: var(--terminal-hover);
+}
+
+.terminal-product-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.terminal-product-price {
+  color: var(--terminal-accent);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.terminal-product-description {
+  margin-bottom: 1rem;
+  color: var(--terminal-muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}
+
+.terminal-product-image {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--terminal-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.terminal-product-image img {
+  transition: transform 0.3s ease;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.terminal-product:hover .terminal-product-image img {
+  transform: scale(1.05);
+}
+
+.terminal-no-image {
+  background-color: var(--terminal-header);
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+/* Ensure buttons don't overflow */
+.terminal-product .d-flex {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .terminal-product-image img,
+  .terminal-no-image {
+    height: 140px !important;
   }
   
-  .terminal-card:hover {
-    border-color: var(--terminal-text);
-    background-color: var(--terminal-hover);
+  .terminal-product-title {
+    font-size: 1rem;
   }
   
-  .terminal-card-title {
-    font-weight: bold;
-    color: var(--terminal-text);
+  .terminal-product-description {
+    font-size: 0.85rem;
   }
-  
-  .terminal-card-content {
-    color: var(--terminal-muted);
-  }
-  
-  .terminal-card-link {
-    text-decoration: none;
-    color: var(--terminal-text);
-    display: block;
-  }
-  
-  .terminal-card-link:hover {
-    color: var(--terminal-text);
-    text-decoration: none;
-  }
-  
-  :root {
-    /* Terminal color scheme */
-    --terminal-bg: #000000;
-    --terminal-text: #FF69B4;  /* Main terminal text */
-    --terminal-accent: #FF69B4;
-    --terminal-secondary: #00ff00;
-    --terminal-prompt: #ffff00;
-    --terminal-success: #00ff00;
-    --terminal-warning: #ffff00;
-    --terminal-error: #ff0000;
-    --terminal-muted: #888888;
-    --terminal-border: #333333;
-    --terminal-header: #111111;
-    --terminal-hover: #222222;
-    
-    /* Font settings */
-    --font-mono: 'Courier New', monospace;
-    
-    /* Bootstrap overrides */
-    --bs-primary: var(--terminal-secondary);
-    --bs-secondary: var(--terminal-text);
-    --bs-success: var(--terminal-success);
-    --bs-danger: var(--terminal-error);
-    --bs-warning: var(--terminal-warning);
-    --bs-light: #222222;
-    --bs-dark: #111111;
-  }
-  
-  /* Global styles */
-  body {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-text);
-    font-family: var(--font-mono);
-    line-height: 1.5;
-    cursor: text;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-  }
-  
-  /* Scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: var(--terminal-bg);
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: var(--terminal-border);
-    border-radius: 0;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--terminal-hover);
-  }
-  
-  /* Basic terminal element styles */
-  .terminal-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    overflow-x: hidden;
-  }
-  
-  .terminal-header {
-    background-color: var(--terminal-header);
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--terminal-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .terminal-title {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  .terminal-controls {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .terminal-control {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  
-  .terminal-control.close {
-    background-color: #ff5f5f;
-  }
-  
-  .terminal-control.minimize {
-    background-color: #ffff00;
-  }
-  
-  .terminal-control.expand {
-    background-color: #00ff00;
-  }
-  
-  .terminal-prompt {
-    color: var(--terminal-prompt);
-    margin-right: 0.5rem;
-  }
-  
-  .terminal-path {
-    color: var(--terminal-secondary);
-    margin-right: 0.5rem;
-  }
-  
-  .terminal-section {
-    margin: 2rem 0;
-    border: 1px solid var(--terminal-border);
-    border-radius: 0;
-    overflow: hidden;
-  }
-  
-  .terminal-section-header {
-    background-color: var(--terminal-header);
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--terminal-border);
-    font-weight: bold;
-  }
-  
-  .terminal-section-body {
-    padding: 1rem;
-  }
-  
-  /* Terminal command box */
+}
+
+.terminal-product:hover .terminal-no-image {
+  background-color: var(--terminal-border);
+}
+
+/* Image loading effects */
+.terminal-image-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.terminal-loading-text {
+  color: var(--terminal-text);
+  font-size: 0.8rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.terminal-loading-text:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border: 2px solid var(--terminal-text);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+img.loading {
+  opacity: 0;
+}
+
+.terminal-image-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--terminal-header);
+  color: var(--terminal-error);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.terminal-image-error i {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Blog post cards */
+.terminal-post {
+  border: 1px solid var(--terminal-border);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.terminal-post:hover {
+  border-color: var(--terminal-text);
+  background-color: var(--terminal-hover);
+}
+
+.terminal-post-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.terminal-post-date {
+  color: var(--terminal-muted);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.terminal-post-excerpt {
+  margin-bottom: 1rem;
+  color: var(--terminal-muted);
+}
+
+/* Footer styles */
+.terminal-footer {
+  border-top: 1px solid var(--terminal-border);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.terminal-footer-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.terminal-footer-text {
+  margin-bottom: 1rem;
+  color: var(--terminal-muted);
+}
+
+.terminal-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.terminal-footer-link {
+  color: var(--terminal-text);
+  text-decoration: none;
+}
+
+.terminal-footer-link:hover {
+  color: var(--terminal-accent);
+  text-decoration: underline;
+}
+
+/* Error and status messages */
+.terminal-error {
+  color: var(--terminal-error);
+  border: 1px solid var(--terminal-error);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.terminal-success {
+  color: var(--terminal-success);
+  border: 1px solid var(--terminal-success);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.terminal-warning {
+  color: var(--terminal-warning);
+  border: 1px solid var(--terminal-warning);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Alert overrides */
+.alert {
+  background-color: var(--terminal-bg);
+  border-radius: 0;
+  border-width: 1px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+}
+
+.alert-success {
+  color: var(--terminal-success);
+  border-color: var(--terminal-success);
+}
+
+.alert-danger {
+  color: var(--terminal-error);
+  border-color: var(--terminal-error);
+}
+
+.alert-warning {
+  color: var(--terminal-warning);
+  border-color: var(--terminal-warning);
+}
+
+.alert-info {
+  color: var(--terminal-secondary);
+  border-color: var(--terminal-secondary);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Hide terminal commands on mobile */
   .terminal-command {
+    display: none;
+  }
+  
+  /* Show only the last terminal command (with cursor) for user input simulation */
+  .terminal-command:last-child {
     display: flex;
-    padding: 0.25rem 0;
   }
   
-  .terminal-command-prompt {
-    color: var(--terminal-prompt);
-    margin-right: 0.5rem;
-    user-select: none;
+  /* Resize ASCII art for mobile */
+  .ascii-art {
+    font-size: 0.4rem !important;
+    line-height: 0.7 !important;
+    transform: scale(0.9);
+    transform-origin: left top;
+    overflow-x: auto;
+    max-width: 100%;
+    white-space: pre;
   }
   
-  .terminal-command-text {
-    flex-grow: 1;
+  /* Special handling for homepage logo */
+  .ascii-art.homepage-logo {
+    font-size: 0.35rem !important;
+    line-height: 0.6 !important;
+    letter-spacing: -0.02em;
   }
   
-  .terminal-command-text.success {
-    color: var(--terminal-success);
+  /* Other mobile optimizations */
+  .terminal-hero-title {
+    font-size: 1.8rem;
   }
   
-  .terminal-command-text.error {
-    color: var(--terminal-error);
-  }
-  
-  .terminal-command-cursor {
-    width: 0.5rem;
-    height: 1rem;
-    background-color: var(--terminal-text);
-    display: inline-block;
-    animation: blink 1s infinite;
-    margin-left: 0.25rem;
-    vertical-align: middle;
-  }
-  
-  @keyframes blink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-  
-  /* Typewriter effect */
-  .typewriter {
-    overflow: hidden;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-  }
-  
-  .typewriter-text {
-    animation: typing 3s steps(40, end);
-  }
-  
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-  
-  /* Navigation styles */
-  .terminal-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--terminal-border);
-    margin-bottom: 1rem;
-  }
-  
-  .terminal-nav-brand {
-    font-weight: bold;
-    color: var(--terminal-text);
-    text-decoration: none;
+  .terminal-hero-subtitle {
     font-size: 1.2rem;
+  }
+  
+  .terminal-nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .terminal-nav-links {
     display: flex;
-    gap: 1.5rem;
-  }
-  
-  .terminal-nav-link {
-    color: var(--terminal-text);
-    text-decoration: none;
-    position: relative;
-    padding: 0.25rem 0;
-  }
-  
-  .terminal-nav-link:hover, .terminal-nav-link.active {
-    color: var(--terminal-accent);
-  }
-  
-  .terminal-nav-link:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--terminal-accent);
-    transition: width 0.3s ease;
-  }
-  
-  .terminal-nav-link:hover:after, .terminal-nav-link.active:after {
-    width: 100%;
-  }
-  
-  /* Override Bootstrap components */
-  .card {
-    background-color: var(--terminal-bg);
-    border: 1px solid var(--terminal-border);
-    border-radius: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .card-header {
-    background-color: var(--terminal-header);
-    border-bottom: 1px solid var(--terminal-border);
-    border-radius: 0 !important;
-    color: var(--terminal-text);
-    font-weight: bold;
-  }
-  
-  .card-body {
-    padding: 1rem;
-  }
-  
-  .card-title {
-    color: var(--terminal-text);
-    font-weight: bold;
-  }
-  
-  .card-text {
-    color: var(--terminal-text);
-  }
-  
-  .btn {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-text);
-    border: 1px solid var(--terminal-text);
-    border-radius: 0;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .btn:hover {
-    background-color: var(--terminal-text);
-    color: var(--terminal-bg);
-  }
-  
-  .btn-primary {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-secondary);
-    border-color: var(--terminal-secondary);
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--terminal-secondary);
-    color: var(--terminal-bg);
-    border-color: var(--terminal-secondary);
-  }
-  
-  .btn-success {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-success);
-    border-color: var(--terminal-success);
-  }
-  
-  .btn-success:hover {
-    background-color: var(--terminal-success);
-    color: var(--terminal-bg);
-    border-color: var(--terminal-success);
-  }
-  
-  .btn-danger {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-error);
-    border-color: var(--terminal-error);
-  }
-  
-  .btn-danger:hover {
-    background-color: var(--terminal-error);
-    color: var(--terminal-bg);
-    border-color: var(--terminal-error);
-  }
-  
-  .btn-accent {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-accent);
-    border-color: var(--terminal-accent);
-  }
-  
-  .btn-accent:hover {
-    background-color: var(--terminal-accent);
-    color: var(--terminal-bg);
-    border-color: var(--terminal-accent);
-  }
-  
-  .form-control {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-text);
-    border: 1px solid var(--terminal-border);
-    border-radius: 0;
-    padding: 0.5rem;
-    font-family: var(--font-mono);
-  }
-  
-  .form-control:focus {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-text);
-    border-color: var(--terminal-text);
-    box-shadow: none;
-  }
-  
-  .form-control::placeholder {
-    color: var(--terminal-muted);
-  }
-  
-  /* Table styles */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-  }
-  
-  table th, table td {
-    padding: 0.5rem;
-    border: 1px solid var(--terminal-border);
-    text-align: left;
-  }
-  
-  table th {
-    background-color: var(--terminal-header);
-    font-weight: bold;
-  }
-  
-  /* Terminal hero section */
-  .terminal-hero {
-    padding: 3rem 0;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--terminal-border);
-  }
-  
-  .terminal-hero-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .terminal-hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--terminal-accent);
-  }
-  
-  .terminal-hero-text {
-    margin-bottom: 2rem;
-  }
-  
-  /* Terminal ASCII art */
-  .ascii-art {
-    font-family: monospace;
-    white-space: pre;
-    font-size: 0.8rem;
-    line-height: 1.2;
-    margin: 1rem 0;
-    color: var(--terminal-secondary);
-  }
-
-  .ascii-art-small {
-    font-family: monospace;
-    white-space: pre;
-    font-size: 0.8rem;
-    line-height:0.9;
-    margin: 2rem 0;
-    color: var(--terminal-main);
-  }
-  
-  /* Terminal decoration */
-  .terminal-decoration {
-    color: var(--terminal-muted);
-    user-select: none;
-    font-size: 0.8rem;
-  }
-  
-  .terminal-separator {
-    height: 1px;
-    background-color: var(--terminal-border);
-    margin: 2rem 0;
-  }
-  
-/* Product cards */
-.terminal-product {
-    border: 1px solid var(--terminal-border);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .terminal-product:hover {
-    border-color: var(--terminal-text);
-    background-color: var(--terminal-hover);
-  }
-  
-  .terminal-product-title {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    line-height: 1.3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .terminal-product-price {
-    color: var(--terminal-accent);
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  
-  .terminal-product-description {
-    margin-bottom: 1rem;
-    color: var(--terminal-muted);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    flex-grow: 1;
-  }
-  
-  .terminal-product-image {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--terminal-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .terminal-product-image img {
-    transition: transform 0.3s ease;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  .terminal-product:hover .terminal-product-image img {
-    transform: scale(1.05);
-  }
-  
-  .terminal-no-image {
-    background-color: var(--terminal-header);
-    transition: background-color 0.3s ease;
-    width: 100%;
-  }
-  
-  /* Ensure buttons don't overflow */
-  .terminal-product .d-flex {
+    flex-direction: row;
     flex-wrap: wrap;
     gap: 0.5rem;
-  }
-  
-  @media (max-width: 576px) {
-    .terminal-product-image img,
-    .terminal-no-image {
-      height: 140px !important;
-    }
-    
-    .terminal-product-title {
-      font-size: 1rem;
-    }
-    
-    .terminal-product-description {
-      font-size: 0.85rem;
-    }
-  }
-  
-  .terminal-product:hover .terminal-no-image {
-    background-color: var(--terminal-border);
-  }
-
-  /* Image loading effects */
-  .terminal-image-loading {
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin-top: 0.5rem;
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 0.5rem;
   }
   
-  .terminal-loading-text {
-    color: var(--terminal-text);
-    font-size: 0.8rem;
-    position: relative;
-    padding-left: 20px;
-  }
-  
-  .terminal-loading-text:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 12px;
-    height: 12px;
-    margin-top: -6px;
-    border: 2px solid var(--terminal-text);
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  img.loading {
-    opacity: 0;
-  }
-  
-  .terminal-image-error {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--terminal-header);
-    color: var(--terminal-error);
-    font-size: 0.8rem;
-    text-align: center;
-  }
-  
-  .terminal-image-error i {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Blog post cards */
-  .terminal-post {
-    border: 1px solid var(--terminal-border);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .terminal-post:hover {
-    border-color: var(--terminal-text);
-    background-color: var(--terminal-hover);
-  }
-  
-  .terminal-post-title {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .terminal-post-date {
-    color: var(--terminal-muted);
-    margin-bottom: 0.5rem;
+  /* Make terminal section headers more compact */
+  .terminal-section-header {
+    padding: 0.3rem 0.5rem;
     font-size: 0.9rem;
   }
   
-  .terminal-post-excerpt {
-    margin-bottom: 1rem;
-    color: var(--terminal-muted);
+  /* Make products fit better on small screens */
+  .terminal-product-image img {
+    height: 120px !important;
   }
   
-  /* Footer styles */
+  /* Smaller text for footer on mobile */
   .terminal-footer {
-    border-top: 1px solid var(--terminal-border);
-    padding: 2rem 0;
-    margin-top: 3rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .ascii-art {
+    font-size: 0.3rem !important;
+    transform: scale(0.8);
   }
   
-  .terminal-footer-title {
-    font-weight: bold;
-    margin-bottom: 1rem;
+  .ascii-art.homepage-logo {
+    font-size: 0.25rem !important;
+    letter-spacing: -0.05em;
+    line-height: 0.6 !important;
   }
-  
-  .terminal-footer-text {
-    margin-bottom: 1rem;
-    color: var(--terminal-muted);
-  }
-  
-  .terminal-footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .terminal-footer-link {
-    color: var(--terminal-text);
-    text-decoration: none;
-  }
-  
-  .terminal-footer-link:hover {
-    color: var(--terminal-accent);
-    text-decoration: underline;
-  }
-  
-  /* Error and status messages */
-  .terminal-error {
-    color: var(--terminal-error);
-    border: 1px solid var(--terminal-error);
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .terminal-success {
-    color: var(--terminal-success);
-    border: 1px solid var(--terminal-success);
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .terminal-warning {
-    color: var(--terminal-warning);
-    border: 1px solid var(--terminal-warning);
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* Alert overrides */
-  .alert {
-    background-color: var(--terminal-bg);
-    border-radius: 0;
-    border-width: 1px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-mono);
-  }
-  
-  .alert-success {
-    color: var(--terminal-success);
-    border-color: var(--terminal-success);
-  }
-  
-  .alert-danger {
-    color: var(--terminal-error);
-    border-color: var(--terminal-error);
-  }
-  
-  .alert-warning {
-    color: var(--terminal-warning);
-    border-color: var(--terminal-warning);
-  }
-  
-  .alert-info {
-    color: var(--terminal-secondary);
-    border-color: var(--terminal-secondary);
-  }
-  
-  /* Mobile optimizations */
-  @media (max-width: 768px) {
-    .terminal-hero-title {
-      font-size: 1.8rem;
-    }
-    
-    .terminal-hero-subtitle {
-      font-size: 1.2rem;
-    }
-    
-    .terminal-nav {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    .terminal-nav-links {
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      width: 100%;
-    }
-    
-    .ascii-art {
-      font-size: 0.6rem;
-    }
-  }
-  
-  /* Badge styles */
-  .badge {
-    background-color: var(--terminal-bg);
-    color: var(--terminal-text);
-    border: 1px solid var(--terminal-text);
-    border-radius: 0;
-    font-family: var(--font-mono);
-    padding: 0.25rem 0.5rem;
-  }
-  
-  .badge.bg-primary {
-    color: var(--terminal-secondary);
-    border-color: var(--terminal-secondary);
-  }
-  
-  .badge.bg-success {
-    color: var(--terminal-success);
-    border-color: var(--terminal-success);
-  }
-  
-  .badge.bg-danger {
-    color: var(--terminal-error);
-    border-color: var(--terminal-error);
-  }
-  
-  .badge.bg-warning {
-    color: var(--terminal-warning);
-    border-color: var(--terminal-warning);
-  }
-  
-  .badge.bg-info {
-    color: var(--terminal-secondary);
-    border-color: var(--terminal-secondary);
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  .fade-in {
-    animation: fadeIn 1s ease-in;
-  }
-  
-  /* Custom scrollbar */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--terminal-border) var(--terminal-bg);
-  }
+}
+
+/* Badge styles */
+.badge {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  border: 1px solid var(--terminal-text);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  padding: 0.25rem 0.5rem;
+}
+
+.badge.bg-primary {
+  color: var(--terminal-secondary);
+  border-color: var(--terminal-secondary);
+}
+
+.badge.bg-success {
+  color: var(--terminal-success);
+  border-color: var(--terminal-success);
+}
+
+.badge.bg-danger {
+  color: var(--terminal-error);
+  border-color: var(--terminal-error);
+}
+
+.badge.bg-warning {
+  color: var(--terminal-warning);
+  border-color: var(--terminal-warning);
+}
+
+.badge.bg-info {
+  color: var(--terminal-secondary);
+  border-color: var(--terminal-secondary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+/* Custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--terminal-border) var(--terminal-bg);
+}

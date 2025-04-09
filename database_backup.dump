@@ -1,0 +1,1147 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.14 (Homebrew)
+-- Dumped by pg_dump version 14.14 (Homebrew)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: action_text_rich_texts; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.action_text_rich_texts (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    body text,
+    record_type character varying NOT NULL,
+    record_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.action_text_rich_texts OWNER TO "esmehulbert-putt";
+
+--
+-- Name: action_text_rich_texts_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.action_text_rich_texts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.action_text_rich_texts_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: action_text_rich_texts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.action_text_rich_texts_id_seq OWNED BY public.action_text_rich_texts.id;
+
+
+--
+-- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.active_storage_attachments (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    record_type character varying NOT NULL,
+    record_id bigint NOT NULL,
+    blob_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_attachments OWNER TO "esmehulbert-putt";
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.active_storage_attachments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_attachments_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.active_storage_attachments_id_seq OWNED BY public.active_storage_attachments.id;
+
+
+--
+-- Name: active_storage_blobs; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.active_storage_blobs (
+    id bigint NOT NULL,
+    key character varying NOT NULL,
+    filename character varying NOT NULL,
+    content_type character varying,
+    metadata text,
+    service_name character varying NOT NULL,
+    byte_size bigint NOT NULL,
+    checksum character varying,
+    created_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_blobs OWNER TO "esmehulbert-putt";
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.active_storage_blobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_blobs_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage_blobs.id;
+
+
+--
+-- Name: active_storage_variant_records; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.active_storage_variant_records (
+    id bigint NOT NULL,
+    blob_id bigint NOT NULL,
+    variation_digest character varying NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_variant_records OWNER TO "esmehulbert-putt";
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.active_storage_variant_records_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_variant_records_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.active_storage_variant_records_id_seq OWNED BY public.active_storage_variant_records.id;
+
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO "esmehulbert-putt";
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.comments (
+    id bigint NOT NULL,
+    content text,
+    user_id bigint NOT NULL,
+    post_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.comments OWNER TO "esmehulbert-putt";
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comments_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
+
+
+--
+-- Name: order_items; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.order_items (
+    id bigint NOT NULL,
+    order_id integer,
+    product_id integer,
+    quantity integer,
+    price numeric,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.order_items OWNER TO "esmehulbert-putt";
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.order_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.order_items_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.order_items_id_seq OWNED BY public.order_items.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    user_id integer,
+    email character varying,
+    total_amount numeric,
+    status integer,
+    address text,
+    phone character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    token character varying
+);
+
+
+ALTER TABLE public.orders OWNER TO "esmehulbert-putt";
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- Name: posts; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.posts (
+    id bigint NOT NULL,
+    title character varying,
+    published boolean,
+    published_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.posts OWNER TO "esmehulbert-putt";
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.posts_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
+
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.products (
+    id bigint NOT NULL,
+    title character varying,
+    price numeric,
+    stock integer,
+    featured boolean,
+    specifications text,
+    condition character varying,
+    original_price numeric,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.products OWNER TO "esmehulbert-putt";
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO "esmehulbert-putt";
+
+--
+-- Name: subscribers; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.subscribers (
+    id bigint NOT NULL,
+    name character varying,
+    email character varying,
+    active boolean,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    user_id bigint,
+    token character varying
+);
+
+
+ALTER TABLE public.subscribers OWNER TO "esmehulbert-putt";
+
+--
+-- Name: subscribers_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.subscribers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.subscribers_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: subscribers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.subscribers_id_seq OWNED BY public.subscribers.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    name character varying,
+    email character varying,
+    password_digest character varying,
+    role integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO "esmehulbert-putt";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO "esmehulbert-putt";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: action_text_rich_texts id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.action_text_rich_texts ALTER COLUMN id SET DEFAULT nextval('public.action_text_rich_texts_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_attachments ALTER COLUMN id SET DEFAULT nextval('public.active_storage_attachments_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_blobs id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('public.active_storage_blobs_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_variant_records id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAULT nextval('public.active_storage_variant_records_id_seq'::regclass);
+
+
+--
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
+
+
+--
+-- Name: order_items id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.order_items ALTER COLUMN id SET DEFAULT nextval('public.order_items_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- Name: posts id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
+
+
+--
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- Name: subscribers id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.subscribers ALTER COLUMN id SET DEFAULT nextval('public.subscribers_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: action_text_rich_texts; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.action_text_rich_texts (id, name, body, record_type, record_id, created_at, updated_at) FROM stdin;
+18	content	<div>This is the first episode in a series where we rescue something from the wild.&nbsp;</div><div><br></div><div>This story begins at the Salvation army store on Taranaki Street in Wellington. Sitting in the cabinet were two point and shoot cameras for $15 each. A Sony DSC-T20 (story for another day) and a Fujifilm Finepix Z70. Neither had batteries, but I decided to take a chance on both.</div><div><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfBHqJVegd_srz5sTfJJ_fHaGJLt8eSyBJAKZj19HqLv-o1VYzYRTuYsJItd1g83kdcAG3LT7YlJjYIHqKoNpYl5sWS9hFstDduWPNSGy872gBj3nFiK22nGzXwUX2iOaxeJ9ewHw?key=leTrIEvNbrIteVriZtj4oH9i" width="455" height="463" caption="Salvation Army Taranaki Street cabinet"></action-text-attachment></div><div><br></div><div>After tracking down a compatible battery on Trademe, I fired it up - to both good and bad news.&nbsp;</div><div><br></div><div>The screen was in great condition, and all of the buttons and internal features appeared to work perfectly - including the incredibly intriguing “Edit for blog” and “Photobook assist”.</div><div><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdzw9fA7nmzuhWX3VvM0YpXNvLl11ltQBV7TfWQMrWuZxwd_9CBxuaio2VknO8r2lTvIrD2qh9lvzu9QlFk3D611XKJN-JRA1Ya6kGF8jUEK3aTlSq-LcVI0-1JKC-ixux1Z9mhNA?key=leTrIEvNbrIteVriZtj4oH9i" width="624" height="832"></action-text-attachment></div><div><br></div><div>So the moment of truth - taking a photo. Unfortunately, everything I could see through the lens (and subsequent photos) looked like it was taken through the window of a Wellington bus on a humid day.&nbsp;</div><div><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdsyhNecdirrmUll5eTUSvNI92Xf-WcHs9Y76x4RbwtSExGzwIJWLeRfW_r1aEDlnJhlkZQx6Lp3QzfRm-PYaIP2fXleiMGwWMlq2_rcynBWV0IH4_pNOovpK-u_s3-XklkG-He-w?key=leTrIEvNbrIteVriZtj4oH9i" width="624" height="832"></action-text-attachment></div><div><br></div><div>I decided to not give up hope, and looked through the photos still stored on the device - which were in their clear 14.0 megapixel glory. A clue!</div><div><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdH2k8s5TV9JE7ZeJo0lQO1QEyTZnzh4q_06uu_Nk4KENGxvrbUamoQYiPLmu6TR9iJySffRRMfzPljaycaHVwN1KKjzuySDStf3YfCMbelUBTLkLdmGk6ynV9MPQPZBLyjycrF?key=leTrIEvNbrIteVriZtj4oH9i" width="624" height="831"></action-text-attachment></div><div><br></div><div>I inspected the outside of the camera and immediately realised the issue. Most camera diagnoses involve taking apart the camera - but I soon realised the issue was the front part of the lens was completely missing - which, for those who remember studying lenses and lightwaves in school physics, would see how this would lead to the inability to focus.&nbsp;</div><div><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXceib9mhVEzIzxfsXUbIj5M9DVuRWrMeQBIRee9lG8tY4xEGd1h4GnS8sw26lKBdIRKubSYMrVVbHxPw2YqywSaw3ruEIfluF9sfe6NqPrX61hJEyvkaT_bpVSgUqtYzHSp91MYSg?key=leTrIEvNbrIteVriZtj4oH9i" width="624" height="832" caption="If you look at the lens, you can see it is missing the outermost piece"></action-text-attachment></div><div><br></div><div>I did some Googling to see if anyone sold spare parts for these cameras, considered seeing if I could 3d print something, and even wondered about tracking down the Warehouse carpark in the last photo taken on the camera - and seeing if it was sitting around fifteen years later.&nbsp;</div><div><br></div><div>With no luck, I sat on this one for a bit. Until I saw a faulty Z90 on TradeMe a couple of months later. After a bit of research, and a lot of zooming in on the two listing photos, I decided to take a chance that the lens on this one would be the same - and that it would also not be missing on this one.&nbsp;</div><div><br><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXccjf3yrBwey0G3rs_D7-aYFRkAobZKIkiO8OyWAY_7XjiSn82Wzmsh4xGvNIB7uInJpzm5fHovdpHoGMEnPVHg2hGRgIRIIaCDw-vOcCvPjSbbnUc9JUdmr9QEhYWSRYQONDZklQ?key=leTrIEvNbrIteVriZtj4oH9i" width="587" height="324"></action-text-attachment></div><div><br></div><div>Success! I was able to remove the lens from this camera and attach it to my existing one. I’ve been trialling the camera for around a month and it appears to be working as hoped!</div><div><br></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeO__0wcCnQqz2AXga9YG7KqBy1aMkgFev39KZpRCyvNp35CScREKgXh2OHYHqRnyKVMGIScwUiLfvTZh9BO5RBSES6GG78C55UkHPiKSFPFRH3KCF8Ch5BfknZNNzMAtFNCVrO3A?key=leTrIEvNbrIteVriZtj4oH9i" width="370" height="315"></action-text-attachment></div><div><action-text-attachment content-type="image" url="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfIsF8elnEOXiH1fLVKnNiwrid4qKmcGzXaP9BZYpfzrNyXgqbt06mUU8zElD-MEaDZZT_bAKzlTZ4t0Vgc2oEJcJCTfROWWcaMFmia2gtI8OByzNGsoSl6HlvJqI5zpSKrriRgJA?key=leTrIEvNbrIteVriZtj4oH9i" width="464" height="388"></action-text-attachment></div><div><br><br></div><div><strong>Overall costs:</strong></div><div><br></div><div>Camera: $15</div><div>Battery: $7</div><div>Camera for parts (including shipping): $40</div><div><br></div><div>Total cost: $62</div><div>Estimated value: $200</div><div><br><br></div>	Post	11	2025-04-06 10:00:51.127311	2025-04-06 10:00:51.127311
+20	content	<div>This is the second episode in a series where we rescue something from the wild.&nbsp;</div><div><br></div><div>This story begins with a Sunday night and an overflowing rubbish bin. I live in an apartment complex with a shared rubbish area.&nbsp;</div><div><br></div><div>I proceeded to throw out the rubbish, cans, plastic bottles, before opening up the glass bin to throw out my empty bottle of Pam’s extra virgin olive oil - and on the top, a hot pink Nutribullet portable blender, complete with bottle and built in power cable.&nbsp;</div><div><br></div><div>My assumption is that this wouldn’t work - but once you see something like this, it’s hard to look away - even just for the fact that there isn’t a single piece of glass on it.&nbsp;</div><div><br></div><div>Adding to the lore of this particular find is that we had purchased this exact same blender (in the same perfect colour scheme) just two weeks earlier. I raced home, filled with the fear I had sleepwalked to the rubbish area in the night - unaware of my own subciouscious resentment for the portable nutribullet (and apparently a well organised recycling system). But sure enough, mine was still on the counter.&nbsp;</div><div><br><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMTk_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--bc8517a7c0257cb1cfd592e6172620479190f8e0" content-type="image/jpeg" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTksInB1ciI6ImJsb2JfaWQifX0=--fea3d3b7fb29569d1f2f7747fcb8e4d2f76e8204/att.WRj9mkpQlTRz4hABmBp-VOw_fyM6q56kKwDtL81lJlM.jpg" filename="att.WRj9mkpQlTRz4hABmBp-VOw_fyM6q56kKwDtL81lJlM.jpg" filesize="138366" width="1536" height="2048" presentation="gallery" caption="My Nutribullet, watched on by the toaster and spice rack"></action-text-attachment></div><div><br></div><div>I charged up the clone device, and as expected, I could only get it to show its red error light. I tried using the bottle and the cap with my working blender - both with successful results. This pointed to the issue being either in the motor, or in the attachment between the two.&nbsp;</div><div><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMjA_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--516f483b1a87c88eb98f71daace85ee97eb0dde3" content-type="image/jpeg" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjAsInB1ciI6ImJsb2JfaWQifX0=--18d63b1a5e466f58aeb0e0424b189e80fbac0e91/att.KTLhS7mEZ0QfLuZXgDarIFpz8SwC1y86b0EBZptnGTA.jpg" filename="att.KTLhS7mEZ0QfLuZXgDarIFpz8SwC1y86b0EBZptnGTA.jpg" filesize="148772" width="1536" height="2048" presentation="gallery" caption="Clone wars"></action-text-attachment></div><div><br></div><div>Next, I tried very slowly connecting the motor piece to the top half of the blender, I noticed that, a few cm from locking on tightly, the light indicating whether it was ready to work lit up the successful blue colour.&nbsp;</div><div><br></div><div>This indicated that the electronic mechanism designed to confirm the blender was locked in place (for safety reasons) was not correctly aligned to the correct spot.&nbsp;</div><div><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMjE_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--e5a73e694e6474588bed507cf0df63af82a2ec77" content-type="image/jpeg" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjEsInB1ciI6ImJsb2JfaWQifX0=--65758e7b472590bfa3d60be836c0ca0c33f093a4/att.RMftbEwpUcKwBgA793-rYio_CKOgh3BHCQdB4lPaHqc.jpg" filename="att.RMftbEwpUcKwBgA793-rYio_CKOgh3BHCQdB4lPaHqc.jpg" filesize="115145" width="2048" height="1536" presentation="gallery" caption="The issue - the safety mechanism is engaged before the two dots are lined up"></action-text-attachment></div><div><br></div><div>Next, I’d love to tell you how I fixed it. But this isn’t a blog written by an electronics expert. So this is as far as the story goes thus far.&nbsp;</div><div><br></div><div>After a good couple of hours of trying to disassemble and reassemble each of the rubber seals, I was unable to work out how to adjust the alignment. I’m looking forward to trying again.&nbsp;</div><div><br></div><div>Until then, I guess we have a spare bottle to use with our existing blender. And a reason to motivate me to visit the recycling bins in our complex more regularly.&nbsp;</div><div><br></div><div><strong>Overall costs:</strong></div><div><br></div><div>Nutribullet: $0</div><div><br></div><div>Total cost: $0</div><div>Estimated value: $0 (so far)</div><div><br><br></div>	Post	13	2025-04-07 01:47:11.083715	2025-04-07 01:47:11.166742
+21	content	<div>This is the third episode in a series where we rescue something from the wild.&nbsp;</div><div><br></div><div>For those following along, this story has two common themes with previous episodes - Salvation Army cabinets and hot pink.&nbsp;</div><div><br></div><div>This time the cabinet in question was in Queenstown. Whilst purchasing some complete-in-packaging coffee filter papers, I noticed a Casio Baby G watch in the cabinet. It had no signs of life and was hence selling for $8.&nbsp;<br><br><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMjg_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--ac02c8cd90d1fe7f70430d68ed544f6d5467e950" content-type="image/jpeg" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjgsInB1ciI6ImJsb2JfaWQifX0=--40b094b5832a545efd32ec3c86e9699a5b93433e/att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg" filename="att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg" filesize="230623" width="1235" height="1186" previewable="true" presentation="gallery" caption="The Baby-G on first inspection"></action-text-attachment></div><div>When I was younger, I loved the Baby G watches. Their screen bumper bars and animal animations are iconic feelings of childhood - as is the taste of the rubber strap when chewing it (anyone else?).&nbsp;</div><div><br><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMjk_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--980333fea4f33be36a4d2176b47f46d882356c2f" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjksInB1ciI6ImJsb2JfaWQifX0=--1eade8d661e64432bf7a41dfd4fe7f81aa1476cd/Screenshot%202025-04-07%20at%201.49.49%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.49.49 PM.png" filesize="208684" width="288" height="418" previewable="true" presentation="gallery" caption="Iconic Baby-G watch dolphin animation"></action-text-attachment></div><div>I decided to risk that the reason for the lack of response was due to a battery issue and paid the $8. When back in Wellington, I popped into a watch shop to find a replacement battery would cost $79.&nbsp;</div><div><br></div><div>I’ve never seen the inside of a watch before, and had assumed the batteries in them were proprietary, or only accessible to people who had undergone a top secret underground watchmakers course.&nbsp;</div><div><br></div><div>I was therefore shocked to find, after taking a photo of the back of the watch and asking my local ai chatbot, that this watch took a simple CR2025 battery - available in a double pack for $9 at Woolworths.&nbsp;</div><div><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMzA_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--43613d7f04068ae719b8b8d9ff2d8ddfc37aed00" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzAsInB1ciI6ImJsb2JfaWQifX0=--afaefb10fbc301fd4980aa6d12545ae5e4850569/Screenshot%202025-04-07%20at%201.51.29%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.51.29 PM.png" filesize="529401" width="1496" height="958" previewable="true" presentation="gallery" caption="Not a bad deal"></action-text-attachment></div><div><br></div><div>I popped into Woolworths on my way home and grabbed the batteries. Using my tiny screwdrivers, I popped off the back of the watch, and to my horror, the battery in it was far smaller than the one I had bought. It turns out ai isn’t always correct. Who would have thought? <br><br><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMzE_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--ef50b4cfe91b2ee84f4fef65bbd782dd9a8ac6c0" content-type="image/jpeg" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzEsInB1ciI6ImJsb2JfaWQifX0=--e3f4742b3ab7f3f195cf6ccde58840e12d6a73ea/att.vjECICieio-r19wwZoNqfVn5Uf6sgNKI520SyHio7gE%20(1).jpg" filename="att.vjECICieio-r19wwZoNqfVn5Uf6sgNKI520SyHio7gE (1).jpg" filesize="119121" width="1536" height="2048" previewable="true" presentation="gallery" caption="Exposing the insides of the Baby-G"></action-text-attachment></div><div><br></div><div>This time I looked up the battery code on the real battery in the watch and was pleased to find this one was even cheaper - $6 at the Warehouse.&nbsp;</div><div><br></div><div>I grabbed one, and with some tricky tweezer manipulation, managed to get it into the watch. Which turned on to a delightful pufferfish animation.&nbsp;</div><div><br></div><div>I carefully put the watch back together, so as to retain the famous waterproof and shock tolerance of the Baby G series. Before making a common mistake I have come across in this series: showing it to my wife.&nbsp;</div><div><br></div><div><strong>Overall costs:</strong></div><div><br></div><div>Watch: $8</div><div>Incorrect battery: $9</div><div>Correct battery: $6&nbsp;</div><div><br></div><div>Total cost: $23</div><div>Estimated value: My wife’s happiness (~$300)</div><div><br><br></div>	Post	14	2025-04-07 01:53:26.089711	2025-04-07 01:53:39.953384
+19	content	<div>Hardcopy derives its name from a love for physical media. There’s a constant battle within me between the love of beautiful things on a shelf, and the aesthetic joy of a professionally shot and produced Youtube video about minimalism.&nbsp;</div><div><br></div><div>But ultimately - it’s the physical media that wins out. I understand, in the world we live in now, there’s many arguments against physical media. USB sticks are becoming a retro nostalgic item, new cars haven’t had any form of physical media slot for years, and the Switch 2 launched this week with news that the physical game cards they sell may not even have the games on them - in favour of digital downloads.&nbsp;</div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvOT9leHBpcmVzX2luIiwicHVyIjoiYXR0YWNoYWJsZSJ9fQ==--dea4640b5b30a22698054e9095ee584c9c1f6bf3" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6OSwicHVyIjoiYmxvYl9pZCJ9fQ==--507e95e26daf21488ed88c874584b5a58ff5931a/Screenshot%202025-04-07%20at%201.37.47%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.37.47 PM.png" filesize="281413" width="1200" height="620" previewable="true" presentation="gallery" caption="The Nintendo Switch 2 release was marred by outrage at the removal of game data off physical cartridges"></action-text-attachment></div><div>There’s three key reasons why I see this switch to online media happening - financial, environmental and convenience. Today I’m curious whether, when we look at the maths, the financial argument rings true.&nbsp;</div><div><br></div><div>I love shooting film photography. But there's a pretty hefty financial argument against it. Why spend money buying film and getting it professionally developed, when I can take a seemingly infinite number of photos for free on my phone.&nbsp;</div><div><br></div><div>But can I? I decided to run some numbers.&nbsp;</div><div><br></div><div>Every time you take a digital photo, it is stored somewhere. For those of us who don’t have infinite storage on our phones, or want this photo to be backed up somewhere, this is in the cloud.&nbsp;</div><div><br></div><div>I took a bunch of photos this morning on a walk. Each of these photos on my Samsung Galaxy S22 is roughly <strong>8.19MB</strong>.&nbsp;</div><div><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMTA_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--4b0125f60afb0f1596c8d1d426d715d05ab55625" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTAsInB1ciI6ImJsb2JfaWQifX0=--0882ce943dda81ffdd43be355df48654a1a83777/Screenshot%202025-04-07%20at%201.38.04%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.38.04 PM.png" filesize="171963" width="1460" height="352" previewable="true" presentation="gallery" caption="8.19 MB per photo"></action-text-attachment></div><div><br></div><div>Now, I’m terrible at deleting the photos off my camera reel. So, this photo is likely to stick around for a long time. Due to the seamless integration on my phone, it will eventually be uploaded to Google as a backup without me even thinking about it.</div><div><br></div><div>Google storage costs <strong>$3.49</strong> per month for <strong>100GB</strong>. Less than a coffee. Bargain.</div><div><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMTE_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--209923bff0d26fcc6e6f17405709fe008428ffd2" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTEsInB1ciI6ImJsb2JfaWQifX0=--4acff5ff515837b68a5b771e82e0922062719901/Screenshot%202025-04-07%20at%201.38.24%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.38.24 PM.png" filesize="301992" width="1362" height="860" previewable="true" presentation="gallery" caption="The storage options provided by Google"></action-text-attachment></div><div><br></div><div>Put another way, one megabyte is <strong>$0.0000349 </strong>per month. This sweaty walk photo, in all its 8.19MB will therefore cost $0.0000349 * 8.19 =<strong> $0.000285831 to store for a month</strong>.</div><div><br></div><div>However, once this photo is in Google, I’ll never see it again. I’ll use the Google photos search feature to conveniently find the photos I want in future, and if the search function works well (and I hear Google is pretty good at those), this photo will never pop up unless I decide to one day nostalgically search through old neighbourhood walk photos. But it will still be there.</div><div><br></div><div>I am 28 years old, so I hope to look back on my photos for at least the next 50 years. That’s 600 months. 600 * 0.000285831 is $0.0.1714986 - which is roughly <strong>17 cents</strong>. That means, over the next 50 years, this Sunday morning selfie will cost me 17 cents. That’s beginning to become tangible.&nbsp;</div><div><br></div><div>Especially when I admit I didn’t take one photo. I took 15. The lighting of the first wasn’t quite right, the second was a little blurry, and in the third I had a bit of hair on my face. I took photos in multiple spots because I thought the second (and then third) locations were actually better than the first. And I’ll admit one more thing - I didn’t go back and delete any from my phone. Why would I when storage seems endless?&nbsp;</div><div><br></div><div>15 photos at 17c each is <strong>$2.55</strong>. At my local photo store, it costs $35 for a roll of 24 shots of film, including scanning and development. That’s <strong>$1.45</strong> per photo. Factor in a very generous $<strong>1.05</strong> for a 6x4 inch print and we can call this even with my walk shooting spree.&nbsp;</div><div><br></div><div>When I shoot in film, I carefully think about each shot. I wait for the perfect moment to capture something that has genuinely delighted me. I probably wouldn’t have taken a photo on my morning neighbourhood walk - and that probably wouldn’t be a bad thing. When I get each of those photos back, I show my friends, I print them out and put them on the wall, and I imagine looking back on them for the next 50 years.&nbsp;</div><div><br></div><div>There’s a lot of assumptions made in my maths (and likely some ignorant exaggerations in the quest to make my point). And maybe all of you carefully go back and delete your photos each time you screenshot something to send to a friend, take a bunch of selfies or photograph your unused items to list on TradeMe.&nbsp;</div><div><br></div><div>But my point is once we own something once, we really own it. Not only that, but we get to spend our money at film shops down the road from our house, not Google. Subscription models convince us we’re getting a bargain, and our habits adapt to it.&nbsp;</div><div><br></div><div>Once our habits change, we are trapped. If my local film shop decides to increase the cost of their 24 shot rolls from $35 to $37, I can choose to buy my film elsewhere, but if Google ups their monthly price for 100GB of storage from $3.49 to $3.69, there’s no way I’m moving all my photos for the sake of 20c. If they hike this price by 20c each year, fifty years would see me spending more than $5000 on storage. And that's assuming my storage needs don't increase (although my photo taking habits would suggest this also goes up linearly).<br><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMTI_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--72edebcceabddda5a93052f6526f4ae9e0a6e463" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTIsInB1ciI6ImJsb2JfaWQifX0=--2b316d3159e402e2b6ba703135b4d7de42bb4817/Screenshot%202025-04-07%20at%201.38.36%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.38.36 PM.png" filesize="100434" width="1736" height="944" previewable="true" presentation="gallery" caption="Accumulative cost of Google Storage over 50 years if you stay on the same plan(assuming a 20c price increase each year)"></action-text-attachment></div><div><br></div><div>As phones get better and better, the photos on our phones take up even more storage. Again, without us even really knowing. This leads to a greater spend on storage. Intriguing to note, the people who make the phone cameras we use, that get better and better (and make larger and larger photos) each year (Google and Apple) also own the storage tools we subscribe to.&nbsp;</div><div><br></div><div>I’ll stop short of putting my tinfoil hat on, but it gives something to ponder.</div><div><br></div><div>That being said, I’d like to thank Google Drive for giving me a place to write this article.&nbsp;</div><div><br></div><div><action-text-attachment sgid="eyJfcmFpbHMiOnsiZGF0YSI6ImdpZDovL2hhcmRjb3B5L0FjdGl2ZVN0b3JhZ2U6OkJsb2IvMTM_ZXhwaXJlc19pbiIsInB1ciI6ImF0dGFjaGFibGUifX0=--94fc8770b29d55d876d218c79b75995e34730b3d" content-type="image/png" url="http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTMsInB1ciI6ImJsb2JfaWQifX0=--6a907dff1d4a5b669a6bdda9fd9467810d97f3f2/Screenshot%202025-04-07%20at%201.38.53%E2%80%AFPM.png" filename="Screenshot 2025-04-07 at 1.38.53 PM.png" filesize="71355" width="1734" height="176" previewable="true" presentation="gallery" caption="Google is hard to escape"></action-text-attachment></div><div><br></div>	Post	12	2025-04-07 01:36:09.497533	2025-04-07 01:56:40.836009
+12	description	<div>An awesome digicam from 2007, rescued and restored from an op shop cabinet.<br><br>This one has some stories to tell. The 'steady shot' function has seen better days. Typically, after taking 2-3 photos, it begins to lost focus and the cover needs to be closed and opened back up again.<br><br>It also has signs of wear on the metal case.&nbsp;<br><br>Aside from this, it takes awesome photos, the sliding cover works well, and it feels super solid.&nbsp;<br><br>Comes with a Sony battery, charger and Sony Memory Card adapter - allowing you to use any micro sd card with the camera.</div>	Product	7	2025-03-24 05:35:06.157509	2025-04-07 02:18:18.636253
+22	description	<div>A super rare find in a Salvation army store. Cleaned, fixed up, and fully tested.<br><br>Works like a dream despite being released in 1998 - boasting to be the first (and maybe only) fisheye 35mm film camera. Flash also in tact.<br><br>The only issue is there is a little piece of plastic missing from the top of the manual rewinding mechanism. This doesn't cause any issues with the use of the camera.<br><br>Comes with the original packaging and instruction manual. We'll even chuck in a battery for you.</div>	Product	8	2025-04-07 02:28:18.41076	2025-04-07 02:28:18.41076
+23	description	<div>I recent bought this at an auction - judging by the cover, I thought I'd be taking it in to do some work on it.&nbsp;<br><br>Sometimes you get a win. In a twist of events, not only was the camera in mint condition, all cables, battery, manuals and accessories were untouched and still in packaging.&nbsp;<br><br>Coming out in 2009, this camera gives you the opportunity to sidestep sixteen years of inflation and purchase it at the original Harvey Norman listing price.</div>	Product	9	2025-04-07 02:41:14.801796	2025-04-07 02:41:14.801796
+24	description	<div>A great condition 110mm camera that takes deliciously grainy photos.<br><br>The coolest thing about this camera is its compactness - it weighs next to nothing and fits in your pocket. All whilst maintaining the quality necessary for it to have last 40 years.<br><br>Take super unique photos at any opportunity with this one.</div>	Product	10	2025-04-07 02:50:40.095623	2025-04-07 02:50:40.095623
+\.
+
+
+--
+-- Data for Name: active_storage_attachments; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.active_storage_attachments (id, name, record_type, record_id, blob_id, created_at) FROM stdin;
+128	images	Product	9	130	2025-04-07 02:44:10.073996
+129	images	Product	9	131	2025-04-07 02:44:10.075989
+3	featured_image	Post	11	3	2025-04-06 10:00:51.134966
+4	image	ActiveStorage::VariantRecord	2	4	2025-04-06 10:00:54.092944
+5	featured_image	Post	12	5	2025-04-07 01:36:09.506288
+6	image	ActiveStorage::VariantRecord	3	6	2025-04-07 01:36:12.360302
+7	image	ActiveStorage::VariantRecord	4	7	2025-04-07 01:36:49.331368
+8	embeds	ActionText::RichText	19	9	2025-04-07 01:39:07.2612
+9	embeds	ActionText::RichText	19	10	2025-04-07 01:39:07.276516
+10	embeds	ActionText::RichText	19	11	2025-04-07 01:39:07.288919
+11	embeds	ActionText::RichText	19	12	2025-04-07 01:39:07.301235
+12	embeds	ActionText::RichText	19	13	2025-04-07 01:39:07.315154
+13	image	ActiveStorage::VariantRecord	5	14	2025-04-07 01:39:07.527708
+14	image	ActiveStorage::VariantRecord	6	15	2025-04-07 01:39:07.528453
+15	image	ActiveStorage::VariantRecord	7	16	2025-04-07 01:39:07.538531
+16	image	ActiveStorage::VariantRecord	8	17	2025-04-07 01:39:07.903638
+17	image	ActiveStorage::VariantRecord	9	18	2025-04-07 01:39:07.912788
+18	embeds	ActionText::RichText	20	19	2025-04-07 01:47:11.097701
+19	embeds	ActionText::RichText	20	20	2025-04-07 01:47:11.107608
+20	embeds	ActionText::RichText	20	21	2025-04-07 01:47:11.1165
+21	featured_image	Post	13	22	2025-04-07 01:47:11.121098
+22	image	ActiveStorage::VariantRecord	10	23	2025-04-07 01:47:11.29474
+23	image	ActiveStorage::VariantRecord	11	24	2025-04-07 01:47:11.310846
+24	image	ActiveStorage::VariantRecord	12	25	2025-04-07 01:47:11.311756
+25	image	ActiveStorage::VariantRecord	13	26	2025-04-07 01:47:17.100271
+26	embeds	ActionText::RichText	21	28	2025-04-07 01:53:26.103984
+27	embeds	ActionText::RichText	21	29	2025-04-07 01:53:26.116076
+28	embeds	ActionText::RichText	21	30	2025-04-07 01:53:26.126384
+29	embeds	ActionText::RichText	21	31	2025-04-07 01:53:26.136171
+30	featured_image	Post	14	32	2025-04-07 01:53:26.139387
+31	image	ActiveStorage::VariantRecord	14	33	2025-04-07 01:53:26.317848
+32	image	ActiveStorage::VariantRecord	15	34	2025-04-07 01:53:26.322908
+33	image	ActiveStorage::VariantRecord	16	35	2025-04-07 01:53:26.615172
+34	image	ActiveStorage::VariantRecord	17	36	2025-04-07 01:53:26.656168
+35	image	ActiveStorage::VariantRecord	18	37	2025-04-07 01:53:34.324484
+36	image	ActiveStorage::VariantRecord	19	38	2025-04-07 01:53:36.90769
+130	images	Product	9	132	2025-04-07 02:44:10.077539
+131	images	Product	9	133	2025-04-07 02:44:10.078963
+132	images	Product	9	134	2025-04-07 02:44:10.080577
+133	images	Product	9	135	2025-04-07 02:44:10.081947
+134	images	Product	9	136	2025-04-07 02:44:10.083364
+135	images	Product	9	137	2025-04-07 02:44:10.084742
+136	images	Product	9	138	2025-04-07 02:44:10.086068
+137	images	Product	9	139	2025-04-07 02:44:10.087427
+138	images	Product	9	140	2025-04-07 02:44:10.088763
+46	images	Product	7	48	2025-04-07 02:18:18.643246
+47	images	Product	7	49	2025-04-07 02:18:18.64535
+48	images	Product	7	50	2025-04-07 02:18:18.646975
+49	images	Product	7	51	2025-04-07 02:18:18.649042
+50	images	Product	7	52	2025-04-07 02:18:18.650515
+51	images	Product	7	53	2025-04-07 02:18:18.652694
+52	image	ActiveStorage::VariantRecord	26	54	2025-04-07 02:18:24.524548
+53	image	ActiveStorage::VariantRecord	27	55	2025-04-07 02:18:24.525253
+54	image	ActiveStorage::VariantRecord	28	56	2025-04-07 02:18:24.541186
+55	image	ActiveStorage::VariantRecord	29	57	2025-04-07 02:18:24.94738
+56	image	ActiveStorage::VariantRecord	30	58	2025-04-07 02:18:24.948078
+57	image	ActiveStorage::VariantRecord	31	59	2025-04-07 02:18:24.948811
+58	image	ActiveStorage::VariantRecord	32	60	2025-04-07 02:18:47.61005
+139	image	ActiveStorage::VariantRecord	65	141	2025-04-07 02:44:13.924725
+140	images	Product	10	142	2025-04-07 02:50:40.101464
+141	images	Product	10	143	2025-04-07 02:50:40.104396
+142	images	Product	10	144	2025-04-07 02:50:40.106681
+143	images	Product	10	145	2025-04-07 02:50:40.108513
+144	images	Product	10	146	2025-04-07 02:50:40.110546
+145	image	ActiveStorage::VariantRecord	66	147	2025-04-07 02:53:45.641378
+118	images	Product	8	120	2025-04-07 02:43:24.142776
+119	images	Product	8	121	2025-04-07 02:43:24.144888
+120	images	Product	8	122	2025-04-07 02:43:24.146777
+121	images	Product	8	123	2025-04-07 02:43:24.148554
+122	images	Product	8	124	2025-04-07 02:43:24.150436
+123	images	Product	8	125	2025-04-07 02:43:24.152749
+124	images	Product	8	126	2025-04-07 02:43:24.154356
+125	images	Product	8	127	2025-04-07 02:43:24.156254
+126	images	Product	8	128	2025-04-07 02:43:24.164434
+127	image	ActiveStorage::VariantRecord	64	129	2025-04-07 02:43:28.628755
+\.
+
+
+--
+-- Data for Name: active_storage_blobs; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.active_storage_blobs (id, key, filename, content_type, metadata, service_name, byte_size, checksum, created_at) FROM stdin;
+3	ipemgf7yl7e2c6lfqu0bm0bo2qdz	WhatsApp Image 2025-04-06 at 12.41.27.jpeg	image/jpeg	{"identified":true,"width":1363,"height":1389,"analyzed":true}	local	381991	MJIDFnOBOYOxCIFeRiC7hQ==	2025-04-06 10:00:51.134194
+4	n7q2fjx3gntan5crnfdfhdavv8uq	WhatsApp Image 2025-04-06 at 12.41.27.jpeg	image/jpeg	{"identified":true,"width":49,"height":50,"analyzed":true}	local	1733	eL0qPIV9GgQlpSOqPvDRQA==	2025-04-06 10:00:54.091751
+5	c4297kvxl93n567869dy14jmuga1	att.s6WjoBOW324EQdpThxpneTDvHvi1vYYnI2jJARvYOwU.jpg	image/jpeg	{"identified":true,"width":370,"height":469,"analyzed":true}	local	28325	3VFQYyPGoEZHvxrKdtaUNw==	2025-04-07 01:36:09.505011
+6	kr6lnw3l6dq0htda7q8jn7ouj4ml	att.s6WjoBOW324EQdpThxpneTDvHvi1vYYnI2jJARvYOwU.jpg	image/jpeg	{"identified":true,"width":39,"height":50,"analyzed":true}	local	1491	Cp+EbOwBjIcNd+4OOecCag==	2025-04-07 01:36:12.359423
+7	cojbfu4yg1bvdwg2hpfm9g17ex0p	att.s6WjoBOW324EQdpThxpneTDvHvi1vYYnI2jJARvYOwU.jpg	image/jpeg	{"identified":true,"width":158,"height":200,"analyzed":true}	local	7729	ddIpdyi1BofLqBW7tuFKPg==	2025-04-07 01:36:49.330408
+8	0b7hw4ofe01hjzp2nwgui9a7j1ci	Screenshot 2025-04-07 at 1.37.16 PM.png	image/png	\N	local	281179	cFoy1Dunb0pnvjc3GDWrww==	2025-04-07 01:37:18.250936
+17	9vmidpmh0ce70r4wmky6qqjiv2nr	Screenshot 2025-04-07 at 1.38.53 PM.png	image/png	{"identified":true,"width":1024,"height":104,"analyzed":true}	local	32258	aoPYBcMPkxr9tmXynEP0JQ==	2025-04-07 01:39:07.902794
+18	qx1obby6coz695pjoywgi2uwv9c2	Screenshot 2025-04-07 at 1.38.04 PM.png	image/png	{"identified":true,"width":1024,"height":247,"analyzed":true}	local	89776	JcQSYpdTh9zilnQP7mm/nQ==	2025-04-07 01:39:07.911962
+12	g2daxt1328mmhvmzw8rq9mq4weps	Screenshot 2025-04-07 at 1.38.36 PM.png	image/png	{"identified":true,"width":1736,"height":944,"analyzed":true}	local	100434	KZ9ARZqQHhAhhIn033oUxA==	2025-04-07 01:38:41.92513
+13	rgtyozcnqmyad1ng4igtprp0ztft	Screenshot 2025-04-07 at 1.38.53 PM.png	image/png	{"identified":true,"width":1734,"height":176,"analyzed":true}	local	71355	lGq1K+WpJcQ9fUdSfoHqEA==	2025-04-07 01:38:56.005773
+9	s96u1i1x3cevhbzol0bvwcrf1wpo	Screenshot 2025-04-07 at 1.37.47 PM.png	image/png	{"identified":true,"width":1200,"height":620,"analyzed":true}	local	281413	G2nZzn/mBueAOI4XiXBTyw==	2025-04-07 01:37:49.144057
+10	z9oj513791j37ar3pbh1037jd79o	Screenshot 2025-04-07 at 1.38.04 PM.png	image/png	{"identified":true,"width":1460,"height":352,"analyzed":true}	local	171963	4BX57ELM75LJbyFoUBlw4A==	2025-04-07 01:38:07.064764
+11	vaoswfhywhtc119mpiia6tn1c47d	Screenshot 2025-04-07 at 1.38.24 PM.png	image/png	{"identified":true,"width":1362,"height":860,"analyzed":true}	local	301992	nY64eEKpZTucycDVENLHwA==	2025-04-07 01:38:26.949798
+15	7xdjfnc05p479tv3op45p38l6l6u	Screenshot 2025-04-07 at 1.38.36 PM.png	image/png	{"identified":true,"width":1024,"height":557,"analyzed":true}	local	30859	rlu6Kz0ilQ2UcJXRMOU+IA==	2025-04-07 01:39:07.526958
+14	svctnjiwriu1o9sfkbcwyputzxy9	Screenshot 2025-04-07 at 1.37.47 PM.png	image/png	{"identified":true,"width":1024,"height":529,"analyzed":true}	local	255984	1m67r3AhYs3Uw30TlnkPeg==	2025-04-07 01:39:07.525553
+16	82ivzykotxjohwzf54t43qes8d90	Screenshot 2025-04-07 at 1.38.24 PM.png	image/png	{"identified":true,"width":1024,"height":647,"analyzed":true}	local	158402	NOB7iremDdh0r1nWIxlPrQ==	2025-04-07 01:39:07.536916
+23	4uj4m3nx13dq8k13h846l9k8sl3p	att.WRj9mkpQlTRz4hABmBp-VOw_fyM6q56kKwDtL81lJlM.jpg	image/jpeg	{"identified":true,"width":576,"height":768,"analyzed":true}	local	48213	FFslhUkXVrVuLtI0fxL4MA==	2025-04-07 01:47:11.292916
+24	3oxo39yzz7p08veqex2xwekvp82p	att.RMftbEwpUcKwBgA793-rYio_CKOgh3BHCQdB4lPaHqc.jpg	image/jpeg	{"identified":true,"width":1024,"height":768,"analyzed":true}	local	61438	3i9AMQG8JHZSxuOCT/spwQ==	2025-04-07 01:47:11.30818
+25	l1ttuz3acht2lt268jcxekc0jtjj	att.KTLhS7mEZ0QfLuZXgDarIFpz8SwC1y86b0EBZptnGTA.jpg	image/jpeg	{"identified":true,"width":576,"height":768,"analyzed":true}	local	51335	jclnm3TppZaUwETQAsXT6w==	2025-04-07 01:47:11.30964
+19	lj5j1ckgal78a0jo9xz3c65g7uys	att.WRj9mkpQlTRz4hABmBp-VOw_fyM6q56kKwDtL81lJlM.jpg	image/jpeg	{"identified":true,"width":1536,"height":2048,"analyzed":true}	local	138366	RbKl8SEZRUhg5YL82mcp3g==	2025-04-07 01:45:29.478814
+22	bvxa079py3iswpdlnpubtk6hjstp	att.KTLhS7mEZ0QfLuZXgDarIFpz8SwC1y86b0EBZptnGTA.jpg	image/jpeg	{"identified":true,"width":1536,"height":2048,"analyzed":true}	local	148772	ntUazmnHVTkgsbziLdznpg==	2025-04-07 01:47:11.120495
+21	n601hy7twe72ynzm5lrgintoa4w6	att.RMftbEwpUcKwBgA793-rYio_CKOgh3BHCQdB4lPaHqc.jpg	image/jpeg	{"identified":true,"width":2048,"height":1536,"analyzed":true}	local	115145	sKkYhuIV22h4eC6YXLT4uQ==	2025-04-07 01:46:18.900809
+20	1u2xkk9sq2nw2lh66t82w2zaprnp	att.KTLhS7mEZ0QfLuZXgDarIFpz8SwC1y86b0EBZptnGTA.jpg	image/jpeg	{"identified":true,"width":1536,"height":2048,"analyzed":true}	local	148772	ntUazmnHVTkgsbziLdznpg==	2025-04-07 01:46:05.421954
+26	yknwldx2063xahsk4waisd1mt6kz	att.KTLhS7mEZ0QfLuZXgDarIFpz8SwC1y86b0EBZptnGTA.jpg	image/jpeg	{"identified":true,"width":38,"height":50,"analyzed":true}	local	1500	9HM4761huFoQVo49bjDoLQ==	2025-04-07 01:47:17.099326
+27	ao4zojv3t7nwh97k6kp7pwgfjxbr	att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg	image/jpeg	\N	local	128109	t8W/hQFM9V6gf8Faagraow==	2025-04-07 01:48:03.391277
+135	gt8fal6jazsz8osx9msxe08byvlv	WhatsApp Image 2025-04-07 at 14.09.36.jpeg	image/jpeg	{"identified":true,"width":1191,"height":1007,"analyzed":true}	local	423805	rsy9PAbaqZRycXdCPWBSjg==	2025-04-07 02:44:10.081363
+28	j9nw8orgolw49f1n4zf65b2iox8l	att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg	image/jpeg	{"identified":true,"width":1235,"height":1186,"analyzed":true}	local	230623	4CrFXBQsUvgTn8VjEVDOFw==	2025-04-07 01:48:29.308558
+31	faeadqmmnvrldamhwwufdtvv0h2n	att.vjECICieio-r19wwZoNqfVn5Uf6sgNKI520SyHio7gE (1).jpg	image/jpeg	{"identified":true,"width":1536,"height":2048,"analyzed":true}	local	119121	VGB0f5ZQ9dQo1eUFQoOk+g==	2025-04-07 01:52:54.05949
+32	y3yb2avozlvx8p9jrn0wcrit20vm	att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg	image/jpeg	{"identified":true,"width":1235,"height":1186,"analyzed":true}	local	230623	4CrFXBQsUvgTn8VjEVDOFw==	2025-04-07 01:53:26.138843
+29	a51ue85yfqiau3knkjqleg0gat8s	Screenshot 2025-04-07 at 1.49.49 PM.png	image/png	{"identified":true,"width":288,"height":418,"analyzed":true}	local	208684	qadqXeowb2KdsalMDhFiZQ==	2025-04-07 01:50:04.300164
+30	szgr46o6fsygn6x1xl75k0pv5a4r	Screenshot 2025-04-07 at 1.51.29 PM.png	image/png	{"identified":true,"width":1496,"height":958,"analyzed":true}	local	529401	3KSPZH6ZjS6cjhHxfu6STA==	2025-04-07 01:51:37.659391
+33	zd9skbjpl6yj1rtdhiqcfdd77axh	att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg	image/jpeg	{"identified":true,"width":800,"height":768,"analyzed":true}	local	56211	4EESNe++pylscDuyv9CLTA==	2025-04-07 01:53:26.315618
+34	rw43spui47nztbjxue4mewr4mq8f	Screenshot 2025-04-07 at 1.49.49 PM.png	image/png	{"identified":true,"width":288,"height":418,"analyzed":true}	local	262860	LDnpVA3BHu2pbiejdrsDkA==	2025-04-07 01:53:26.321061
+35	413fyxlgx0e9iitfhspkcvc52xft	att.vjECICieio-r19wwZoNqfVn5Uf6sgNKI520SyHio7gE (1).jpg	image/jpeg	{"identified":true,"width":576,"height":768,"analyzed":true}	local	41343	wwhs/Qx5pCy886g+GoFl+Q==	2025-04-07 01:53:26.614196
+36	uixyz1024xhd51wj5co087lqvnzu	Screenshot 2025-04-07 at 1.51.29 PM.png	image/png	{"identified":true,"width":1024,"height":656,"analyzed":true}	local	289483	KD9/UUqzp3DFC7HLqmtvVA==	2025-04-07 01:53:26.655312
+37	4gayt0us3f7wnnqbu69d13vfk5cb	att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg	image/jpeg	{"identified":true,"width":50,"height":48,"analyzed":true}	local	1734	0vlQTJmDHBFI8bCI0rB/+Q==	2025-04-07 01:53:34.323345
+38	2uo0tcfza5aiotxdg3g0ppw01661	att.ax85UJ31bZJ0Ka4cZzSogb9HWPyStbmwj1a4IiapgTw.jpg	image/jpeg	{"identified":true,"width":200,"height":192,"analyzed":true}	local	8407	6kGXQcsGZfXgt8Msi1LWFQ==	2025-04-07 01:53:36.906526
+134	33d22ohgzhiuus9xjf8a54b2mdpp	WhatsApp Image 2025-04-07 at 14.09.36 (2).jpeg	image/jpeg	{"identified":true,"width":1080,"height":715,"analyzed":true}	local	346763	Ca+ZLDhCDQzjIwMcAmxJFA==	2025-04-07 02:44:10.079599
+49	fxs1mkscp09lorxtwtajxqj8q949	WhatsApp Image 2025-04-07 at 14.09.32 (2).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	800334	zraBMYf9K+5XfOgma1dUsA==	2025-04-07 02:18:18.644648
+48	c87yhx63w6kpq05oz24jxq8ueh9b	WhatsApp Image 2025-04-07 at 14.09.31 (1).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	952604	kO+v0UHhdFpSUc3j4yNYrQ==	2025-04-07 02:18:18.641391
+133	swrgg5a1b4uh04loi1kc6k5wpns7	WhatsApp Image 2025-04-07 at 14.09.36 (1).jpeg	image/jpeg	{"identified":true,"width":1198,"height":1114,"analyzed":true}	local	479457	glHh2OXqBU1JlEXwrxBWxA==	2025-04-07 02:44:10.078389
+58	a8gv0e89hwmt27ajujhr6oseun3v	WhatsApp Image 2025-04-07 at 14.15.09.jpeg	image/jpeg	{"identified":true,"width":100,"height":75,"analyzed":true}	local	3893	jsnxv6zjYUHvaeMGwgD0vg==	2025-04-07 02:18:24.945864
+136	tdhulwxl8lo3xjbrwazi4podhyn9	WhatsApp Image 2025-04-07 at 14.09.37 (1).jpeg	image/jpeg	{"identified":true,"width":1104,"height":885,"analyzed":true}	local	281077	ChnFbesJfFmE6khr5a1w9Q==	2025-04-07 02:44:10.08273
+59	4siv6v8n7orfiqojio0j2ujc05bi	WhatsApp Image 2025-04-07 at 14.15.10.jpeg	image/jpeg	{"identified":true,"width":75,"height":100,"analyzed":true}	local	4197	MxRHJHwUGUp8lwSMu9X6JQ==	2025-04-07 02:18:24.9467
+137	sfvgrac9iazdymfz2lxli55zsqwr	WhatsApp Image 2025-04-07 at 14.09.38 (1).jpeg	image/jpeg	{"identified":true,"width":1124,"height":888,"analyzed":true}	local	428824	mpuu0AFKaMuzEkyA89urrA==	2025-04-07 02:44:10.084092
+51	x8yk0h1tb6gtcavntjn6wopr1q7x	WhatsApp Image 2025-04-07 at 14.15.09.jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	956147	dLvxEbO+U5R/7kH4caqNkQ==	2025-04-07 02:18:18.648354
+50	yjifvxom0yy9xet4o3vg5hond6nt	WhatsApp Image 2025-04-07 at 14.09.32.jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	788711	hxbWy583dnPVE8jzcBmToA==	2025-04-07 02:18:18.646197
+53	gv61n4z4lz3ga147v5mwps3idbcu	WhatsApp Image 2025-04-07 at 14.15.10.jpeg	image/jpeg	{"identified":true,"width":1200,"height":1600,"analyzed":true}	local	278489	qiW/TgBGn4YA+Tpyj8T39A==	2025-04-07 02:18:18.652048
+52	qiickxzmw7dm9wsbz8unvjwti0l4	WhatsApp Image 2025-04-07 at 14.15.10 (1).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	756975	ZewWntgtnfHP9uONfHl0LQ==	2025-04-07 02:18:18.64985
+55	sj7zz6kxng0knavdu584fx7pm4kj	WhatsApp Image 2025-04-07 at 14.09.31 (1).jpeg	image/jpeg	{"identified":true,"width":100,"height":75,"analyzed":true}	local	3942	NAYIR7jBj2hjvJr/MBiGdA==	2025-04-07 02:18:24.523806
+54	sur5159u1j4mpkr73ckvgdfslyny	WhatsApp Image 2025-04-07 at 14.09.32 (2).jpeg	image/jpeg	{"identified":true,"width":100,"height":75,"analyzed":true}	local	3931	iPcldlRqxgYaNIT14yOS1w==	2025-04-07 02:18:24.522993
+56	zw4pnnoh6lk1fgh8dskun2fseksx	WhatsApp Image 2025-04-07 at 14.09.32.jpeg	image/jpeg	{"identified":true,"width":100,"height":75,"analyzed":true}	local	4257	qb5+3xwP2dvVPWYlADDa5Q==	2025-04-07 02:18:24.540077
+57	enh0ou694xrlo4vh3kv5if8rt4o8	WhatsApp Image 2025-04-07 at 14.15.10 (1).jpeg	image/jpeg	{"identified":true,"width":100,"height":75,"analyzed":true}	local	3831	pGjO2iri2HCwJ9/EzS9OeQ==	2025-04-07 02:18:24.944923
+60	9i3pazd1cctiliy3qf60zd1j4ig7	WhatsApp Image 2025-04-07 at 14.09.31 (1).jpeg	image/jpeg	{"identified":true,"width":50,"height":38,"analyzed":true}	local	1571	8DInBqi0KkPX1zjBH7hthg==	2025-04-07 02:18:47.60899
+138	786dxzceqts7u5izm4ykeskfkdl4	WhatsApp Image 2025-04-07 at 14.09.38 (2).jpeg	image/jpeg	{"identified":true,"width":1110,"height":959,"analyzed":true}	local	337203	lLtZpyVRjPTi4g3sgwst5w==	2025-04-07 02:44:10.085473
+139	lfuqe71srq3ylevpivhcfaovxs6c	WhatsApp Image 2025-04-07 at 14.09.38 (3).jpeg	image/jpeg	{"identified":true,"width":1177,"height":1190,"analyzed":true}	local	528104	HQD6IbgT07c+ZThLnZ/SeA==	2025-04-07 02:44:10.086803
+140	nhnn3yq2nj3tjgigejw789wrtie3	WhatsApp Image 2025-04-07 at 14.09.38.jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	864734	1l7+yt3eJAlpNeFBtctYKg==	2025-04-07 02:44:10.08815
+141	qt4idbmvmrkar7x5mti78iytr0mt	WhatsApp Image 2025-04-07 at 14.09.35 (1).jpeg	image/jpeg	{"identified":true,"width":50,"height":41,"analyzed":true}	local	1758	dgxSStskiezp2y7DF34h9A==	2025-04-07 02:44:13.923604
+130	f2gs3y5ob2dipnhhnwuwe1mcoxda	WhatsApp Image 2025-04-07 at 14.09.35 (1).jpeg	image/jpeg	{"identified":true,"width":1200,"height":973,"analyzed":true}	local	311161	H9Y4YZDTrmWtSd5a1E2iQA==	2025-04-07 02:44:10.072871
+132	tbjpgw2bersmy7qr7bia5x1r2a01	WhatsApp Image 2025-04-07 at 14.09.35.jpeg	image/jpeg	{"identified":true,"width":1192,"height":1157,"analyzed":true}	local	661441	fI+CIMYxIj43KDRbT1Vezg==	2025-04-07 02:44:10.076812
+131	aqnle339zwf8ldtuxstggxjxod8m	WhatsApp Image 2025-04-07 at 14.09.35 (2).jpeg	image/jpeg	{"identified":true,"width":1198,"height":1158,"analyzed":true}	local	543435	xj3rP+CIe2yTGeqSOw+z7A==	2025-04-07 02:44:10.075281
+143	6xpah1d6rzhdegkhux315du5mu21	EP51909-R1-E014 (1).jpg	image/jpeg	{"identified":true,"width":1523,"height":1228,"analyzed":true}	local	2346888	zmE/x/BmsMCOtXq9quYrpA==	2025-04-07 02:50:40.103521
+144	ziycvik1a8spcetzfxvz5svq71a3	WhatsApp Image 2025-04-07 at 14.09.40 (2).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	847286	LG5HSfmMTQumniGjpySrAA==	2025-04-07 02:50:40.105938
+146	k5cj9nw84zgp9rkurhg26q73e0s1	WhatsApp Image 2025-04-07 at 14.09.41.jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	950907	Qk8slaHIzu45dijC203PTA==	2025-04-07 02:50:40.10981
+145	tq8kswc461a2losyzv2l1h4n52uj	WhatsApp Image 2025-04-07 at 14.09.41 (1).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	1030732	4aK0UeyUpGv7uuCazl2s9w==	2025-04-07 02:50:40.107628
+142	0sqa05tozjfdfl0n6w7ccogvmvpg	EP51909-R1-E006.jpg	image/jpeg	{"identified":true,"width":1523,"height":1228,"analyzed":true}	local	2664424	bZ8QKfSqKerIQ5o0gnpobg==	2025-04-07 02:50:40.100208
+121	jzn0ga5fzan2e5qirvw4jl2p8h6x	WhatsApp Image 2025-04-07 at 14.09.39 (1).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	465364	v0g2LSwM6Lcwc/0vQ53GWA==	2025-04-07 02:43:24.144047
+122	ae1vi1qqiyh3c0hn8cdfnn9obbut	WhatsApp Image 2025-04-07 at 14.09.39 (2).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	522024	syA07e8D0+ZDm9QWU638QQ==	2025-04-07 02:43:24.145803
+124	9o9uq3owlcdm2b8ktqo856luq3hj	WhatsApp Image 2025-04-07 at 14.09.39.jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	688112	/OTMYVp3iPGHA200+ozmqA==	2025-04-07 02:43:24.149576
+123	doxpbbonf4m6ovx183uaiwdfmdfj	WhatsApp Image 2025-04-07 at 14.09.39 (3).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	781003	oUpjhACJR35fmJrPsl47LQ==	2025-04-07 02:43:24.147833
+120	xioe6151la26oay8b36avtozt2u9	EP75028-R1-009-3.jpg	image/jpeg	{"identified":true,"width":1818,"height":1228,"analyzed":true}	local	1868463	P+Jyv8tXKY3wUB25m+ALsQ==	2025-04-07 02:43:24.141478
+125	dvqd9qu2x7aspu1z7fdhicv3h36t	WhatsApp Image 2025-04-07 at 14.09.40 (1).jpeg	image/jpeg	{"identified":true,"width":1600,"height":1200,"analyzed":true}	local	353987	g91czlWLiLcdpj+TlNA/OA==	2025-04-07 02:43:24.151847
+126	zprj1hxljx5vnx08iikfwpc1er60	WhatsApp Image 2025-04-07 at 14.09.40.jpeg	image/jpeg	{"identified":true,"width":1200,"height":1600,"analyzed":true}	local	347664	sby3KnN2MGYgDC6G7Opxbg==	2025-04-07 02:43:24.153637
+127	1kkuwkwqpoxgrhew232ib0b0lq28	WhatsApp Image 2025-04-07 at 14.09.44 (1).jpeg	image/jpeg	{"identified":true,"width":1200,"height":1600,"analyzed":true}	local	325046	DOcE9ICDoGa3Ipzic38Saw==	2025-04-07 02:43:24.155228
+128	doh3etgde1qbi0icm5zh6i89d5u6	WhatsApp Image 2025-04-07 at 14.09.44.jpeg	image/jpeg	{"identified":true,"width":1200,"height":1600,"analyzed":true}	local	219898	/L1pc6zIirBtc00tRdA7UA==	2025-04-07 02:43:24.160691
+147	iep4o9soh18hcjrwkknm5rlaw9zj	EP51909-R1-E006.jpg	image/jpeg	{"identified":true,"width":50,"height":40,"analyzed":true}	local	1439	MtrYJCcqC7BHDaQvSVwNIg==	2025-04-07 02:53:45.640287
+129	hpk03n2ethn230pogxvxpptg5s4g	EP75028-R1-009-3.jpg	image/jpeg	{"identified":true,"width":50,"height":34,"analyzed":true}	local	1466	sX9dQv4HI6Qg09gpBbqarA==	2025-04-07 02:43:28.627909
+\.
+
+
+--
+-- Data for Name: active_storage_variant_records; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.active_storage_variant_records (id, blob_id, variation_digest) FROM stdin;
+2	3	k88AfoKGtMc3VyDwkBqw0mcl/Fo=
+3	5	2LUGSpqeAxE2FTbZR5KExFsl26Y=
+4	5	6x8KFtM/8O22vFlQ4EVqBuGjN8Q=
+5	9	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+6	12	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+7	11	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+8	13	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+9	10	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+10	19	g9oDsuZ2Ke1OimlPvx7V2sj306E=
+11	21	g9oDsuZ2Ke1OimlPvx7V2sj306E=
+12	20	g9oDsuZ2Ke1OimlPvx7V2sj306E=
+13	22	2LUGSpqeAxE2FTbZR5KExFsl26Y=
+14	28	g9oDsuZ2Ke1OimlPvx7V2sj306E=
+15	29	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+16	31	g9oDsuZ2Ke1OimlPvx7V2sj306E=
+17	30	wjqVtOuFppDd1oEBBMUc2TyD8vk=
+18	32	2LUGSpqeAxE2FTbZR5KExFsl26Y=
+19	32	6x8KFtM/8O22vFlQ4EVqBuGjN8Q=
+26	49	6/MbmLdOctrj7ukuFyVm7nWShm4=
+27	48	6/MbmLdOctrj7ukuFyVm7nWShm4=
+28	50	6/MbmLdOctrj7ukuFyVm7nWShm4=
+29	52	6/MbmLdOctrj7ukuFyVm7nWShm4=
+30	51	6/MbmLdOctrj7ukuFyVm7nWShm4=
+31	53	6/MbmLdOctrj7ukuFyVm7nWShm4=
+32	48	k88AfoKGtMc3VyDwkBqw0mcl/Fo=
+64	120	2LUGSpqeAxE2FTbZR5KExFsl26Y=
+65	130	k88AfoKGtMc3VyDwkBqw0mcl/Fo=
+66	142	2LUGSpqeAxE2FTbZR5KExFsl26Y=
+\.
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2025-03-21 20:41:32.918663	2025-03-21 20:41:32.918664
+\.
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.comments (id, content, user_id, post_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: order_items; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.order_items (id, order_id, product_id, quantity, price, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.orders (id, user_id, email, total_amount, status, address, phone, created_at, updated_at, token) FROM stdin;
+\.
+
+
+--
+-- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.posts (id, title, published, published_at, created_at, updated_at) FROM stdin;
+11	The Rescue series: Episode one - Fujifilm Finepix Z70	t	2025-04-06 09:58:01	2025-04-06 10:00:51.120441	2025-04-06 10:00:51.148304
+13	The Rescue series: Episode two - Hot Pink Portable Nutribullet	t	2025-04-07 01:40:02	2025-04-07 01:47:11.077689	2025-04-07 01:47:11.1706
+14	The Rescue series: Episode three - Casio Baby G	t	2025-04-07 01:47:24	2025-04-07 01:53:26.083496	2025-04-07 01:53:39.959748
+12	The argument for physical media: Part one	t	2025-04-07 01:31:43	2025-04-07 01:36:09.490813	2025-04-07 01:56:40.844714
+\.
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.products (id, title, price, stock, featured, specifications, condition, original_price, created_at, updated_at) FROM stdin;
+8	Lomography 1998 Fisheye Film Camera	120.0	1	t	\N	Good	\N	2025-04-07 02:28:18.406607	2025-04-07 02:43:24.29563
+9	2009 Fujifilm Z20FD: NEW condition with complete packaging	349.9	1	t	\N	Like New	\N	2025-04-07 02:41:14.799474	2025-04-07 02:44:10.320478
+7	Sony DSC-20 Digicam	199.0	1	t	\N	Fair	\N	2025-03-24 05:35:06.155453	2025-04-07 02:18:18.769603
+10	Premier Mini 110mm camera	80.0	1	t	\N	Excellent	\N	2025-04-07 02:50:40.093069	2025-04-07 02:50:40.196014
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20250321204033
+20250321204038
+20250321204042
+20250321204048
+20250321204053
+20250321204107
+20250321204112
+20250321204117
+20250321211411
+20250321211553
+20250321211846
+20250321223345
+\.
+
+
+--
+-- Data for Name: subscribers; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.subscribers (id, name, email, active, created_at, updated_at, user_id, token) FROM stdin;
+1	esmehp	esme.putt@gmail.com	t	2025-04-06 10:02:49.99317	2025-04-06 10:02:49.99317	1	d861384377e651410ce3
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: esmehulbert-putt
+--
+
+COPY public.users (id, name, email, password_digest, role, created_at, updated_at) FROM stdin;
+1	esmehp	esme.putt@gmail.com	$2a$12$icapa2Qj/4kc.DVL0EkrUuxk7KlbtKJ5HHBCfZmugtEqkVEdx7zCm	1	2025-04-06 09:02:39.684141	2025-04-06 09:02:39.684141
+\.
+
+
+--
+-- Name: action_text_rich_texts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.action_text_rich_texts_id_seq', 24, true);
+
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.active_storage_attachments_id_seq', 145, true);
+
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.active_storage_blobs_id_seq', 147, true);
+
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.active_storage_variant_records_id_seq', 66, true);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.comments_id_seq', 1, false);
+
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.order_items_id_seq', 1, false);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.posts_id_seq', 14, true);
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.products_id_seq', 10, true);
+
+
+--
+-- Name: subscribers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.subscribers_id_seq', 1, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: esmehulbert-putt
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: action_text_rich_texts action_text_rich_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.action_text_rich_texts
+    ADD CONSTRAINT action_text_rich_texts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_attachments active_storage_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_attachments
+    ADD CONSTRAINT active_storage_attachments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_blobs active_storage_blobs_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_blobs
+    ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_variant_records active_storage_variant_records_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records
+    ADD CONSTRAINT active_storage_variant_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_items order_items_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.order_items
+    ADD CONSTRAINT order_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: subscribers subscribers_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.subscribers
+    ADD CONSTRAINT subscribers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_action_text_rich_texts_uniqueness; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE UNIQUE INDEX index_action_text_rich_texts_uniqueness ON public.action_text_rich_texts USING btree (record_type, record_id, name);
+
+
+--
+-- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE INDEX index_active_storage_attachments_on_blob_id ON public.active_storage_attachments USING btree (blob_id);
+
+
+--
+-- Name: index_active_storage_attachments_uniqueness; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active_storage_attachments USING btree (record_type, record_id, name, blob_id);
+
+
+--
+-- Name: index_active_storage_blobs_on_key; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
+
+
+--
+-- Name: index_active_storage_variant_records_uniqueness; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.active_storage_variant_records USING btree (blob_id, variation_digest);
+
+
+--
+-- Name: index_comments_on_post_id; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE INDEX index_comments_on_post_id ON public.comments USING btree (post_id);
+
+
+--
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE INDEX index_comments_on_user_id ON public.comments USING btree (user_id);
+
+
+--
+-- Name: index_orders_on_token; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE UNIQUE INDEX index_orders_on_token ON public.orders USING btree (token);
+
+
+--
+-- Name: index_subscribers_on_user_id; Type: INDEX; Schema: public; Owner: esmehulbert-putt
+--
+
+CREATE INDEX index_subscribers_on_user_id ON public.subscribers USING btree (user_id);
+
+
+--
+-- Name: comments fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT fk_rails_03de2dc08c FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: comments fk_rails_2fd19c0db7; Type: FK CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT fk_rails_2fd19c0db7 FOREIGN KEY (post_id) REFERENCES public.posts(id);
+
+
+--
+-- Name: subscribers fk_rails_8f7496cd90; Type: FK CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.subscribers
+    ADD CONSTRAINT fk_rails_8f7496cd90 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: active_storage_variant_records fk_rails_993965df05; Type: FK CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records
+    ADD CONSTRAINT fk_rails_993965df05 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: esmehulbert-putt
+--
+
+ALTER TABLE ONLY public.active_storage_attachments
+    ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
