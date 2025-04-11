@@ -12,7 +12,11 @@ amazon:
   secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY') %>
   region: us-east-1
   bucket: hardcopy-<%= Rails.env %>
-  public: true
+  public: false 
+  upload:
+    acl: 'bucket-owner-full-control'
+  directupload:
+    acl: 'bucket-owner-full-control'
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
