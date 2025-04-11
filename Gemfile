@@ -66,3 +66,4 @@ group :test do
 end
 
 gem "faker", "~> 3.5", :groups => [:development, :test]
+gem "aws-sdk-s3", require: false
