@@ -386,6 +386,18 @@ body {
   margin-left: 0.5rem;
 }
 
+.badge.bg-danger {
+  color: white;
+  background-color: var(--terminal-error) !important;
+  border-color: var(--terminal-error);
+}
+
+/* Make sure text has good contrast with background */
+.badge {
+  font-weight: bold;
+  padding: 0.35rem 0.5rem;
+}
+
 /* Blog cards */
 .blog-card {
   border-radius: 0.5rem;
@@ -615,4 +627,30 @@ h1, h2, h3, h4, h5, h6 {
   .newsletter-text {
     font-size: 1rem;
   }
+}
+
+/* Admin */
+
+.btn-outline-primary, 
+.btn-outline-secondary, 
+.btn-outline-danger {
+  color: #f0f0f0 !important; /* Light text color for dark background */
+  border-color: currentColor;
+}
+
+.btn-outline-primary:hover, 
+.btn-outline-secondary:hover,
+.btn-outline-danger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-layout .card, 
+.admin-layout .table {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.admin-layout .table-light {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
 }
