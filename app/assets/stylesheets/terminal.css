@@ -857,8 +857,19 @@ img.loading {
 }
 
 .badge.bg-danger {
-  color: var(--terminal-error);
-  border-color: var(--terminal-error);
+  color: white !important; /* Force white text */
+  background-color: #ff3333 !important; /* Bright red background */
+  border-color: #ff3333 !important;
+  font-weight: bold !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) !important; /* Add text shadow for better readability */
+}
+
+.terminal-product .badge.bg-danger,
+.terminal-section .badge.bg-danger {
+  color: white !important;
+  background-color: #ff3333 !important;
+  border-color: #ff3333 !important;
+  font-weight: bold !important;
 }
 
 .badge.bg-warning {
