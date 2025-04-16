@@ -25,7 +25,7 @@ class SubscribersController < ApplicationController
       elsif @subscriber.save
         # If not logged in, prompt to create an account
         if !user_signed_in?
-          redirect_to root_path, notice: 'Thank you for subscribing to our newsletter! Consider creating an account to manage your subscription.'
+          redirect_to root_path, notice: 'Thank you for subscribing to our newsletter!'
         else
           redirect_to root_path, notice: 'Thank you for subscribing to our newsletter!'
         end
