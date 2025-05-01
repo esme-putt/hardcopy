@@ -8,5 +8,7 @@ class Admin::DashboardController < Admin::BaseController
       @pending_orders = Order.where(status: 'pending').count rescue 0
       @user_count = User.count
       @admin_count = User.where(role: 'admin').count
+      @subscriber_count = Subscriber.count
+      @active_subscribers = Subscriber.where(active: true).count
     end
   end

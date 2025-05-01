@@ -37,7 +37,11 @@ Rails.application.routes.draw do
     resources :posts
     resources :products
     resources :orders, only: [:index, :show, :update]
-    resources :subscribers, only: [:index, :destroy]
+    resources :subscribers, only: [:index, :show, :destroy] do
+      member do
+        patch :toggle_active
+      end
+    end
     resources :comments, only: [:index, :destroy]
   end
 end
